@@ -1,0 +1,510 @@
+<tcs>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="31%" relative-pos-y="67%"/>
+    <key-up posix-time="121" code="a" relative-pos-x="27%" relative-pos-y="67%"/>
+    <key-down posix-time="248" code="d" relative-pos-x="65%" relative-pos-y="82%"/>
+    <key-up posix-time="323" code="d" relative-pos-x="65%" relative-pos-y="83%"/>
+    <key-down posix-time="447" code="e" relative-pos-x="30%" relative-pos-y="57%"/>
+    <key-up posix-time="525" code="e" relative-pos-x="30%" relative-pos-y="58%"/>
+    <key-down posix-time="651" code="s" relative-pos-x="48%" relative-pos-y="78%"/>
+    <key-up posix-time="739" code="s" relative-pos-x="43%" relative-pos-y="78%"/>
+    <key-down posix-time="852" code="x" relative-pos-x="86%" relative-pos-y="69%"/>
+    <key-up posix-time="930" code="x" relative-pos-x="86%" relative-pos-y="69%"/>
+    <key-down posix-time="998" code="q" relative-pos-x="34%" relative-pos-y="47%"/>
+    <key-up posix-time="1077" code="q" relative-pos-x="34%" relative-pos-y="49%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="29%" relative-pos-y="60%"/>
+    <key-up posix-time="75" code="a" relative-pos-x="29%" relative-pos-y="59%"/>
+    <key-down posix-time="371" code="d" relative-pos-x="15%" relative-pos-y="44%"/>
+    <key-up posix-time="485" code="d" relative-pos-x="12%" relative-pos-y="35%"/>
+    <key-down posix-time="553" code="w" relative-pos-x="95%" relative-pos-y="81%"/>
+    <key-up posix-time="642" code="w" relative-pos-x="95%" relative-pos-y="86%"/>
+    <key-down posix-time="776" code="s" relative-pos-x="20%" relative-pos-y="58%"/>
+    <key-up posix-time="841" code="s" relative-pos-x="20%" relative-pos-y="58%"/>
+    <key-down posix-time="1041" code="x" relative-pos-x="45%" relative-pos-y="72%"/>
+    <key-up posix-time="1072" code="x" relative-pos-x="45%" relative-pos-y="72%"/>
+    <key-down posix-time="1421" code="q" relative-pos-x="48%" relative-pos-y="70%"/>
+    <key-up posix-time="1452" code="q" relative-pos-x="48%" relative-pos-y="70%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="42%" relative-pos-y="58%"/>
+    <key-up posix-time="75" code="a" relative-pos-x="42%" relative-pos-y="58%"/>
+    <key-down posix-time="338" code="d" relative-pos-x="31%" relative-pos-y="52%"/>
+    <key-up posix-time="428" code="d" relative-pos-x="28%" relative-pos-y="49%"/>
+    <key-down posix-time="512" code="w" relative-pos-x="92%" relative-pos-y="57%"/>
+    <key-up posix-time="601" code="w" relative-pos-x="92%" relative-pos-y="59%"/>
+    <key-down posix-time="759" code="s" relative-pos-x="21%" relative-pos-y="57%"/>
+    <key-up posix-time="849" code="s" relative-pos-x="21%" relative-pos-y="57%"/>
+    <key-down posix-time="1189" code="x" relative-pos-x="40%" relative-pos-y="75%"/>
+    <key-up posix-time="1262" code="x" relative-pos-x="39%" relative-pos-y="74%"/>
+    <key-down posix-time="1471" code="q" relative-pos-x="59%" relative-pos-y="78%"/>
+    <key-up posix-time="1586" code="q" relative-pos-x="59%" relative-pos-y="78%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="44%" relative-pos-y="52%"/>
+    <key-up posix-time="79" code="a" relative-pos-x="44%" relative-pos-y="52%"/>
+    <key-down posix-time="331" code="d" relative-pos-x="21%" relative-pos-y="41%"/>
+    <key-up posix-time="412" code="d" relative-pos-x="21%" relative-pos-y="38%"/>
+    <key-down posix-time="521" code="e" relative-pos-x="6%" relative-pos-y="50%"/>
+    <key-up posix-time="594" code="e" relative-pos-x="11%" relative-pos-y="58%"/>
+    <key-down posix-time="1058" code="s" relative-pos-x="20%" relative-pos-y="82%"/>
+    <key-up posix-time="1114" code="s" relative-pos-x="20%" relative-pos-y="82%"/>
+    <key-down posix-time="1404" code="x" relative-pos-x="30%" relative-pos-y="58%"/>
+    <key-up posix-time="1477" code="x" relative-pos-x="24%" relative-pos-y="52%"/>
+    <key-down posix-time="1627" code="q" relative-pos-x="73%" relative-pos-y="80%"/>
+    <key-up posix-time="1717" code="q" relative-pos-x="73%" relative-pos-y="80%"/>
+    <key-down posix-time="2460" code="ENTER" relative-pos-x="77%" relative-pos-y="69%"/>
+    <key-up posix-time="2524" code="ENTER" relative-pos-x="77%" relative-pos-y="69%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="38%" relative-pos-y="76%"/>
+    <key-up posix-time="111" code="a" relative-pos-x="33%" relative-pos-y="73%"/>
+    <key-down posix-time="236" code="d" relative-pos-x="63%" relative-pos-y="80%"/>
+    <key-up posix-time="314" code="d" relative-pos-x="62%" relative-pos-y="80%"/>
+    <key-down posix-time="450" code="e" relative-pos-x="45%" relative-pos-y="51%"/>
+    <key-up posix-time="539" code="e" relative-pos-x="45%" relative-pos-y="52%"/>
+    <key-down posix-time="651" code="s" relative-pos-x="27%" relative-pos-y="73%"/>
+    <key-up posix-time="730" code="s" relative-pos-x="27%" relative-pos-y="74%"/>
+    <key-down posix-time="843" code="x" relative-pos-x="81%" relative-pos-y="69%"/>
+    <key-up posix-time="932" code="x" relative-pos-x="81%" relative-pos-y="67%"/>
+    <key-down posix-time="1010" code="q" relative-pos-x="26%" relative-pos-y="58%"/>
+    <key-up posix-time="1077" code="q" relative-pos-x="27%" relative-pos-y="58%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="38%" relative-pos-y="70%"/>
+    <key-up posix-time="83" code="a" relative-pos-x="38%" relative-pos-y="70%"/>
+    <key-down posix-time="269" code="d" relative-pos-x="12%" relative-pos-y="65%"/>
+    <key-up posix-time="385" code="d" relative-pos-x="12%" relative-pos-y="65%"/>
+    <key-down posix-time="580" code="e" relative-pos-x="25%" relative-pos-y="56%"/>
+    <key-up posix-time="671" code="e" relative-pos-x="25%" relative-pos-y="56%"/>
+    <key-down posix-time="823" code="s" relative-pos-x="25%" relative-pos-y="50%"/>
+    <key-up posix-time="906" code="s" relative-pos-x="25%" relative-pos-y="50%"/>
+    <key-down posix-time="1117" code="x" relative-pos-x="47%" relative-pos-y="50%"/>
+    <key-up posix-time="1225" code="x" relative-pos-x="44%" relative-pos-y="50%"/>
+    <key-down posix-time="1563" code="q" relative-pos-x="61%" relative-pos-y="64%"/>
+    <key-up posix-time="1713" code="q" relative-pos-x="61%" relative-pos-y="64%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="39%" relative-pos-y="46%"/>
+    <key-up posix-time="81" code="a" relative-pos-x="41%" relative-pos-y="46%"/>
+    <key-down posix-time="313" code="d" relative-pos-x="30%" relative-pos-y="62%"/>
+    <key-up posix-time="367" code="d" relative-pos-x="30%" relative-pos-y="60%"/>
+    <key-down posix-time="478" code="e" relative-pos-x="15%" relative-pos-y="72%"/>
+    <key-up posix-time="560" code="e" relative-pos-x="20%" relative-pos-y="78%"/>
+    <key-down posix-time="685" code="s" relative-pos-x="57%" relative-pos-y="48%"/>
+    <key-up posix-time="767" code="s" relative-pos-x="57%" relative-pos-y="48%"/>
+    <key-down posix-time="916" code="x" relative-pos-x="48%" relative-pos-y="59%"/>
+    <key-up posix-time="998" code="x" relative-pos-x="46%" relative-pos-y="58%"/>
+    <key-down posix-time="1172" code="q" relative-pos-x="84%" relative-pos-y="89%"/>
+    <key-up posix-time="1229" code="q" relative-pos-x="84%" relative-pos-y="89%"/>
+    <key-down posix-time="1957" code="ENTER" relative-pos-x="79%" relative-pos-y="34%"/>
+    <key-up posix-time="2032" code="ENTER" relative-pos-x="75%" relative-pos-y="34%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="23%" relative-pos-y="53%"/>
+    <key-up posix-time="89" code="a" relative-pos-x="23%" relative-pos-y="53%"/>
+    <key-down posix-time="494" code="d" relative-pos-x="15%" relative-pos-y="54%"/>
+    <key-up posix-time="609" code="d" relative-pos-x="13%" relative-pos-y="53%"/>
+    <key-down posix-time="775" code="e" relative-pos-x="27%" relative-pos-y="80%"/>
+    <key-up posix-time="823" code="e" relative-pos-x="27%" relative-pos-y="80%"/>
+    <key-down posix-time="1361" code="s" relative-pos-x="22%" relative-pos-y="74%"/>
+    <key-up posix-time="1434" code="s" relative-pos-x="21%" relative-pos-y="73%"/>
+    <key-down posix-time="2317" code="x" relative-pos-x="29%" relative-pos-y="78%"/>
+    <key-up posix-time="2398" code="x" relative-pos-x="26%" relative-pos-y="78%"/>
+    <key-down posix-time="3018" code="q" relative-pos-x="57%" relative-pos-y="68%"/>
+    <key-up posix-time="3042" code="q" relative-pos-x="57%" relative-pos-y="68%"/>
+    <key-down posix-time="5062" code="ENTER" relative-pos-x="84%" relative-pos-y="50%"/>
+    <key-up posix-time="5084" code="ENTER" relative-pos-x="84%" relative-pos-y="50%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="51%" relative-pos-y="70%"/>
+    <key-up posix-time="66" code="a" relative-pos-x="51%" relative-pos-y="70%"/>
+    <key-down posix-time="252" code="d" relative-pos-x="40%" relative-pos-y="84%"/>
+    <key-up posix-time="360" code="d" relative-pos-x="37%" relative-pos-y="82%"/>
+    <key-down posix-time="529" code="e" relative-pos-x="38%" relative-pos-y="37%"/>
+    <key-up posix-time="597" code="e" relative-pos-x="33%" relative-pos-y="42%"/>
+    <key-down posix-time="739" code="s" relative-pos-x="42%" relative-pos-y="70%"/>
+    <key-up posix-time="806" code="s" relative-pos-x="42%" relative-pos-y="70%"/>
+    <key-down posix-time="958" code="x" relative-pos-x="45%" relative-pos-y="53%"/>
+    <key-up posix-time="1040" code="x" relative-pos-x="45%" relative-pos-y="53%"/>
+    <key-down posix-time="1319" code="q" relative-pos-x="57%" relative-pos-y="33%"/>
+    <key-up posix-time="1372" code="q" relative-pos-x="55%" relative-pos-y="33%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="37%" relative-pos-y="60%"/>
+    <key-up posix-time="84" code="a" relative-pos-x="37%" relative-pos-y="60%"/>
+    <key-down posix-time="363" code="d" relative-pos-x="25%" relative-pos-y="46%"/>
+    <key-up posix-time="453" code="d" relative-pos-x="24%" relative-pos-y="44%"/>
+    <key-down posix-time="578" code="e" relative-pos-x="25%" relative-pos-y="61%"/>
+    <key-up posix-time="643" code="e" relative-pos-x="25%" relative-pos-y="61%"/>
+    <key-down posix-time="1280" code="s" relative-pos-x="38%" relative-pos-y="65%"/>
+    <key-up posix-time="1378" code="s" relative-pos-x="37%" relative-pos-y="65%"/>
+    <key-down posix-time="2081" code="q" relative-pos-x="61%" relative-pos-y="86%"/>
+    <key-up posix-time="2179" code="q" relative-pos-x="61%" relative-pos-y="86%"/>
+    <key-down posix-time="2676" code="x" relative-pos-x="62%" relative-pos-y="66%"/>
+    <key-up posix-time="2749" code="x" relative-pos-x="62%" relative-pos-y="66%"/>
+    <key-down posix-time="4351" code="BACKSPACE" relative-pos-x="82%" relative-pos-y="67%"/>
+    <key-up posix-time="4430" code="BACKSPACE" relative-pos-x="82%" relative-pos-y="67%"/>
+    <key-down posix-time="4581" code="BACKSPACE" relative-pos-x="78%" relative-pos-y="63%"/>
+    <key-up posix-time="4655" code="BACKSPACE" relative-pos-x="78%" relative-pos-y="63%"/>
+    <key-down posix-time="5325" code="BACKSPACE" relative-pos-x="81%" relative-pos-y="67%"/>
+    <key-up posix-time="5406" code="BACKSPACE" relative-pos-x="81%" relative-pos-y="67%"/>
+    <key-down posix-time="5473" code="BACKSPACE" relative-pos-x="79%" relative-pos-y="58%"/>
+    <key-up posix-time="5621" code="BACKSPACE" relative-pos-x="79%" relative-pos-y="58%"/>
+    <key-down posix-time="5812" code="BACKSPACE" relative-pos-x="83%" relative-pos-y="62%"/>
+    <key-up posix-time="5885" code="BACKSPACE" relative-pos-x="83%" relative-pos-y="62%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="63%" relative-pos-y="51%"/>
+    <key-up posix-time="73" code="a" relative-pos-x="63%" relative-pos-y="50%"/>
+    <key-down posix-time="269" code="d" relative-pos-x="53%" relative-pos-y="51%"/>
+    <key-up posix-time="377" code="d" relative-pos-x="45%" relative-pos-y="44%"/>
+    <key-down posix-time="513" code="e" relative-pos-x="31%" relative-pos-y="40%"/>
+    <key-up posix-time="554" code="e" relative-pos-x="31%" relative-pos-y="40%"/>
+    <key-down posix-time="698" code="s" relative-pos-x="42%" relative-pos-y="45%"/>
+    <key-up posix-time="781" code="s" relative-pos-x="42%" relative-pos-y="45%"/>
+    <key-down posix-time="984" code="x" relative-pos-x="43%" relative-pos-y="57%"/>
+    <key-up posix-time="1075" code="x" relative-pos-x="43%" relative-pos-y="57%"/>
+    <key-down posix-time="1303" code="q" relative-pos-x="53%" relative-pos-y="39%"/>
+    <key-up posix-time="1355" code="q" relative-pos-x="53%" relative-pos-y="39%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="59%" relative-pos-y="66%"/>
+    <key-up posix-time="66" code="a" relative-pos-x="59%" relative-pos-y="66%"/>
+    <key-down posix-time="253" code="d" relative-pos-x="45%" relative-pos-y="66%"/>
+    <key-up posix-time="335" code="d" relative-pos-x="44%" relative-pos-y="66%"/>
+    <key-down posix-time="495" code="e" relative-pos-x="40%" relative-pos-y="56%"/>
+    <key-up posix-time="545" code="e" relative-pos-x="40%" relative-pos-y="56%"/>
+    <key-down posix-time="710" code="s" relative-pos-x="34%" relative-pos-y="64%"/>
+    <key-up posix-time="764" code="s" relative-pos-x="35%" relative-pos-y="64%"/>
+    <key-down posix-time="941" code="x" relative-pos-x="56%" relative-pos-y="64%"/>
+    <key-up posix-time="1016" code="x" relative-pos-x="55%" relative-pos-y="64%"/>
+    <key-down posix-time="1294" code="q" relative-pos-x="63%" relative-pos-y="45%"/>
+    <key-up posix-time="1360" code="q" relative-pos-x="63%" relative-pos-y="45%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="5%" relative-pos-y="34%"/>
+    <key-up posix-time="121" code="a" relative-pos-x="9%" relative-pos-y="34%"/>
+    <key-down posix-time="258" code="d" relative-pos-x="72%" relative-pos-y="82%"/>
+    <key-up posix-time="325" code="d" relative-pos-x="72%" relative-pos-y="82%"/>
+    <key-down posix-time="449" code="e" relative-pos-x="31%" relative-pos-y="52%"/>
+    <key-up posix-time="515" code="e" relative-pos-x="31%" relative-pos-y="52%"/>
+    <key-down posix-time="653" code="s" relative-pos-x="56%" relative-pos-y="65%"/>
+    <key-up posix-time="713" code="s" relative-pos-x="47%" relative-pos-y="70%"/>
+    <key-down posix-time="899" code="x" relative-pos-x="66%" relative-pos-y="74%"/>
+    <key-up posix-time="1010" code="x" relative-pos-x="66%" relative-pos-y="72%"/>
+    <key-down posix-time="1066" code="q" relative-pos-x="34%" relative-pos-y="51%"/>
+    <key-up posix-time="1144" code="q" relative-pos-x="31%" relative-pos-y="51%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="25%" relative-pos-y="61%"/>
+    <key-up posix-time="63" code="a" relative-pos-x="25%" relative-pos-y="61%"/>
+    <key-down posix-time="380" code="d" relative-pos-x="40%" relative-pos-y="52%"/>
+    <key-up posix-time="471" code="d" relative-pos-x="37%" relative-pos-y="49%"/>
+    <key-down posix-time="537" code="e" relative-pos-x="12%" relative-pos-y="88%"/>
+    <key-up posix-time="626" code="e" relative-pos-x="12%" relative-pos-y="88%"/>
+    <key-down posix-time="800" code="s" relative-pos-x="16%" relative-pos-y="56%"/>
+    <key-up posix-time="849" code="s" relative-pos-x="16%" relative-pos-y="56%"/>
+    <key-down posix-time="1131" code="x" relative-pos-x="40%" relative-pos-y="76%"/>
+    <key-up posix-time="1203" code="x" relative-pos-x="38%" relative-pos-y="74%"/>
+    <key-down posix-time="1468" code="q" relative-pos-x="62%" relative-pos-y="54%"/>
+    <key-up posix-time="1510" code="q" relative-pos-x="62%" relative-pos-y="54%"/>
+    <key-down posix-time="2295" code="ENTER" relative-pos-x="84%" relative-pos-y="58%"/>
+    <key-up posix-time="2367" code="ENTER" relative-pos-x="84%" relative-pos-y="58%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="41%" relative-pos-y="52%"/>
+    <key-up posix-time="91" code="a" relative-pos-x="41%" relative-pos-y="52%"/>
+    <key-down posix-time="438" code="d" relative-pos-x="50%" relative-pos-y="48%"/>
+    <key-up posix-time="529" code="d" relative-pos-x="50%" relative-pos-y="48%"/>
+    <key-down posix-time="693" code="e" relative-pos-x="42%" relative-pos-y="57%"/>
+    <key-up posix-time="759" code="e" relative-pos-x="43%" relative-pos-y="59%"/>
+    <key-down posix-time="991" code="s" relative-pos-x="44%" relative-pos-y="49%"/>
+    <key-up posix-time="1097" code="s" relative-pos-x="42%" relative-pos-y="49%"/>
+    <key-down posix-time="1404" code="x" relative-pos-x="56%" relative-pos-y="68%"/>
+    <key-up posix-time="1477" code="x" relative-pos-x="56%" relative-pos-y="68%"/>
+    <key-down posix-time="1974" code="q" relative-pos-x="59%" relative-pos-y="73%"/>
+    <key-up posix-time="2048" code="q" relative-pos-x="59%" relative-pos-y="73%"/>
+    <key-down posix-time="3188" code="ENTER" relative-pos-x="73%" relative-pos-y="51%"/>
+    <key-up posix-time="3260" code="ENTER" relative-pos-x="73%" relative-pos-y="50%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="12%" relative-pos-y="56%"/>
+    <key-up posix-time="90" code="a" relative-pos-x="12%" relative-pos-y="56%"/>
+    <key-down posix-time="438" code="d" relative-pos-x="16%" relative-pos-y="56%"/>
+    <key-up posix-time="519" code="d" relative-pos-x="15%" relative-pos-y="54%"/>
+    <key-down posix-time="611" code="e" relative-pos-x="31%" relative-pos-y="97%"/>
+    <key-up posix-time="692" code="e" relative-pos-x="31%" relative-pos-y="96%"/>
+    <key-down posix-time="883" code="s" relative-pos-x="16%" relative-pos-y="74%"/>
+    <key-up posix-time="941" code="s" relative-pos-x="16%" relative-pos-y="74%"/>
+    <key-down posix-time="1345" code="x" relative-pos-x="37%" relative-pos-y="74%"/>
+    <key-up posix-time="1410" code="x" relative-pos-x="37%" relative-pos-y="73%"/>
+    <key-down posix-time="1692" code="q" relative-pos-x="37%" relative-pos-y="62%"/>
+    <key-up posix-time="1715" code="q" relative-pos-x="37%" relative-pos-y="62%"/>
+    <key-down posix-time="2871" code="ENTER" relative-pos-x="90%" relative-pos-y="60%"/>
+    <key-up posix-time="2903" code="ENTER" relative-pos-x="90%" relative-pos-y="60%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="26%" relative-pos-y="57%"/>
+    <key-up posix-time="101" code="a" relative-pos-x="30%" relative-pos-y="58%"/>
+    <key-down posix-time="268" code="d" relative-pos-x="56%" relative-pos-y="85%"/>
+    <key-up posix-time="335" code="d" relative-pos-x="56%" relative-pos-y="85%"/>
+    <key-down posix-time="518" code="e" relative-pos-x="29%" relative-pos-y="46%"/>
+    <key-up posix-time="604" code="e" relative-pos-x="16%" relative-pos-y="46%"/>
+    <key-down posix-time="762" code="s" relative-pos-x="36%" relative-pos-y="71%"/>
+    <key-up posix-time="819" code="s" relative-pos-x="33%" relative-pos-y="72%"/>
+    <key-down posix-time="1146" code="x" relative-pos-x="43%" relative-pos-y="64%"/>
+    <key-up posix-time="1207" code="x" relative-pos-x="43%" relative-pos-y="64%"/>
+    <key-down posix-time="1380" code="q" relative-pos-x="34%" relative-pos-y="44%"/>
+    <key-up posix-time="1441" code="q" relative-pos-x="30%" relative-pos-y="45%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="50%" relative-pos-y="48%"/>
+    <key-up posix-time="76" code="a" relative-pos-x="50%" relative-pos-y="48%"/>
+    <key-down posix-time="495" code="d" relative-pos-x="25%" relative-pos-y="52%"/>
+    <key-up posix-time="584" code="d" relative-pos-x="24%" relative-pos-y="50%"/>
+    <key-down posix-time="676" code="e" relative-pos-x="0%" relative-pos-y="64%"/>
+    <key-up posix-time="758" code="e" relative-pos-x="0%" relative-pos-y="64%"/>
+    <key-down posix-time="948" code="s" relative-pos-x="34%" relative-pos-y="54%"/>
+    <key-up posix-time="972" code="s" relative-pos-x="34%" relative-pos-y="54%"/>
+    <key-down posix-time="1411" code="x" relative-pos-x="51%" relative-pos-y="75%"/>
+    <key-up posix-time="1467" code="x" relative-pos-x="50%" relative-pos-y="75%"/>
+    <key-down posix-time="1724" code="q" relative-pos-x="62%" relative-pos-y="78%"/>
+    <key-up posix-time="1756" code="q" relative-pos-x="62%" relative-pos-y="78%"/>
+    <key-down posix-time="2558" code="ENTER" relative-pos-x="75%" relative-pos-y="72%"/>
+    <key-up posix-time="2628" code="ENTER" relative-pos-x="75%" relative-pos-y="72%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="44%" relative-pos-y="74%"/>
+    <key-up posix-time="80" code="a" relative-pos-x="44%" relative-pos-y="74%"/>
+    <key-down posix-time="281" code="s" relative-pos-x="94%" relative-pos-y="58%"/>
+    <key-up posix-time="396" code="s" relative-pos-x="89%" relative-pos-y="50%"/>
+    <key-down posix-time="455" code="e" relative-pos-x="8%" relative-pos-y="93%"/>
+    <key-up posix-time="544" code="e" relative-pos-x="6%" relative-pos-y="93%"/>
+    <key-down posix-time="685" code="s" relative-pos-x="18%" relative-pos-y="56%"/>
+    <key-up posix-time="759" code="s" relative-pos-x="18%" relative-pos-y="56%"/>
+    <key-down posix-time="983" code="x" relative-pos-x="47%" relative-pos-y="91%"/>
+    <key-up posix-time="1081" code="x" relative-pos-x="45%" relative-pos-y="90%"/>
+    <key-down posix-time="1337" code="q" relative-pos-x="65%" relative-pos-y="74%"/>
+    <key-up posix-time="1394" code="q" relative-pos-x="65%" relative-pos-y="74%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="50%" relative-pos-y="60%"/>
+    <key-up posix-time="75" code="a" relative-pos-x="51%" relative-pos-y="60%"/>
+    <key-down posix-time="286" code="d" relative-pos-x="47%" relative-pos-y="61%"/>
+    <key-up posix-time="361" code="d" relative-pos-x="45%" relative-pos-y="59%"/>
+    <key-down posix-time="521" code="e" relative-pos-x="53%" relative-pos-y="53%"/>
+    <key-up posix-time="554" code="e" relative-pos-x="53%" relative-pos-y="53%"/>
+    <key-down posix-time="731" code="s" relative-pos-x="36%" relative-pos-y="55%"/>
+    <key-up posix-time="781" code="s" relative-pos-x="36%" relative-pos-y="55%"/>
+    <key-down posix-time="941" code="x" relative-pos-x="46%" relative-pos-y="58%"/>
+    <key-up posix-time="1041" code="x" relative-pos-x="38%" relative-pos-y="57%"/>
+    <key-down posix-time="1261" code="q" relative-pos-x="51%" relative-pos-y="51%"/>
+    <key-up posix-time="1312" code="q" relative-pos-x="51%" relative-pos-y="51%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="33%" relative-pos-y="71%"/>
+    <key-up posix-time="100" code="a" relative-pos-x="29%" relative-pos-y="71%"/>
+    <key-down posix-time="168" code="d" relative-pos-x="68%" relative-pos-y="86%"/>
+    <key-up posix-time="246" code="d" relative-pos-x="69%" relative-pos-y="86%"/>
+    <key-down posix-time="360" code="e" relative-pos-x="27%" relative-pos-y="81%"/>
+    <key-up posix-time="460" code="e" relative-pos-x="18%" relative-pos-y="82%"/>
+    <key-down posix-time="573" code="s" relative-pos-x="56%" relative-pos-y="74%"/>
+    <key-up posix-time="640" code="s" relative-pos-x="56%" relative-pos-y="74%"/>
+    <key-down posix-time="812" code="x" relative-pos-x="58%" relative-pos-y="71%"/>
+    <key-up posix-time="887" code="x" relative-pos-x="61%" relative-pos-y="72%"/>
+    <key-down posix-time="977" code="q" relative-pos-x="38%" relative-pos-y="51%"/>
+    <key-up posix-time="1067" code="q" relative-pos-x="36%" relative-pos-y="51%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="13%" relative-pos-y="63%"/>
+    <key-up posix-time="109" code="a" relative-pos-x="16%" relative-pos-y="63%"/>
+    <key-down posix-time="200" code="d" relative-pos-x="66%" relative-pos-y="69%"/>
+    <key-up posix-time="267" code="d" relative-pos-x="66%" relative-pos-y="70%"/>
+    <key-down posix-time="484" code="e" relative-pos-x="48%" relative-pos-y="58%"/>
+    <key-up posix-time="537" code="e" relative-pos-x="44%" relative-pos-y="58%"/>
+    <key-down posix-time="697" code="s" relative-pos-x="36%" relative-pos-y="69%"/>
+    <key-up posix-time="750" code="s" relative-pos-x="36%" relative-pos-y="69%"/>
+    <key-down posix-time="966" code="x" relative-pos-x="54%" relative-pos-y="75%"/>
+    <key-up posix-time="1042" code="x" relative-pos-x="54%" relative-pos-y="76%"/>
+    <key-down posix-time="1145" code="q" relative-pos-x="31%" relative-pos-y="55%"/>
+    <key-up posix-time="1223" code="q" relative-pos-x="33%" relative-pos-y="52%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="27%" relative-pos-y="33%"/>
+    <key-up posix-time="108" code="a" relative-pos-x="27%" relative-pos-y="33%"/>
+    <key-down posix-time="529" code="d" relative-pos-x="20%" relative-pos-y="62%"/>
+    <key-up posix-time="603" code="d" relative-pos-x="20%" relative-pos-y="62%"/>
+    <key-down posix-time="906" code="e" relative-pos-x="49%" relative-pos-y="66%"/>
+    <key-up posix-time="1015" code="e" relative-pos-x="49%" relative-pos-y="66%"/>
+    <key-down posix-time="1176" code="s" relative-pos-x="47%" relative-pos-y="58%"/>
+    <key-up posix-time="1250" code="s" relative-pos-x="47%" relative-pos-y="58%"/>
+    <key-down posix-time="1470" code="x" relative-pos-x="57%" relative-pos-y="56%"/>
+    <key-up posix-time="1561" code="x" relative-pos-x="57%" relative-pos-y="56%"/>
+    <key-down posix-time="2057" code="q" relative-pos-x="62%" relative-pos-y="57%"/>
+    <key-up posix-time="2116" code="q" relative-pos-x="62%" relative-pos-y="56%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="70%" relative-pos-y="77%"/>
+    <key-up posix-time="74" code="a" relative-pos-x="70%" relative-pos-y="77%"/>
+    <key-down posix-time="319" code="d" relative-pos-x="41%" relative-pos-y="73%"/>
+    <key-up posix-time="419" code="d" relative-pos-x="41%" relative-pos-y="73%"/>
+    <key-down posix-time="605" code="e" relative-pos-x="46%" relative-pos-y="41%"/>
+    <key-up posix-time="656" code="e" relative-pos-x="43%" relative-pos-y="42%"/>
+    <key-down posix-time="814" code="s" relative-pos-x="53%" relative-pos-y="41%"/>
+    <key-up posix-time="864" code="s" relative-pos-x="53%" relative-pos-y="41%"/>
+    <key-down posix-time="1049" code="x" relative-pos-x="38%" relative-pos-y="48%"/>
+    <key-up posix-time="1141" code="x" relative-pos-x="35%" relative-pos-y="48%"/>
+    <key-down posix-time="1394" code="q" relative-pos-x="56%" relative-pos-y="36%"/>
+    <key-up posix-time="1451" code="q" relative-pos-x="55%" relative-pos-y="36%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="41%" relative-pos-y="58%"/>
+    <key-up posix-time="41" code="a" relative-pos-x="41%" relative-pos-y="58%"/>
+    <key-down posix-time="363" code="d" relative-pos-x="52%" relative-pos-y="50%"/>
+    <key-up posix-time="445" code="d" relative-pos-x="49%" relative-pos-y="46%"/>
+    <key-down posix-time="555" code="e" relative-pos-x="27%" relative-pos-y="74%"/>
+    <key-up posix-time="628" code="e" relative-pos-x="27%" relative-pos-y="74%"/>
+    <key-down posix-time="784" code="s" relative-pos-x="43%" relative-pos-y="68%"/>
+    <key-up posix-time="845" code="s" relative-pos-x="43%" relative-pos-y="68%"/>
+    <key-down posix-time="1345" code="x" relative-pos-x="29%" relative-pos-y="72%"/>
+    <key-up posix-time="1410" code="x" relative-pos-x="29%" relative-pos-y="72%"/>
+    <key-down posix-time="1667" code="q" relative-pos-x="75%" relative-pos-y="69%"/>
+    <key-up posix-time="1749" code="q" relative-pos-x="75%" relative-pos-y="69%"/>
+    <key-down posix-time="2567" code="ENTER" relative-pos-x="73%" relative-pos-y="59%"/>
+    <key-up posix-time="2648" code="ENTER" relative-pos-x="73%" relative-pos-y="59%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="25%" relative-pos-y="78%"/>
+    <key-up posix-time="72" code="a" relative-pos-x="25%" relative-pos-y="78%"/>
+    <key-down posix-time="421" code="d" relative-pos-x="37%" relative-pos-y="59%"/>
+    <key-up posix-time="512" code="d" relative-pos-x="33%" relative-pos-y="55%"/>
+    <key-down posix-time="619" code="e" relative-pos-x="44%" relative-pos-y="91%"/>
+    <key-up posix-time="692" code="e" relative-pos-x="42%" relative-pos-y="91%"/>
+    <key-down posix-time="874" code="s" relative-pos-x="22%" relative-pos-y="58%"/>
+    <key-up posix-time="931" code="s" relative-pos-x="22%" relative-pos-y="58%"/>
+    <key-down posix-time="1691" code="x" relative-pos-x="28%" relative-pos-y="70%"/>
+    <key-up posix-time="1766" code="x" relative-pos-x="28%" relative-pos-y="70%"/>
+    <key-down posix-time="2055" code="q" relative-pos-x="56%" relative-pos-y="41%"/>
+    <key-up posix-time="2096" code="q" relative-pos-x="56%" relative-pos-y="41%"/>
+    <key-down posix-time="3613" code="ENTER" relative-pos-x="84%" relative-pos-y="70%"/>
+    <key-up posix-time="3703" code="ENTER" relative-pos-x="80%" relative-pos-y="70%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="16%" relative-pos-y="64%"/>
+    <key-up posix-time="122" code="a" relative-pos-x="13%" relative-pos-y="72%"/>
+    <key-down posix-time="225" code="d" relative-pos-x="70%" relative-pos-y="70%"/>
+    <key-up posix-time="303" code="d" relative-pos-x="70%" relative-pos-y="70%"/>
+    <key-down posix-time="395" code="e" relative-pos-x="25%" relative-pos-y="58%"/>
+    <key-up posix-time="454" code="e" relative-pos-x="25%" relative-pos-y="58%"/>
+    <key-down posix-time="563" code="s" relative-pos-x="63%" relative-pos-y="73%"/>
+    <key-up posix-time="673" code="s" relative-pos-x="52%" relative-pos-y="70%"/>
+    <key-down posix-time="847" code="x" relative-pos-x="70%" relative-pos-y="68%"/>
+    <key-up posix-time="944" code="x" relative-pos-x="70%" relative-pos-y="68%"/>
+    <key-down posix-time="1056" code="q" relative-pos-x="27%" relative-pos-y="66%"/>
+    <key-up posix-time="1104" code="q" relative-pos-x="26%" relative-pos-y="67%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="18%" relative-pos-y="62%"/>
+    <key-up posix-time="111" code="a" relative-pos-x="22%" relative-pos-y="58%"/>
+    <key-down posix-time="214" code="d" relative-pos-x="62%" relative-pos-y="79%"/>
+    <key-up posix-time="291" code="d" relative-pos-x="62%" relative-pos-y="80%"/>
+    <key-down posix-time="438" code="e" relative-pos-x="61%" relative-pos-y="52%"/>
+    <key-up posix-time="527" code="e" relative-pos-x="56%" relative-pos-y="52%"/>
+    <key-down posix-time="651" code="s" relative-pos-x="38%" relative-pos-y="74%"/>
+    <key-up posix-time="729" code="s" relative-pos-x="38%" relative-pos-y="75%"/>
+    <key-down posix-time="1115" code="x" relative-pos-x="59%" relative-pos-y="71%"/>
+    <key-up posix-time="1191" code="x" relative-pos-x="59%" relative-pos-y="71%"/>
+    <key-down posix-time="1315" code="q" relative-pos-x="41%" relative-pos-y="62%"/>
+    <key-up posix-time="1403" code="q" relative-pos-x="43%" relative-pos-y="66%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="19%" relative-pos-y="58%"/>
+    <key-up posix-time="109" code="a" relative-pos-x="12%" relative-pos-y="69%"/>
+    <key-down posix-time="189" code="d" relative-pos-x="75%" relative-pos-y="78%"/>
+    <key-up posix-time="254" code="d" relative-pos-x="75%" relative-pos-y="78%"/>
+    <key-down posix-time="359" code="e" relative-pos-x="2%" relative-pos-y="78%"/>
+    <key-up posix-time="459" code="w" relative-pos-x="98%" relative-pos-y="82%"/>
+    <key-down posix-time="571" code="s" relative-pos-x="36%" relative-pos-y="74%"/>
+    <key-up posix-time="649" code="s" relative-pos-x="20%" relative-pos-y="69%"/>
+    <key-down posix-time="841" code="x" relative-pos-x="70%" relative-pos-y="58%"/>
+    <key-up posix-time="908" code="x" relative-pos-x="70%" relative-pos-y="58%"/>
+    <key-down posix-time="1065" code="q" relative-pos-x="40%" relative-pos-y="52%"/>
+    <key-up posix-time="1132" code="q" relative-pos-x="40%" relative-pos-y="52%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="13%" relative-pos-y="43%"/>
+    <key-up posix-time="123" code="a" relative-pos-x="16%" relative-pos-y="47%"/>
+    <key-down posix-time="248" code="d" relative-pos-x="62%" relative-pos-y="87%"/>
+    <key-up posix-time="325" code="d" relative-pos-x="68%" relative-pos-y="90%"/>
+    <key-down posix-time="441" code="e" relative-pos-x="33%" relative-pos-y="44%"/>
+    <key-up posix-time="517" code="e" relative-pos-x="36%" relative-pos-y="51%"/>
+    <key-down posix-time="629" code="s" relative-pos-x="16%" relative-pos-y="78%"/>
+    <key-up posix-time="696" code="s" relative-pos-x="15%" relative-pos-y="74%"/>
+    <key-down posix-time="843" code="x" relative-pos-x="93%" relative-pos-y="72%"/>
+    <key-up posix-time="921" code="x" relative-pos-x="93%" relative-pos-y="72%"/>
+    <key-down posix-time="977" code="q" relative-pos-x="38%" relative-pos-y="66%"/>
+    <key-up posix-time="1066" code="q" relative-pos-x="34%" relative-pos-y="66%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="46%" relative-pos-y="62%"/>
+    <key-up posix-time="107" code="a" relative-pos-x="46%" relative-pos-y="62%"/>
+    <key-down posix-time="338" code="d" relative-pos-x="2%" relative-pos-y="56%"/>
+    <key-up posix-time="399" code="d" relative-pos-x="2%" relative-pos-y="56%"/>
+    <key-down posix-time="561" code="e" relative-pos-x="37%" relative-pos-y="86%"/>
+    <key-up posix-time="626" code="e" relative-pos-x="37%" relative-pos-y="86%"/>
+    <key-down posix-time="768" code="s" relative-pos-x="35%" relative-pos-y="40%"/>
+    <key-up posix-time="849" code="s" relative-pos-x="34%" relative-pos-y="40%"/>
+    <key-down posix-time="1246" code="x" relative-pos-x="51%" relative-pos-y="69%"/>
+    <key-up posix-time="1353" code="x" relative-pos-x="41%" relative-pos-y="59%"/>
+    <key-down posix-time="1535" code="q" relative-pos-x="63%" relative-pos-y="94%"/>
+    <key-up posix-time="1650" code="q" relative-pos-x="63%" relative-pos-y="94%"/>
+    <key-down posix-time="2344" code="ENTER" relative-pos-x="82%" relative-pos-y="50%"/>
+    <key-up posix-time="2406" code="ENTER" relative-pos-x="82%" relative-pos-y="50%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="49%" relative-pos-y="52%"/>
+    <key-up posix-time="82" code="a" relative-pos-x="49%" relative-pos-y="54%"/>
+    <key-down posix-time="302" code="d" relative-pos-x="50%" relative-pos-y="65%"/>
+    <key-up posix-time="354" code="d" relative-pos-x="50%" relative-pos-y="65%"/>
+    <key-down posix-time="570" code="e" relative-pos-x="52%" relative-pos-y="60%"/>
+    <key-up posix-time="628" code="e" relative-pos-x="50%" relative-pos-y="60%"/>
+    <key-down posix-time="763" code="s" relative-pos-x="39%" relative-pos-y="54%"/>
+    <key-up posix-time="831" code="s" relative-pos-x="41%" relative-pos-y="54%"/>
+    <key-down posix-time="998" code="x" relative-pos-x="49%" relative-pos-y="54%"/>
+    <key-up posix-time="1107" code="x" relative-pos-x="47%" relative-pos-y="52%"/>
+    <key-down posix-time="1327" code="q" relative-pos-x="40%" relative-pos-y="49%"/>
+    <key-up posix-time="1379" code="q" relative-pos-x="40%" relative-pos-y="49%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="41%" relative-pos-y="70%"/>
+    <key-up posix-time="66" code="a" relative-pos-x="41%" relative-pos-y="70%"/>
+    <key-down posix-time="268" code="d" relative-pos-x="53%" relative-pos-y="60%"/>
+    <key-up posix-time="343" code="d" relative-pos-x="50%" relative-pos-y="58%"/>
+    <key-down posix-time="538" code="e" relative-pos-x="38%" relative-pos-y="27%"/>
+    <key-up posix-time="604" code="e" relative-pos-x="38%" relative-pos-y="27%"/>
+    <key-down posix-time="781" code="s" relative-pos-x="28%" relative-pos-y="56%"/>
+    <key-up posix-time="856" code="s" relative-pos-x="28%" relative-pos-y="56%"/>
+    <key-down posix-time="1058" code="x" relative-pos-x="34%" relative-pos-y="72%"/>
+    <key-up posix-time="1158" code="x" relative-pos-x="34%" relative-pos-y="72%"/>
+    <key-down posix-time="1436" code="q" relative-pos-x="60%" relative-pos-y="42%"/>
+    <key-up posix-time="1494" code="q" relative-pos-x="60%" relative-pos-y="42%"/>
+  </pattern>
+  <pattern>
+    <key-down posix-time="0" code="a" relative-pos-x="44%" relative-pos-y="40%"/>
+    <key-up posix-time="81" code="a" relative-pos-x="44%" relative-pos-y="40%"/>
+    <key-down posix-time="388" code="d" relative-pos-x="53%" relative-pos-y="56%"/>
+    <key-up posix-time="469" code="d" relative-pos-x="53%" relative-pos-y="56%"/>
+    <key-down posix-time="636" code="e" relative-pos-x="38%" relative-pos-y="63%"/>
+    <key-up posix-time="708" code="e" relative-pos-x="37%" relative-pos-y="64%"/>
+    <key-down posix-time="858" code="s" relative-pos-x="37%" relative-pos-y="44%"/>
+    <key-up posix-time="932" code="s" relative-pos-x="37%" relative-pos-y="44%"/>
+    <key-down posix-time="1197" code="x" relative-pos-x="58%" relative-pos-y="71%"/>
+    <key-up posix-time="1295" code="x" relative-pos-x="55%" relative-pos-y="69%"/>
+    <key-down posix-time="1758" code="q" relative-pos-x="62%" relative-pos-y="54%"/>
+    <key-up posix-time="1840" code="q" relative-pos-x="62%" relative-pos-y="56%"/>
+    <key-down posix-time="2610" code="ENTER" relative-pos-x="87%" relative-pos-y="60%"/>
+    <key-up posix-time="2680" code="ENTER" relative-pos-x="87%" relative-pos-y="59%"/>
+  </pattern>
+</tcs>
