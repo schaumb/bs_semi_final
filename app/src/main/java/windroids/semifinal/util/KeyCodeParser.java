@@ -5,7 +5,6 @@ import java.security.InvalidParameterException;
 public class KeyCodeParser {
 	
 	public static KeyCode parse(String rawValue) {
-		rawValue = rawValue.toLowerCase();
 		switch (rawValue) {
 			case "1":
 				return KeyCode.KEY_1;
@@ -27,71 +26,129 @@ public class KeyCodeParser {
 				return KeyCode.KEY_9;
 			case "0":
 				return KeyCode.KEY_0;
-			case "q":
+			case "Q":
 				return KeyCode.KEY_Q;
-			case "w":
+			case "W":
 				return KeyCode.KEY_W;
-			case "e":
+			case "E":
 				return KeyCode.KEY_E;
-			case "r":
+			case "R":
 				return KeyCode.KEY_R;
-			case "t":
+			case "T":
 				return KeyCode.KEY_T;
-			case "z":
+			case "Z":
 				return KeyCode.KEY_Z;
-			case "u":
+			case "U":
 				return KeyCode.KEY_U;
-			case "i":
+			case "I":
 				return KeyCode.KEY_I;
-			case "o":
+			case "O":
 				return KeyCode.KEY_O;
-			case "p":
+			case "P":
 				return KeyCode.KEY_P;
+			case "q":
+				return KeyCode.KEY_q;
+			case "w":
+				return KeyCode.KEY_w;
+			case "e":
+				return KeyCode.KEY_e;
+			case "r":
+				return KeyCode.KEY_r;
+			case "t":
+				return KeyCode.KEY_t;
+			case "z":
+				return KeyCode.KEY_z;
+			case "u":
+				return KeyCode.KEY_u;
+			case "i":
+				return KeyCode.KEY_i;
+			case "o":
+				return KeyCode.KEY_o;
+			case "p":
+				return KeyCode.KEY_p;
 			case "a":
-				return KeyCode.KEY_A;
+				return KeyCode.KEY_a;
 			case "s":
-				return KeyCode.KEY_S;
+				return KeyCode.KEY_s;
 			case "d":
-				return KeyCode.KEY_D;
+				return KeyCode.KEY_d;
 			case "f":
-				return KeyCode.KEY_F;
+				return KeyCode.KEY_f;
 			case "g":
-				return KeyCode.KEY_G;
+				return KeyCode.KEY_g;
 			case "h":
-				return KeyCode.KEY_H;
+				return KeyCode.KEY_h;
 			case "j":
-				return KeyCode.KEY_J;
+				return KeyCode.KEY_j;
 			case "k":
-				return KeyCode.KEY_K;
+				return KeyCode.KEY_k;
 			case "l":
+				return KeyCode.KEY_l;
+			case "A":
+				return KeyCode.KEY_A;
+			case "S":
+				return KeyCode.KEY_S;
+			case "D":
+				return KeyCode.KEY_D;
+			case "F":
+				return KeyCode.KEY_F;
+			case "G":
+				return KeyCode.KEY_G;
+			case "H":
+				return KeyCode.KEY_H;
+			case "J":
+				return KeyCode.KEY_J;
+			case "K":
+				return KeyCode.KEY_K;
+			case "L":
 				return KeyCode.KEY_L;
 			case "shift":
 				return KeyCode.KEY_SHIFT;
 			case "y":
-				return KeyCode.KEY_Y;
+				return KeyCode.KEY_y;
 			case "x":
-				return KeyCode.KEY_X;
+				return KeyCode.KEY_x;
 			case "c":
-				return KeyCode.KEY_C;
+				return KeyCode.KEY_c;
 			case "v":
-				return KeyCode.KEY_V;
+				return KeyCode.KEY_v;
 			case "b":
-				return KeyCode.KEY_B;
+				return KeyCode.KEY_b;
 			case "n":
-				return KeyCode.KEY_N;
+				return KeyCode.KEY_n;
 			case "m":
+				return KeyCode.KEY_m;
+			case "Y":
+				return KeyCode.KEY_Y;
+			case "X":
+				return KeyCode.KEY_X;
+			case "C":
+				return KeyCode.KEY_C;
+			case "V":
+				return KeyCode.KEY_V;
+			case "B":
+				return KeyCode.KEY_B;
+			case "N":
+				return KeyCode.KEY_N;
+			case "M":
 				return KeyCode.KEY_M;
 			case "backspace":
+			case "BACKSPACE":
 				return KeyCode.KEY_BACKSPACE;
 			case "change":
+			case "CHANGE":
 				return KeyCode.KEY_CHANGE;
 			case "comma":
+			case "COMMA":
 				return KeyCode.KEY_COMMA;
 			case "space":
+			case "SPACE":
 				return KeyCode.KEY_SPACE;
 			case "dot":
+			case "DOT":
 				return KeyCode.KEY_DOT;
 			case "enter":
+			case "ENTER":
 				return KeyCode.KEY_ENTER;
 			default:
 				throw new InvalidParameterException("Given key does not exist!");
