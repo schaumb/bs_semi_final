@@ -13,7 +13,7 @@
 		android:layout_weight="1.5"
 		android:layout_margin="@dimen/margin_button"
 		android:drawableTop="@drawable/ic_keyboard_capslock_black_24dp"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color" />
 
 	<Button
 		android:id="@+id/btn_y"
@@ -23,7 +23,8 @@
 		android:text="y"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_x"
@@ -33,7 +34,8 @@
 		android:text="x"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_c"
@@ -43,7 +45,8 @@
 		android:text="c"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_v"
@@ -53,7 +56,8 @@
 		android:text="v"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_b"
@@ -63,7 +67,8 @@
 		android:text="b"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_n"
@@ -73,7 +78,8 @@
 		android:text="n"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_m"
@@ -83,7 +89,8 @@
 		android:text="m"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_backspace"

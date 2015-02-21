@@ -19,7 +19,8 @@
 		android:text="a"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_s"
@@ -29,7 +30,8 @@
 		android:text="s"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_d"
@@ -39,7 +41,8 @@
 		android:text="d"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_f"
@@ -49,7 +52,8 @@
 		android:text="f"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_g"
@@ -59,7 +63,8 @@
 		android:text="g"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_h"
@@ -69,7 +74,8 @@
 		android:text="h"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_j"
@@ -79,7 +85,8 @@
 		android:text="j"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_k"
@@ -89,7 +96,8 @@
 		android:text="k"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<Button
 		android:id="@+id/btn_l"
@@ -99,7 +107,8 @@
 		android:text="l"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
-		android:textColor="@color/text_color"/>
+		android:textColor="@color/text_color"
+		android:textAllCaps="false"/>
 
 	<View
 		android:layout_width="0dp"

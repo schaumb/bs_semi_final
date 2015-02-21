@@ -7,7 +7,7 @@
 	android:weightSum="10">
 
 	<Button
-		android:id="@+id/btn_shift"
+		android:id="@+id/btn_change"
 		android:layout_width="0dp"
 		android:layout_height="match_parent"
 		android:layout_weight="1.5"
@@ -31,6 +31,7 @@
 		android:layout_width="0dp"
 		android:layout_height="match_parent"
 		android:layout_weight="5"
+		android:text=" "
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
 		android:textColor="@color/text_color"/>
@@ -46,7 +47,7 @@
 		android:textColor="@color/text_color"/>
 
 	<Button
-		android:id="@+id/btn_done"
+		android:id="@+id/btn_enter"
 		android:layout_width="0dp"
 		android:layout_height="match_parent"
 		android:layout_weight="1.5"
