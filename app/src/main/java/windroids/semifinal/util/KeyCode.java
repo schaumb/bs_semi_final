@@ -1,4 +1,4 @@
-package windroids.semifinal.config;
+package windroids.semifinal.util;
 
 public enum KeyCode {
 	KEY_1,
