@@ -24,8 +24,6 @@ public class Communicator {
     private static final String COMM_MSG_HELLO_CLIENT = "BSP 1.0 CLIENT HELLO";
     private static final String COMM_MSG_HELLO_SERVER = "BSP 1.0 SERVER HELLO";
     private static final String COMM_MSG_ASK_ID = "SEND YOUR ID";
-//    private static final String COMM_MSG_DATA_NAME = "TEST3";
-//    private static final String COMM_MSG_RQST_SERVER = "TEST3 ID ACK - WAITING FOR REQUEST";
     private static final String COMM_MSG_RQST_CLIENT = "RQSTDATA";
     private static final String COMM_MSG_RQST_TRAIN_CLIENT = "RQSTTRAIN";
     private static final String COMM_MSG_RQST_TEST_CLIENT = "RQSTTEST";
@@ -35,26 +33,55 @@ public class Communicator {
     private PrintWriter pw;
     private BufferedReader br;
     private String dataId;
+    private int port;
+    private String address;
 
-    public Communicator(String address, int port, String dataId) throws IOException {
+    public Communicator(final String address, final int port, final String dataId) throws IOException, ExecutionException, InterruptedException {
         this.dataId = dataId; //example: TEST3
-
-        socket = new Socket(address, port);
-
-        InputStream inputStream = socket.getInputStream();
-        OutputStream outputStream = socket.getOutputStream();
-        br = new BufferedReader(new InputStreamReader(inputStream, ENCODING));
-        outputStream = new BufferedOutputStream(outputStream);
-        pw = new PrintWriter(new OutputStreamWriter(outputStream, ENCODING));
+        this.address = address;
+        this.port = port;
     }
 
-    public void endCommuncation() throws IOException {
-        socket.close();
+    public Boolean startCommunication() throws ExecutionException, InterruptedException {
+        boolean result = new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                try {
+                    socket = new Socket(address, port);
+
+                    InputStream inputStream = socket.getInputStream();
+                    OutputStream outputStream = socket.getOutputStream();
+                    br = new BufferedReader(new InputStreamReader(inputStream, ENCODING));
+                    outputStream = new BufferedOutputStream(outputStream);
+                    pw = new PrintWriter(new OutputStreamWriter(outputStream, ENCODING));
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+        }.execute().get();
+        Log.d("Connection succeed: ", String.valueOf(result));
+        return result;
+    }
+
+    public Boolean endCommuncation() throws IOException, ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        }.execute().get();
+
     }
 
     public String doPreCommuncationAndGetPassword() throws ExecutionException, InterruptedException {
         return new AsyncTask<String, Void, String>() {
-
             @Override
             protected String doInBackground(String... params) {
                 String message = null;
@@ -94,7 +121,6 @@ public class Communicator {
 
     public String getNextTestDataXmlFile() throws ExecutionException, InterruptedException {
         return new AsyncTask<Void, Void, String>() {
-
             @Override
             protected String doInBackground(Void... params) {
                 sendMessage(COMM_MSG_RQST_TEST_CLIENT);
@@ -105,18 +131,18 @@ public class Communicator {
         }.execute().get();
     }
 
-    public void answerTestData(boolean suceedState) throws ExecutionException, InterruptedException {
+    public boolean answerTestData(boolean suceedState) throws ExecutionException, InterruptedException {
         String clientAnswer;
         clientAnswer = suceedState ? "ACCEPT" : "REJECT";
 
-        new AsyncTask<String, Void, Void>() {
+        return new AsyncTask<String, Void, Boolean>() {
 
             @Override
-            protected Void doInBackground(String... params) {
+            protected Boolean doInBackground(String... params) {
                 sendMessage(params[0]);
-                return null;
+                return true;
             }
-        }.execute(clientAnswer);
+        }.execute(clientAnswer).get();
     }
 
     private void sendMessage(String message) {
