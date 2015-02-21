@@ -34,6 +34,10 @@ public class KeyEvent implements Serializable {
 		return time;
 	}
 
+	public void setTime(long time) {
+		this.time = time;
+	}
+
 	public KeyCode getCode() {
 		return code;
 	}
