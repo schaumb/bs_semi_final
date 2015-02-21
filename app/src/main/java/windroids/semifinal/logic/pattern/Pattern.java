@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;
 
-import windroids.semifinal.util.KeyCode;
-
 public class Pattern implements Serializable 
 {
 	private static final long serialVersionUID = 1L;
@@ -22,38 +20,38 @@ public class Pattern implements Serializable
 		return events;
 	}
 
-	String getTypedCode()
-	{
-		String result = "";
-		boolean shift = false;
-		for(KeyEvent e : events)
-		{
-			if(e.getType() == KeyEvent.Type.UP) 
-				continue;
-
-            
-			switch(e.getCode().getName())
-			{
-			case KeyCode.BACK_SPACE.getName():
-				result = result.substring(0, result.length() - 1);
-				break;
-			case KeyCode.SHIFT.getName():
-				shift = true;
-				continue;
-			default:
-				if(e.isLetterKey() && shift)
-				{
-					result.append(Character.toUpperCase((char)e.getCode()));
-				}
-				else
-				{
-					result.append((char)e.getCode());
-				}
-			}
-			shift = false;
-		}
-		return result;
-	}
+//	String getTypedCode()
+//	{
+//		String result = "";
+//		boolean shift = false;
+//		for(KeyEvent e : events)
+//		{
+//			if(e.getType() == KeyEvent.Type.UP)
+//				continue;
+//
+//
+//			switch(e.getCode().getName())
+//			{
+//			case KeyCode.BACK_SPACE.getName():
+//				result = result.substring(0, result.length() - 1);
+//				break;
+//			case KeyCode.SHIFT.getName():
+//				shift = true;
+//				continue;
+//			default:
+//				if(e.isLetterKey() && shift)
+//				{
+//					result.append(Character.toUpperCase((char)e.getCode()));
+//				}
+//				else
+//				{
+//					result.append((char)e.getCode());
+//				}
+//			}
+//			shift = false;
+//		}
+//		return result;
+//	}
 
 	int eraseBackSpaceEvents()
 	{

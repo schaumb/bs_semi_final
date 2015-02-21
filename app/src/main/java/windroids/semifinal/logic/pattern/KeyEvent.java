@@ -2,11 +2,9 @@ package windroids.semifinal.logic.pattern;
 
 import java.io.Serializable;
 
-import windroids.semifinal.util.KeyCode;
-
 public class KeyEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Type type;
 	private long time;
 	private KeyCode code;

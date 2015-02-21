@@ -14,10 +14,9 @@ import java.util.Date;
 import java.util.List;
 
 import windroids.semifinal.R;
+import windroids.semifinal.logic.pattern.KeyCode;
 import windroids.semifinal.logic.pattern.KeyEvent;
 import windroids.semifinal.logic.pattern.Pattern;
-import windroids.semifinal.util.KeyCode;
-import windroids.semifinal.util.KeyCodeParser;
 
 public class Keyboard extends Fragment {
 
@@ -51,7 +50,7 @@ public class Keyboard extends Fragment {
 
 	private boolean isShift;
 
-	private List<KeyEvent> events = new ArrayList<>(20); // TODO: mekkora legyen?
+	private List<KeyEvent> events = new ArrayList<>(30);
 	private KeyEvent downEventCache;
 	private KeyEvent upEventCache;
 
@@ -61,7 +60,6 @@ public class Keyboard extends Fragment {
 		findButtonsOnLayout(layout);
 		addTagsForSpecialCharacters();
 		addListenersToButtons();
-		// TODO
 		return layout;
 	}
 
@@ -156,8 +154,6 @@ public class Keyboard extends Fragment {
 		@Override
 		public void onClick(View view) {
 			if (view != null) {
-				events.add(downEventCache);
-				events.add(upEventCache);
 				isShift = !isShift;
 			}
 			if (isShift) {
@@ -223,14 +219,13 @@ public class Keyboard extends Fragment {
 			long time = new Date().getTime();
 			Log.d(TAG, "Time: " + time);
 
-			// CODE 
-			// TODO a shift-es logikával baj van
+			// CODE
 			Button button = (Button) view;
 			CharSequence rawValue = button.getText();
 			if (rawValue == null || rawValue.length() == 0) {
 				rawValue = button.getTag().toString();
 			}
-			KeyCode keyCode = KeyCodeParser.parse(rawValue.toString().toLowerCase());
+			KeyCode keyCode = KeyCode.getKeyCode(rawValue.toString());
 			Log.d(TAG, "KeyCode: " + keyCode);
 
 			// POSX

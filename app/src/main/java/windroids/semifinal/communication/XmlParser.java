@@ -1,9 +1,9 @@
 package windroids.semifinal.communication;
 
-import android.util.Xml;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import android.util.Xml;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -11,10 +11,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import windroids.semifinal.logic.pattern.KeyCode;
 import windroids.semifinal.logic.pattern.KeyEvent;
 import windroids.semifinal.logic.pattern.Pattern;
-import windroids.semifinal.util.KeyCode;
-import windroids.semifinal.util.KeyCodeParser;
 
 public class XmlParser {
 
@@ -80,7 +79,7 @@ public class XmlParser {
         long time = Long.valueOf(parser.getAttributeValue(null, "posix-time"));
 
         String keyCodeRaw = parser.getAttributeValue(null, "code");
-        KeyCode keyCode = KeyCodeParser.parse(keyCodeRaw);
+        KeyCode keyCode = KeyCode.getKeyCode(keyCodeRaw);
 
         String posXRaw = parser.getAttributeValue(null, "relative-pos-x");
         double posX = Double.valueOf(posXRaw.substring(0, posXRaw.length() - 1));
