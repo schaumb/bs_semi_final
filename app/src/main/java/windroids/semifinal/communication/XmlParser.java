@@ -79,6 +79,28 @@ public class XmlParser {
         long time = Long.valueOf(parser.getAttributeValue(null, "posix-time"));
 
         String keyCodeRaw = parser.getAttributeValue(null, "code");
+		switch (keyCodeRaw) {
+			case "SHIFT":
+				keyCodeRaw = "Shift";
+				break;
+			case "BACKSPACE":
+				keyCodeRaw = "Backspace";
+				break;
+			case "SPACE":
+				keyCodeRaw = "Space";
+				break;
+			case ",":
+				keyCodeRaw = "Comma";
+				break;
+			case ".":
+				keyCodeRaw = "Period";
+				break;
+			case "ENTER":
+				keyCodeRaw = "Enter";
+				break;
+			default:
+				keyCodeRaw = keyCodeRaw.toUpperCase();
+		}
         KeyCode keyCode = KeyCode.getKeyCode(keyCodeRaw);
 
         String posXRaw = parser.getAttributeValue(null, "relative-pos-x");

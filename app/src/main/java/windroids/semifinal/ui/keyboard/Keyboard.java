@@ -133,10 +133,10 @@ public class Keyboard extends Fragment {
 	}
 
 	private void addTagsForSpecialCharacters() {
-		shift.setTag("shift");
-		backspace.setTag("backspace");
-		change.setTag("change");
-		enter.setTag("enter");
+		shift.setTag("Shift");
+		backspace.setTag("Backspace");
+		change.setTag("change"); // TODO
+		enter.setTag("Enter");
 	}
 
 	private View.OnClickListener onNormalButtonClickListener = new View.OnClickListener() {
@@ -154,6 +154,8 @@ public class Keyboard extends Fragment {
 		@Override
 		public void onClick(View view) {
 			if (view != null) {
+				events.add(downEventCache);
+				events.add(upEventCache);
 				isShift = !isShift;
 			}
 			if (isShift) {
@@ -224,6 +226,17 @@ public class Keyboard extends Fragment {
 			CharSequence rawValue = button.getText();
 			if (rawValue == null || rawValue.length() == 0) {
 				rawValue = button.getTag().toString();
+			} else {
+				rawValue = rawValue.toString().toUpperCase();
+				if (rawValue.equals(" ")) {
+					rawValue = "Space";
+				}
+				if (rawValue.equals(",")) {
+					rawValue = "Comma";
+				}
+				if (rawValue.equals(".")) {
+					rawValue = "Period";
+				}
 			}
 			KeyCode keyCode = KeyCode.getKeyCode(rawValue.toString());
 			Log.d(TAG, "KeyCode: " + keyCode);
