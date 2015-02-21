@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@null"
+	android:weightSum="10">
+
+	<Button
+		android:id="@+id/btn_shift"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1.5"
+		android:layout_margin="@dimen/margin_button"
+		android:drawableTop="@drawable/ic_keyboard_capslock_black_24dp"
+		android:textColor="@color/text_color"/>
+
+	<Button
+		android:id="@+id/btn_y"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:text="y"
+		android:layout_margin="@dimen/margin_button"
+		android:padding="@dimen/padding_button"
+		android:textColor="@color/text_color"/>
+
+	<Button
+		android:id="@+id/btn_x"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:text="x"
+		android:layout_margin="@dimen/margin_button"
+		android:padding="@dimen/padding_button"
+		android:textColor="@color/text_color"/>
+
+	<Button
+		android:id="@+id/btn_c"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:text="c"
+		android:layout_margin="@dimen/margin_button"
+		android:padding="@dimen/padding_button"
+		android:textColor="@color/text_color"/>
+
+	<Button
+		android:id="@+id/btn_v"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:text="v"
+		android:layout_margin="@dimen/margin_button"
+		android:padding="@dimen/padding_button"
+		android:textColor="@color/text_color"/>
+
+	<Button
+		android:id="@+id/btn_b"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:text="b"
+		android:layout_margin="@dimen/margin_button"
+		android:padding="@dimen/padding_button"
+		android:textColor="@color/text_color"/>
+
+	<Button
+		android:id="@+id/btn_n"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:text="n"
+		android:layout_margin="@dimen/margin_button"
+		android:padding="@dimen/padding_button"
+		android:textColor="@color/text_color"/>
+
+	<Button
+		android:id="@+id/btn_m"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:text="m"
+		android:layout_margin="@dimen/margin_button"
+		android:padding="@dimen/padding_button"
+		android:textColor="@color/text_color"/>
+
+	<Button
+		android:id="@+id/btn_backspace"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1.5"
+		android:layout_margin="@dimen/margin_button"
+		android:drawableTop="@drawable/ic_keyboard_backspace_black_24dp"
+		android:textColor="@color/text_color"/>
+
+</LinearLayout>
