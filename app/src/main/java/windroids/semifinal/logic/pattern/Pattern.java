@@ -2,6 +2,7 @@ package windroids.semifinal.logic.pattern;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.ListIterator;
 
 import windroids.semifinal.util.KeyCode;
 
@@ -30,22 +31,23 @@ public class Pattern implements Serializable
 			if(e.getType() == KeyEvent.Type.UP) 
 				continue;
 
-			switch(e.getCode())
+            
+			switch(e.getCode().getName())
 			{
-			case KeyCode.BACK_SPACE:
-				result = result.substring(0, result.lenth() - 1);
+			case KeyCode.BACK_SPACE.getName():
+				result = result.substring(0, result.length() - 1);
 				break;
-			case KeyCode.SHIFT:
+			case KeyCode.SHIFT.getName():
 				shift = true;
 				continue;
 			default:
 				if(e.isLetterKey() && shift)
 				{
-					result.append(Character.toUpperCase(e.getCode()));
+					result.append(Character.toUpperCase((char)e.getCode()));
 				}
 				else
 				{
-					result.append(e.getCode());
+					result.append((char)e.getCode());
 				}
 			}
 			shift = false;
@@ -58,7 +60,7 @@ public class Pattern implements Serializable
 		int countOfBackSpace = 0;
 		for (ListIterator<KeyEvent> iterator = events.listIterator(); iterator.hasNext();) 
 		{
-			KeyEvent event = iterator.next();
+			KeyEvent e = iterator.next();
 			if (e.getCode() == KeyCode.BACK_SPACE) 
 			{
 				if(e.getType() == KeyEvent.Type.UP)
@@ -67,7 +69,7 @@ public class Pattern implements Serializable
 					iterator.remove();
 
 					// change the time
-					long diff = event.getTime();
+					long diff = e.getTime();
 					if(iterator.hasPrevious()) 
 					{
 						KeyEvent prev = iterator.previous();
@@ -87,7 +89,7 @@ public class Pattern implements Serializable
 						iterator.remove();
 						if(!iterator.hasPrevious()) break;
 						KeyEvent prev = iterator.previous();
-						if(prev.getCode() == KeyEvent.SHIFT)
+						if(prev.getCode() == KeyCode.SHIFT)
 							++t;
 					}
 					while(--t != 0);

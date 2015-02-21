@@ -25,6 +25,6 @@ public class Logic implements Serializable
 
 	public boolean isMatching(Pattern pattern)
 	{
-
+		return false;
 	}
 }
