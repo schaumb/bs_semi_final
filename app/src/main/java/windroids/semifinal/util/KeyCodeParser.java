@@ -103,6 +103,7 @@ public class KeyCodeParser {
 			case "L":
 				return KeyCode.KEY_L;
 			case "shift":
+			case "SHIFT":
 				return KeyCode.KEY_SHIFT;
 			case "y":
 				return KeyCode.KEY_y;
@@ -135,23 +136,19 @@ public class KeyCodeParser {
 			case "backspace":
 			case "BACKSPACE":
 				return KeyCode.KEY_BACKSPACE;
-			case "change":
-			case "CHANGE":
+			case "#@$":
 				return KeyCode.KEY_CHANGE;
-			case "comma":
-			case "COMMA":
+			case ",":
 				return KeyCode.KEY_COMMA;
-			case "space":
-			case "SPACE":
+			case " ":
 				return KeyCode.KEY_SPACE;
-			case "dot":
-			case "DOT":
+			case ".":
 				return KeyCode.KEY_DOT;
 			case "enter":
 			case "ENTER":
 				return KeyCode.KEY_ENTER;
 			default:
-				throw new InvalidParameterException("Given key does not exist!");
+				throw new InvalidParameterException("Given key does not exist: " + rawValue);
 		}
 	}
 }

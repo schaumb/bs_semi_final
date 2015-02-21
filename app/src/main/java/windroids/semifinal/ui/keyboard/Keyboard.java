@@ -2,17 +2,26 @@ package windroids.semifinal.ui.keyboard;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import windroids.semifinal.R;
+import windroids.semifinal.logic.pattern.KeyEvent;
+import windroids.semifinal.logic.pattern.Pattern;
+import windroids.semifinal.util.KeyCode;
+import windroids.semifinal.util.KeyCodeParser;
 
 public class Keyboard extends Fragment {
+
+	private static final String TAG = Keyboard.class.getSimpleName();
 
 	private EventListener eventListener = new EventListener() {
 		@Override
@@ -26,23 +35,30 @@ public class Keyboard extends Fragment {
 		}
 
 		@Override
-		public void onSubmit() {
-
+		public void onSubmit(Pattern pattern) {
+			List<KeyEvent> keyEvents = pattern.getEvents();
+			for (KeyEvent event : keyEvents) {
+				Log.d(getClass().getSimpleName(), event.toString());
+			}
 		}
 	}; // TODO delete
-	
-	private List<Button> normalButtons = new ArrayList<>(39);
+
+	private List<Button> normalButtons = new ArrayList<>(40);
 	private Button shift;
 	private Button backspace;
 	private Button change;
 	private Button enter;
-	
+
 	private boolean isShift;
+	private boolean isOutOfBounds;
+
+	private List<KeyEvent> events = new ArrayList<>(20); // TODO: mekkora legyen?
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View layout = inflater.inflate(R.layout.keyboard, container, false);
 		findButtonsOnLayout(layout);
+		addTagsForSpecialCharacters();
 		addListenersToButtons();
 		// TODO
 		return layout;
@@ -94,7 +110,6 @@ public class Keyboard extends Fragment {
 		enter = (Button) layout.findViewById(R.id.btn_enter);
 	}
 
-	// TODO
 	private void addListenersToButtons() {
 		//
 		//	Set View.OnClickListener
@@ -105,12 +120,26 @@ public class Keyboard extends Fragment {
 		shift.setOnClickListener(onShiftClickListener);
 		backspace.setOnClickListener(onBackspaceClickListener);
 		enter.setOnClickListener(onEnterClickListener);
-		
+
 		//
-		//	TODO
+		//	Set View.OnTouchListener
 		//
+		for (Button normalButton : normalButtons) {
+			normalButton.setOnTouchListener(onTouchListener);
+		}
+		shift.setOnTouchListener(onTouchListener);
+		backspace.setOnTouchListener(onTouchListener);
+		change.setOnTouchListener(onTouchListener);
+		enter.setOnTouchListener(onTouchListener);
 	}
-	
+
+	private void addTagsForSpecialCharacters() {
+		shift.setTag("shift");
+		backspace.setTag("backspace");
+		change.setTag("change");
+		enter.setTag("enter");
+	}
+
 	private View.OnClickListener onNormalButtonClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
@@ -137,7 +166,7 @@ public class Keyboard extends Fragment {
 			}
 		}
 	};
-	
+
 	private View.OnClickListener onBackspaceClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
@@ -145,21 +174,83 @@ public class Keyboard extends Fragment {
 			eventListener.onBackspace();
 		}
 	};
-	
+
 	private View.OnClickListener onEnterClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
 			updateCaseIfNecessary();
-			eventListener.onSubmit();
+			eventListener.onSubmit(new Pattern(events));
+			events = new ArrayList<>(20);
 		}
 	};
-	
+
 	private void updateCaseIfNecessary() {
 		if (isShift) {
 			isShift = false;
 			onShiftClickListener.onClick(null);
 		}
 	}
+
+	private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+		@Override
+		public boolean onTouch(View view, MotionEvent event) {
+			// TYPE
+			KeyEvent.Type type;
+			switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					type = KeyEvent.Type.DOWN;
+					Log.d(TAG, "Type: KeyEvent.Type.DOWN");
+					break;
+				case MotionEvent.ACTION_UP:
+					if (isOutOfBounds) {
+						isOutOfBounds = false;
+						return false;
+					}
+					type = KeyEvent.Type.UP;
+					Log.d(TAG, "Type: KeyEvent.Type.UP");
+					break;
+				case MotionEvent.ACTION_MOVE:
+					Log.d(TAG, "Another type: MotionEvent.ACTION_MOVE");
+					float x = event.getX();
+					float y = event.getY();
+					if (x < 0 || y < 0 || x > view.getWidth() || y > view.getHeight()) {
+						// TODO nagyobbnak kéne lennie a határnak. mennyivel?
+						isOutOfBounds = true;
+						Log.d(TAG, "Out of bounds.");
+					}
+					return false;
+				default:
+					Log.d(TAG, "Another type: " + event.getAction());
+					return false;
+			}
+
+			// TIME
+			long time = new Date().getTime();
+			Log.d(TAG, "Time: " + time);
+
+			// CODE 
+			// TODO a shift-es logikával baj van
+			Button button = (Button) view;
+			CharSequence rawValue = button.getText();
+			if (rawValue == null || rawValue.length() == 0) {
+				rawValue = button.getTag().toString();
+			}
+			KeyCode keyCode = KeyCodeParser.parse(rawValue.toString().toLowerCase());
+			Log.d(TAG, "KeyCode: " + keyCode);
+
+			// POSX
+			double posX = event.getX() / view.getWidth();
+			Log.d(TAG, "PosX: " + posX);
+
+			// POSY
+			double posY = event.getY() / view.getHeight();
+			Log.d(TAG, "PosY: " + posY);
+
+			events.add(new KeyEvent(type, time, keyCode, posX, posY));
+
+			return false;
+		}
+	};
 
 	public void setEventListener(EventListener eventListener) {
 		this.eventListener = eventListener;
@@ -170,6 +261,6 @@ public class Keyboard extends Fragment {
 
 		void onBackspace();
 
-		void onSubmit();
+		void onSubmit(Pattern pattern);
 	}
 }

@@ -45,4 +45,26 @@ public class KeyEvent implements Serializable {
 	public double getPosY() {
 		return posY;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("// KeyEvent\n");
+		stringBuilder.append("Type: ");
+		stringBuilder.append(type);
+		stringBuilder.append("\n");
+		stringBuilder.append("Time: ");
+		stringBuilder.append(time);
+		stringBuilder.append("\n");
+		stringBuilder.append("Code: ");
+		stringBuilder.append(code);
+		stringBuilder.append("\n");
+		stringBuilder.append("PosX: ");
+		stringBuilder.append(posX);
+		stringBuilder.append("\n");
+		stringBuilder.append("PosY: ");
+		stringBuilder.append(posY);
+		stringBuilder.append("\n");
+		return stringBuilder.toString();
+	}
 }
