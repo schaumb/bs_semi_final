@@ -131,16 +131,16 @@ public class Communicator {
         }.execute().get();
     }
 
-    public boolean answerTestData(boolean suceedState) throws ExecutionException, InterruptedException {
+    public String answerTestDataAndGetNext(boolean suceedState) throws ExecutionException, InterruptedException {
         String clientAnswer;
         clientAnswer = suceedState ? "ACCEPT" : "REJECT";
 
-        return new AsyncTask<String, Void, Boolean>() {
+        return new AsyncTask<String, Void, String>() {
 
             @Override
-            protected Boolean doInBackground(String... params) {
+            protected String doInBackground(String... params) {
                 sendMessage(params[0]);
-                return true;
+                return getMessage();
             }
         }.execute(clientAnswer).get();
     }
@@ -159,6 +159,10 @@ public class Communicator {
         }
         Log.d(SERVER_MESSAGE, message);
         return message;
+    }
+
+    public boolean checkEndMessage(String message) {
+        return message.startsWith("GOODBYE");
     }
 }
 

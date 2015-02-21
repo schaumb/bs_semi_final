@@ -17,11 +17,17 @@ import windroids.semifinal.logic.pattern.Pattern;
 
 public class XmlParser {
 
-    public static List<Pattern> parseXmlFile(String xmlString) throws XmlPullParserException, IOException {
-        return parser(new ByteArrayInputStream(xmlString.getBytes("UTF-8")));
+    public static List<Pattern> parseTestData(String xmlString) throws XmlPullParserException, IOException {
+        List<Pattern> patternList = parserTestData(new ByteArrayInputStream(xmlString.getBytes("UTF-8")));
+        return patternList;
     }
 
-    private static List<Pattern> parser(InputStream in) throws XmlPullParserException, IOException {
+    public static Pattern parsePattern(String xmlString) throws XmlPullParserException, IOException {
+        Pattern pattern = parserPattern(new ByteArrayInputStream(xmlString.getBytes("UTF-8")));
+        return pattern;
+    }
+
+    private static List<Pattern> parserTestData(InputStream in) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -33,10 +39,22 @@ public class XmlParser {
         }
     }
 
+    private static Pattern parserPattern(InputStream in) throws XmlPullParserException, IOException {
+        try {
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            parser.setInput(in, null);
+            parser.nextTag();
+            return readPattern(parser);
+        } finally {
+            in.close();
+        }
+    }
+
     private static List<Pattern> readTcs(XmlPullParser parser) throws XmlPullParserException, IOException {
         List patternList = new ArrayList<Pattern>();
 
-        parser.require(XmlPullParser.START_TAG, null, "tcs");
+        parser.require(XmlPullParser.START_TAG, null, "training");
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -49,7 +67,7 @@ public class XmlParser {
                 skip(parser);
             }
         }
-        parser.require(XmlPullParser.END_TAG, null, "tcs");
+        parser.require(XmlPullParser.END_TAG, null, "training");
         return patternList;
     }
 
