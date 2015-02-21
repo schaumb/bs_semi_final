@@ -50,9 +50,10 @@ public class Keyboard extends Fragment {
 	private Button enter;
 
 	private boolean isShift;
-	private boolean isOutOfBounds;
 
 	private List<KeyEvent> events = new ArrayList<>(20); // TODO: mekkora legyen?
+	private KeyEvent downEventCache;
+	private KeyEvent upEventCache;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -143,6 +144,8 @@ public class Keyboard extends Fragment {
 	private View.OnClickListener onNormalButtonClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
+			events.add(downEventCache);
+			events.add(upEventCache);
 			updateCaseIfNecessary();
 			Button button = (Button) view;
 			eventListener.onTextInput(button.getText().toString());
@@ -153,6 +156,8 @@ public class Keyboard extends Fragment {
 		@Override
 		public void onClick(View view) {
 			if (view != null) {
+				events.add(downEventCache);
+				events.add(upEventCache);
 				isShift = !isShift;
 			}
 			if (isShift) {
@@ -170,6 +175,8 @@ public class Keyboard extends Fragment {
 	private View.OnClickListener onBackspaceClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
+			events.add(downEventCache);
+			events.add(upEventCache);
 			updateCaseIfNecessary();
 			eventListener.onBackspace();
 		}
@@ -178,6 +185,8 @@ public class Keyboard extends Fragment {
 	private View.OnClickListener onEnterClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
+			events.add(downEventCache);
+			events.add(upEventCache);
 			updateCaseIfNecessary();
 			eventListener.onSubmit(new Pattern(events));
 			events = new ArrayList<>(20);
@@ -202,23 +211,9 @@ public class Keyboard extends Fragment {
 					Log.d(TAG, "Type: KeyEvent.Type.DOWN");
 					break;
 				case MotionEvent.ACTION_UP:
-					if (isOutOfBounds) {
-						isOutOfBounds = false;
-						return false;
-					}
 					type = KeyEvent.Type.UP;
 					Log.d(TAG, "Type: KeyEvent.Type.UP");
 					break;
-				case MotionEvent.ACTION_MOVE:
-					Log.d(TAG, "Another type: MotionEvent.ACTION_MOVE");
-					float x = event.getX();
-					float y = event.getY();
-					if (x < 0 || y < 0 || x > view.getWidth() || y > view.getHeight()) {
-						// TODO nagyobbnak kéne lennie a határnak. mennyivel?
-						isOutOfBounds = true;
-						Log.d(TAG, "Out of bounds.");
-					}
-					return false;
 				default:
 					Log.d(TAG, "Another type: " + event.getAction());
 					return false;
@@ -246,7 +241,14 @@ public class Keyboard extends Fragment {
 			double posY = event.getY() / view.getHeight();
 			Log.d(TAG, "PosY: " + posY);
 
-			events.add(new KeyEvent(type, time, keyCode, posX, posY));
+			switch (type) {
+				case DOWN:
+					downEventCache = new KeyEvent(type, time, keyCode, posX, posY);
+					break;
+				case UP:
+					upEventCache = new KeyEvent(type, time, keyCode, posX, posY);
+					break;
+			}
 
 			return false;
 		}
