@@ -205,6 +205,10 @@ public class Keyboard extends Fragment {
 	}
 
 	private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+		
+		private double lastValidPosX;
+		private double lastValidPosY;
+		
 		@Override
 		public boolean onTouch(View view, MotionEvent event) {
 			// TYPE
@@ -218,6 +222,11 @@ public class Keyboard extends Fragment {
 					type = KeyEvent.Type.UP;
 					Log.d(TAG, "Type: KeyEvent.Type.UP");
 					break;
+				case MotionEvent.ACTION_MOVE:
+					double posX = event.getX();
+					double posY = event.getY();
+					if (posX >= 0 && posX <= view.getWidth()) lastValidPosX = posX;
+					if (posY >= 0 && posY <= view.getHeight()) lastValidPosY = posY;
 				default:
 					Log.d(TAG, "Another type: " + event.getAction());
 					return false;
@@ -240,13 +249,15 @@ public class Keyboard extends Fragment {
 			Log.d(TAG, "KeyCode: " + keyCode);
 
 			// POSX
-			// TODO - is lehet
-			double posX = event.getX() / view.getWidth();
+			double posX = event.getX();
+			if (posX <= 0 || posX >= view.getWidth()) posX = lastValidPosX;
+			posX /= view.getWidth();
 			Log.d(TAG, "PosX: " + posX);
 
 			// POSY
-			// TODO - is lehet
-			double posY = event.getY() / view.getHeight();
+			double posY = event.getY();
+			if (posY <= 0 || posY >= view.getHeight()) posY = lastValidPosY;
+			posY /= view.getHeight();
 			Log.d(TAG, "PosY: " + posY);
 
 			switch (type) {
