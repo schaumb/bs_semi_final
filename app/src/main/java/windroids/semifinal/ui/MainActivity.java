@@ -59,13 +59,6 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         counterView = (TextView) findViewById(R.id.counter_view);
         ipaddressView = (EditText) findViewById(R.id.ipaddress_view);
 
-//        ipaddressView.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                Config.COMM_HOST = ((EditText)v).getText();
-//                return false;
-//            }
-//        });
         changeToStartState();
     }
 
@@ -173,7 +166,6 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         String password;
         List<Pattern> training;
         Pattern actualPattern;
-        Logic logic;
         ArrayList<String> testResultLogList = new ArrayList<String>();
         boolean isMatching;
         try {
@@ -213,6 +205,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 
     private void logTestData(ArrayList<String> list, String nextTestDataRaw, boolean isMatching) {
         list.add(new String("Own: " + (isMatching ? "ACCEPT" : "REJECT")+ " Their: "));
+
     }
 
     private void printTestData(ArrayList<String> list, String resultData) {
@@ -222,6 +215,8 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         for(int i = 0; i < list.size(); ++i) {
             builder = new StringBuilder(list.get(i));
             builder.append(array[i]);
+            Log.d("PatternStudied",logic.patternStudied);
+            Log.d("PatternMatch",logic.patternMatch);
             Log.d(Config.LOG,builder.toString());
         }
 
