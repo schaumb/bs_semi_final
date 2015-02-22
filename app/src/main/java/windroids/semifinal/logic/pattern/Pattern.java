@@ -20,41 +20,41 @@ public class Pattern implements Serializable
 		return events;
 	}
 
-//	String getTypedCode()
-//	{
-//		String result = "";
-//		boolean shift = false;
-//		for(KeyEvent e : events)
-//		{
-//			if(e.getType() == KeyEvent.Type.UP)
-//				continue;
-//
-//
-//			switch(e.getCode().getName())
-//			{
-//			case KeyCode.BACK_SPACE.getName():
-//				result = result.substring(0, result.length() - 1);
-//				break;
-//			case KeyCode.SHIFT.getName():
-//				shift = true;
-//				continue;
-//			default:
-//				if(e.isLetterKey() && shift)
-//				{
-//					result.append(Character.toUpperCase((char)e.getCode()));
-//				}
-//				else
-//				{
-//					result.append((char)e.getCode());
-//				}
-//			}
-//			shift = false;
-//		}
-//		return result;
-//	}
-
-	int eraseBackSpaceEvents()
+	public String getTypedCode()
 	{
+		String result = "";
+		boolean shift = false;
+		for(KeyEvent e : events)
+		{
+			if(e.getType() == KeyEvent.Type.UP)
+				continue;
+
+            if(e.getCode().equals(KeyCode.BACK_SPACE))
+            {
+                result = result.substring(0, result.length() - 1);
+            }
+            else if(e.getCode().equals(KeyCode.SHIFT))
+            {
+                shift = true;
+                continue;
+            }
+            else if(e.getCode().isLetterKey() && shift)
+            {
+                result += Character.toUpperCase(e.getCode().code);
+            }
+            else
+            {
+                result += e.getCode().code;
+            }
+
+			shift = false;
+		}
+		return result;
+	}
+
+	public int eraseBackSpaceEvents()
+	{
+        // WARNING MORE MODIFIER ELIMINATE!!!!!!!!
 		int countOfBackSpace = 0;
 		for (ListIterator<KeyEvent> iterator = events.listIterator(); iterator.hasNext();) 
 		{
@@ -75,8 +75,8 @@ public class Pattern implements Serializable
 					}
 					for(ListIterator<KeyEvent> it2 = events.listIterator(iterator.nextIndex()); it2.hasNext();)
 					{
-						KeyEvent nexts = it2.next();
-						nexts.setTime( nexts.getTime() - diff );						
+						KeyEvent next = it2.next();
+						next.setTime( next.getTime() - diff );
 					}
 				}
 				else

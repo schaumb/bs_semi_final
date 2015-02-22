@@ -1,6 +1,7 @@
 package windroids.semifinal.logic.pattern;
 
 import java.io.Serializable;
+import android.util.Pair;
 
 public class KeyEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -8,15 +9,13 @@ public class KeyEvent implements Serializable {
 	private Type type;
 	private long time;
 	private KeyCode code;
-	private double posX;
-	private double posY;
+	private Pair<Double, Double> pos;
 
 	public KeyEvent(Type type, long time, KeyCode code, double posX, double posY) {
 		this.type = type;
 		this.time = time;
 		this.code = code;
-		this.posX = posX;
-		this.posY = posY;
+		this.pos = new Pair<>(posX, posY);
 	}
 
 	public enum Type {
@@ -40,12 +39,8 @@ public class KeyEvent implements Serializable {
 		return code;
 	}
 
-	public double getPosX() {
-		return posX;
-	}
-
-	public double getPosY() {
-		return posY;
+	public Pair<Double, Double> getPos() {
+		return pos;
 	}
 
 	@Override
@@ -62,10 +57,10 @@ public class KeyEvent implements Serializable {
 		stringBuilder.append(code);
 		stringBuilder.append("\n");
 		stringBuilder.append("PosX: ");
-		stringBuilder.append(posX);
+		stringBuilder.append(pos.first);
 		stringBuilder.append("\n");
 		stringBuilder.append("PosY: ");
-		stringBuilder.append(posY);
+		stringBuilder.append(pos.second);
 		stringBuilder.append("\n");
 		return stringBuilder.toString();
 	}
