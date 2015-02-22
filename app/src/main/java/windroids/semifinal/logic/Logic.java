@@ -87,24 +87,37 @@ public class Logic implements Serializable
         }
 
         // calculating the limits
-
+        System.out.println("Time limitations: ");
         for(SingleValueDiff<Long> stat : timeLimitations)
         {
             stat.calculateStatistics();
+            System.out.print("[" + (stat.getAvg() - stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
         }
+        System.out.println();
 
+        System.out.println("Point limitations: ");
         for(PointValueDiff<Double> stat : pointLimitations)
         {
             stat.calculateStatistics();
-        }
+            System.out.print("[ x: " + (stat.getAvg().first - stat.getAllowedDifference().first) + " - " + (stat.getAvg().first + stat.getAllowedDifference().first) +
+                    " , y: " + (stat.getAvg().second - stat.getAllowedDifference().second) + " - " + (stat.getAvg().second + stat.getAllowedDifference().second) + " ] ");
 
+        }
+        System.out.println();
+
+        System.out.println("Angle limitations: ");
         for(AngleValueDiff stat : angleLimitations)
         {
             stat.calculateStatistics();
+            System.out.print("[" + (stat.getAvg() - stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
         }
+        System.out.println();
 
+        System.out.println("Sum limitations: ");
         sumTimeLimit.calculateStatistics();
-	}
+        System.out.println("[" + (sumTimeLimit.getAvg() - sumTimeLimit.getAllowedDifference()) + " - " + (sumTimeLimit.getAvg() + sumTimeLimit.getAllowedDifference()) + "] ");
+
+    }
 
 	public boolean isMatching(Pattern pattern)
 	{
@@ -132,6 +145,7 @@ public class Logic implements Serializable
             KeyEvent prevKey = iterator.next();
 
             double tmp = pointLimitations.get(index).distance(prevKey.getPos());
+            System.out.println(index + " character distance : " + tmp);
             if(tmp > 1) return false;
             pointPercents.add(tmp);
 
@@ -140,16 +154,19 @@ public class Logic implements Serializable
                 KeyEvent nextKey = iterator.next();
 
                 tmp = timeLimitations.get(index).distance(nextKey.getTime()-prevKey.getTime());
+                System.out.println(index + " time distance : " + tmp);
                 if(tmp > 1) return false;
                 timePercents.add(tmp);
 
                 tmp = angleLimitations.get(index).distance(prevKey.getPos(), nextKey.getPos());
+                System.out.println(index + " angle distance : " + tmp);
                 if(tmp > 1) return false;
                 anglePercents.add(tmp);
 
                 ++index;
 
                 tmp = pointLimitations.get(index).distance(prevKey.getPos());
+                System.out.println(index + " point distance : " + tmp);
                 if(tmp > 1) return false;
                 pointPercents.add(tmp);
 
@@ -159,9 +176,11 @@ public class Logic implements Serializable
             tmp = sumTimeLimit.distance(
                     pattern.getEvents().get(pattern.getEvents().size()-1).getTime() -
                             pattern.getEvents().get(0).getTime());
+            System.out.println(index + " sumTime distance : " + tmp);
             if(tmp > 1) return false;
 
             timePercents.add(tmp);
+            System.out.println("Time AVG:" + timePercents.getAvg() + ", place AVG: " + (anglePercents.getAvg() + pointPercents.getAvg()));
 
             result = timePercents.getAvg() < 0.5 && (anglePercents.getAvg() + pointPercents.getAvg()) < 1.0;
         }

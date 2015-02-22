@@ -55,6 +55,11 @@ public class SingleValueDiff<T> extends ArrayList<T> {
         return avg;
     }
 
+    public double getAllowedDifference()
+    {
+        return allowedDifference;
+    }
+
     public void calculateStatistics()
     {
         calculateAvg();

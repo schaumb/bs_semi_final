@@ -36,4 +36,9 @@ public class PointValueDiff<T>{
                 pow(first.distance(elem.first), 2) +
                 pow(second.distance(elem.second), 2));
     }
+
+    public Pair<Double, Double> getAllowedDifference()
+    {
+        return new Pair<>(first.getAllowedDifference(), second.getAllowedDifference());
+    }
 }
