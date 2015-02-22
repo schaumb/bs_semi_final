@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,7 +61,13 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         counterView = (TextView) findViewById(R.id.counter_view);
         ipaddressView = (EditText) findViewById(R.id.ipaddress_view);
 
-//        ipaddressView.setOnKeyListener();
+//        ipaddressView.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                Config.COMM_HOST = ((EditText)v).getText();
+//                return false;
+//            }
+//        });
         changeToStartState();
     }
 
@@ -193,7 +200,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     }
 
     private void logTestData(ArrayList<String> list, String nextTestDataRaw, boolean isMatching) {
-        list.add(new String(nextTestDataRaw + " Own: " + (isMatching ? "ACCEPT" : "REJECT")+ " Their: "));
+        list.add(new String("Own: " + (isMatching ? "ACCEPT" : "REJECT")+ " Their: "));
     }
 
     private void printTestData(ArrayList<String> list, String resultData) {
