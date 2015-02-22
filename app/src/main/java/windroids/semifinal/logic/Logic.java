@@ -36,7 +36,7 @@ public class Logic implements Serializable
             String typedCode = tr.getTypedCode();
 
             if(typedCode.isEmpty()) continue;
-
+            System.out.println("pw is:" + password + ", typed: " + typedCode + " are equals:" + typedCode.equals(password));
             if( typedCode.equals(password) ||
                     (typedCode.substring(0, typedCode.length() - 1).equals(password) &&
                     typedCode.charAt(typedCode.length() - 1) == '\n'))
