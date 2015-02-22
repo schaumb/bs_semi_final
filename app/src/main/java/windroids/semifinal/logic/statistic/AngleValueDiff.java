@@ -25,7 +25,7 @@ public class AngleValueDiff extends SingleValueDiff<Double>
     public double distance(Pair<Double, Double> from, Pair<Double, Double> to)
     {
 		Double d = vectorToAngle(from, to);
-		if(d.isNaN() || (Double.valueOf(avg)).isInfinite() || (Double.valueOf(avg)).isNaN() ) return 0;
+		if(d.isNaN() || d.isInfinite() || (Double.valueOf(avg)).isInfinite() || (Double.valueOf(avg)).isNaN() ) return 0;
 		
         return this.distance(vectorToAngle(from, to));
     }

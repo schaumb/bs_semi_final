@@ -3,12 +3,10 @@ package windroids.semifinal.ui;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -103,6 +101,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     private void changeToStartState() {
         infoView.setText(R.string.start_instructions);
         currentState = State.START;
+		counterView.setVisibility(View.GONE);
         password = null;
         training = new ArrayList<>(100);
         logic = null;
@@ -120,8 +119,16 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     }
 
     public void finishTraining() {
+		if (training.size() == 0) {
+			alertDialog(getString(R.string.training_failed));
+			changeToStartState();
+		}
         logic = new Logic(password, training);
         logic.init();
+//		if () { // TODO
+//			alertDialog(getString(R.string.training_failed));
+//			changeToStartState();
+//		}
         changeToTestState();
     }
 
@@ -130,7 +137,12 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 
             @Override
             protected Void doInBackground(Void... params) {
-                counterView.setVisibility(View.VISIBLE);
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						counterView.setVisibility(View.VISIBLE);
+					}
+				});
                 for (int i = 0; i < 30; ++i) {
                     publishProgress(i);
                     try {
@@ -150,7 +162,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                counterView.setVisibility(View.INVISIBLE);
+                counterView.setVisibility(View.GONE);
                 finishTraining();
             }
         }.execute((Void[]) null);
@@ -216,16 +228,10 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     }
 
     public void alertDialog(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        return;
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+        new AlertDialog.Builder(this)
+				.setMessage(message)
+				.create()
+				.show();
     }
 
 
@@ -256,6 +262,9 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         switch (currentState) {
             case START:
                 password = inputView.getText().toString();
+				if (password.isEmpty()) {
+					alertDialog(getString(R.string.bad_password));
+				}
                 changeToTrainingState();
                 break;
             case TRAINING:
@@ -263,15 +272,9 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
                 break;
             case TEST:
                 if (logic.isMatching(pattern)) {
-                    new AlertDialog.Builder(this)
-                            .setMessage(R.string.successful_auth)
-                            .create()
-                            .show();
+					alertDialog(getString(R.string.successful_auth));
                 } else {
-                    new AlertDialog.Builder(this)
-                            .setMessage(R.string.fail_auth)
-                            .create()
-                            .show();
+					alertDialog(getString(R.string.fail_auth));
                 }
         }
         inputView.setText("");

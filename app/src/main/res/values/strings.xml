@@ -22,5 +22,13 @@
 	<string name="fail_auth">
 		Authentication failed.
 	</string>
+
+	<string name="bad_password">
+		Please enter a stronger password.
+	</string>
+
+	<string name="training_failed">
+		Training failed, please try again.
+	</string>
 	
 </resources>

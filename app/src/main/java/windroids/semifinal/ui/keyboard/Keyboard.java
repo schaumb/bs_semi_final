@@ -223,12 +223,14 @@ public class Keyboard extends Fragment {
 			Object rawTag = view.getTag();
 			String tag = rawTag.toString();
 			String reference = String.valueOf(tag.charAt(tag.length() - 2));
-			if (((Button) view).getText().toString().equals(reference)) {
+			String buttonText = ((Button) view).getText().toString().toLowerCase();
+			if (buttonText.equals(reference)) {
 				keyCode = KeyCode.getKeyCode(reference.toUpperCase());
 			} else {
 				keyCode = KeyCode.getKeyCode(tag.substring(0, tag.length() - 2));
 			}
 			Log.d(TAG, "KeyCode: " + keyCode);
+			System.out.println(keyCode.getName() + " <- name + char:" + (char)keyCode.impl_getCode());
 
 			// POSX
 			double posX = event.getX();

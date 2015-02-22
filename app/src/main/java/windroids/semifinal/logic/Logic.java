@@ -29,6 +29,8 @@ public class Logic implements Serializable
 		this.training = training;
 	}
 
+	public String patternStudied = "";
+	public String patternMatch = "";
 	public void init()
 	{
 		for(Pattern tr : training)
@@ -36,7 +38,9 @@ public class Logic implements Serializable
             String typedCode = tr.getTypedCode();
 
             if(typedCode.isEmpty()) continue;
-            System.out.println("pw is:" + password + ", typed: " + typedCode + " are equals:" + typedCode.equals(password));
+			System.out.println(patternStudied += "pw is:" + password + ", typed: " + typedCode + " are equals:" + typedCode.equals(password) +
+					"areFuzzyEquals: " + (typedCode.substring(0, typedCode.length() - 1).equals(password) &&
+					typedCode.charAt(typedCode.length() - 1) == '\n') + '\n');
             if( typedCode.equals(password) ||
                     (typedCode.substring(0, typedCode.length() - 1).equals(password) &&
                     typedCode.charAt(typedCode.length() - 1) == '\n'))
@@ -68,7 +72,8 @@ public class Logic implements Serializable
                     }
 
                     timeLimitations.get(index).add(nextKey.getTime()-prevKey.getTime());
-                    angleLimitations.get(index).add(prevKey.getPos(), nextKey.getPos());
+                    if(index % 2 == 0)
+						angleLimitations.get(index).add(prevKey.getPos(), nextKey.getPos());
 
                     ++index;
 
@@ -89,36 +94,35 @@ public class Logic implements Serializable
         }
 
         // calculating the limits
-        System.out.println("Time limitations: ");
+        System.out.print(patternStudied += "Time limitations: \n");
         for(SingleValueDiff<Long> stat : timeLimitations)
         {
             stat.calculateStatistics();
-            System.out.print("[" + (stat.getAvg() - stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
+            System.out.print(patternStudied += "[" + (stat.getAvg() - stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
         }
-        System.out.println();
+        System.out.print(patternStudied += '\n');
 
-        System.out.println("Point limitations: ");
+        System.out.print(patternStudied += "Point limitations: \n");
         for(PointValueDiff<Double> stat : pointLimitations)
         {
             stat.calculateStatistics();
-            System.out.print("[ x: " + (stat.getAvg().first - stat.getAllowedDifference().first) + " - " + (stat.getAvg().first + stat.getAllowedDifference().first) +
+            System.out.print(patternStudied += "[ x: " + (stat.getAvg().first - stat.getAllowedDifference().first) + " - " + (stat.getAvg().first + stat.getAllowedDifference().first) +
                     " , y: " + (stat.getAvg().second - stat.getAllowedDifference().second) + " - " + (stat.getAvg().second + stat.getAllowedDifference().second) + " ] ");
 
         }
-        System.out.println();
+        System.out.print(patternStudied += '\n');
 
-        System.out.println("Angle limitations: ");
+        System.out.print(patternStudied += "Angle limitations: \n");
         for(AngleValueDiff stat : angleLimitations)
         {
             stat.calculateStatistics();
-            System.out.print("[" + (stat.getAvg() - stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
-			System.out.print("[" + (stat.getAvg() ) + " " + ( stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
+            System.out.print(patternStudied += "[" + (stat.getAvg() - stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
         }
-        System.out.println();
+        System.out.print(patternStudied += '\n');
 
-        System.out.println("Sum limitations: ");
+        System.out.print(patternStudied += "Sum limitations: \n");
         sumTimeLimit.calculateStatistics();
-        System.out.println("[" + (sumTimeLimit.getAvg() - sumTimeLimit.getAllowedDifference()) + " - " + (sumTimeLimit.getAvg() + sumTimeLimit.getAllowedDifference()) + "] ");
+        System.out.println(patternStudied += "[" + (sumTimeLimit.getAvg() - sumTimeLimit.getAllowedDifference()) + " - " + (sumTimeLimit.getAvg() + sumTimeLimit.getAllowedDifference()) + "] ");
 
     }
 
@@ -130,7 +134,9 @@ public class Logic implements Serializable
 
         if(typedCode.isEmpty()) return false;
 
-		System.out.println("pw is:" + password + ", typed: " + typedCode + " are equals:" + typedCode.equals(password));
+		System.out.print(patternMatch = "pw is:" + password + ", typed: " + typedCode + " are equals:" + typedCode.equals(password) +
+		"areFuzzyEquals: " + (typedCode.substring(0, typedCode.length() - 1).equals(password) &&
+				typedCode.charAt(typedCode.length() - 1) == '\n')+ '\n');
         if(typedCode.equals(password) ||
                 (typedCode.substring(0, typedCode.length() - 1).equals(password) &&
                         typedCode.charAt(typedCode.length() - 1) == '\n'))
@@ -151,7 +157,7 @@ public class Logic implements Serializable
             KeyEvent prevKey = iterator.next();
 
             double tmp = pointLimitations.get(index).distance(prevKey.getPos());
-            System.out.println(index + " character distance : " + tmp);
+            System.out.print(patternMatch += index + " character distance : " + tmp + '\n');
             if(tmp > 1) return false;
             pointPercents.add(tmp);
 
@@ -160,19 +166,21 @@ public class Logic implements Serializable
                 KeyEvent nextKey = iterator.next();
 
                 tmp = timeLimitations.get(index).distance(nextKey.getTime()-prevKey.getTime());
-                System.out.println(index + " time distance : " + tmp);
+                System.out.print(patternMatch += index + " time distance : " + tmp + '\n');
                 if(tmp > 1) return false;
                 timePercents.add(tmp);
 
-                tmp = angleLimitations.get(index).distance(prevKey.getPos(), nextKey.getPos());
-                System.out.println(index + " angle distance : " + tmp);
-                if(tmp > 1) return false;
-                anglePercents.add(tmp);
-
+				if(index % 2 == 0) {
+					tmp = angleLimitations.get(index).distance(prevKey.getPos(), nextKey.getPos());
+					System.out.print(patternMatch += index + " angle distance : " + tmp + '\n');
+					if (tmp > 1)
+						return false;
+					anglePercents.add(tmp);
+				}
                 ++index;
 
                 tmp = pointLimitations.get(index).distance(prevKey.getPos());
-                System.out.println(index + " point distance : " + tmp);
+                System.out.print(patternMatch += index + " point distance : " + tmp + '\n');
                 if(tmp > 1) return false;
                 pointPercents.add(tmp);
 
@@ -182,13 +190,13 @@ public class Logic implements Serializable
             tmp = sumTimeLimit.distance(
                     pattern.getEvents().get(pattern.getEvents().size()-1).getTime() -
                             pattern.getEvents().get(0).getTime());
-            System.out.println(index + " sumTime distance : " + tmp);
+            System.out.println(patternMatch += index + " sumTime distance : " + tmp + '\n');
             if(tmp > 1) return false;
 
             timePercents.add(tmp);
-            System.out.println("Time AVG:" + timePercents.getAvg() + ", place AVG: " + (anglePercents.getAvg() + pointPercents.getAvg()));
+            System.out.print(patternMatch += "Time AVG:" + timePercents.getAvg() + ", angle AVG: " + anglePercents.getAvg() + ", point AVG:" + pointPercents.getAvg() + '\n');
 
-            result = timePercents.getAvg() < 0.5 && (anglePercents.getAvg() + pointPercents.getAvg()) < 1.0;
+            result = timePercents.getAvg() < 0.5 && anglePercents.getAvg() + pointPercents.getAvg() < 1.0;
         }
 
         return result;

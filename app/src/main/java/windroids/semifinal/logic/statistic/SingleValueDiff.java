@@ -1,9 +1,10 @@
 package windroids.semifinal.logic.statistic;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 public class SingleValueDiff<T> extends ArrayList<T> {
 
@@ -65,7 +66,7 @@ public class SingleValueDiff<T> extends ArrayList<T> {
         calculateAvg();
         double stddev = calculateStandardDeviation();
         double maxdif = maximalDifference();
-        allowedDifference = maxdif + stddev;
+        allowedDifference = maxdif + stddev / 0.01;
     }
 
     public double distance(T elem)
