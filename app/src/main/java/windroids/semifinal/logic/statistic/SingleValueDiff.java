@@ -7,9 +7,9 @@ import static java.lang.Math.*;
 
 public class SingleValueDiff<T> extends ArrayList<T> {
 
-    private double avg = 0;
-    private boolean hasCalculatedAvg = false;
-    private double allowedDifference = 0;
+    protected double avg = 0;
+    protected boolean hasCalculatedAvg = false;
+    protected double allowedDifference = 0;
 
     private void calculateAvg()
     {

@@ -41,6 +41,8 @@ public class Logic implements Serializable
                     (typedCode.substring(0, typedCode.length() - 1).equals(password) &&
                     typedCode.charAt(typedCode.length() - 1) == '\n'))
             {
+                if(typedCode.length() != password.length())
+                    tr.eraseLastEnter();
                 tr.eraseBackSpaceEvents();
 
                 int index = 0;
@@ -133,6 +135,8 @@ public class Logic implements Serializable
                 (typedCode.substring(0, typedCode.length() - 1).equals(password) &&
                         typedCode.charAt(typedCode.length() - 1) == '\n'))
         {
+            if(typedCode.length() != password.length())
+                pattern.eraseLastEnter();
 
             SingleValueDiff<Double> timePercents = new SingleValueDiff<>();
             SingleValueDiff<Double> pointPercents = new SingleValueDiff<>();

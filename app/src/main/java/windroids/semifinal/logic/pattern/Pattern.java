@@ -40,7 +40,8 @@ public class Pattern implements Serializable
 
             if(e.getCode().equals(KeyCode.BACK_SPACE))
             {
-                result = result.substring(0, result.length() - 1);
+                if(!result.isEmpty())
+                    result = result.substring(0, result.length() - 1);
             }
             else if(e.getCode().equals(KeyCode.SHIFT))
             {
@@ -68,6 +69,12 @@ public class Pattern implements Serializable
 		}
 		return result;
 	}
+
+    public void eraseLastEnter()
+    {
+        events.remove(events.size()-1);
+        events.remove(events.size()-1);
+    }
 
 	public int eraseBackSpaceEvents()
 	{

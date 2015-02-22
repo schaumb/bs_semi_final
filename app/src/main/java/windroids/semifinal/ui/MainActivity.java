@@ -148,19 +148,24 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     private void startCommunication(String hostName, int portName, String dataName, boolean feedback) {
         Communicator communicator = null;
         String password;
-        List<Pattern> patternList;
+        List<Pattern> training;
         Pattern actualPattern;
+        Logic logic;
+        boolean isMatching;
         try {
             communicator = new Communicator(hostName, portName, dataName);
             if(communicator.startCommunication()) {
                 password = communicator.doPreCommuncationAndGetPassword();
                 String patternListRaw = communicator.getXmlFromServer();
-                patternList = XmlParser.parseTestData(patternListRaw);
+                training = XmlParser.parseTestData(patternListRaw);
+                logic = new Logic(password,training);
+                logic.init();
                 String nextTestDataRaw = communicator.getNextTestDataXmlFile();
                 while (!communicator.checkEndMessage(nextTestDataRaw)) {
                     actualPattern = XmlParser.parsePattern(nextTestDataRaw);
-                    Log.d(Config.LOG, "Pattern events number: " + actualPattern.getEvents().size());
-                    nextTestDataRaw = communicator.answerTestDataAndGetNext(true);
+                    isMatching = logic.isMatching(actualPattern);
+                    Log.d(Config.LOG, "Is matching: "+ String.valueOf(isMatching));
+                    nextTestDataRaw = communicator.answerTestDataAndGetNext(isMatching);
                 }
                 if (feedback) {
                     alertDialog(nextTestDataRaw);
