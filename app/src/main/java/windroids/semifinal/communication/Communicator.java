@@ -24,14 +24,6 @@ public class Communicator {
 
     private static final String ENCODING = "ISO-8859-1";
 
-    private static final String COMM_MSG_HELLO_CLIENT = "BSP 1.0 CLIENT HELLO";
-    private static final String COMM_MSG_HELLO_SERVER = "BSP 1.0 SERVER HELLO";
-    private static final String COMM_MSG_ASK_ID = "SEND YOUR ID";
-    private static final String COMM_MSG_RQST_CLIENT = "RQSTDATA";
-    private static final String COMM_MSG_RQST_TRAIN_CLIENT = "RQSTTRAIN";
-    private static final String COMM_MSG_RQST_TEST_CLIENT = "RQSTTEST";
-    private static final String SERVER_MESSAGE = "SERVER_MESSAGE";
-
     private Socket socket;
     private PrintWriter pw;
     private BufferedReader br;
@@ -41,7 +33,7 @@ public class Communicator {
     private boolean socketEnabled;
 
     public Communicator(final String address, final int port, final String dataId) throws IOException, ExecutionException, InterruptedException {
-        this.dataId = dataId; //example: TEST3
+        this.dataId = dataId;
         this.address = address;
         this.port = port;
     }
@@ -65,7 +57,7 @@ public class Communicator {
                 return socketEnabled;
             }
         }.execute().get();
-        Log.d("Connection succeed: ", String.valueOf(result));
+        Log.d(Config.LOG, "Connection succeed: " + String.valueOf(result));
         return result;
     }
 
@@ -91,15 +83,15 @@ public class Communicator {
             protected String doInBackground(String... params) {
                 String message = null;
                 message = getMessage(); //BSP 1.0 SERVER HELLO
-                if (message.equals(COMM_MSG_HELLO_SERVER)) {
-                    sendMessage(COMM_MSG_HELLO_CLIENT);
+                if (message.equals(Config.COMM_MSG_HELLO_SERVER)) {
+                    sendMessage(Config.COMM_MSG_HELLO_CLIENT);
                 }
                 message = getMessage(); //SEND YOUR ID
-                if (message.equals(COMM_MSG_ASK_ID)) {
+                if (message.equals(Config.COMM_MSG_ASK_ID)) {
                     sendMessage(dataId);
                 }
                 getMessage(); //TESTX ID ACK - WAITING FOR REQUEST
-                sendMessage(COMM_MSG_RQST_CLIENT);
+                sendMessage(Config.COMM_MSG_RQST_CLIENT);
                 message = getMessage(); // PASSWORD=jelszó
                 return message.split("=")[1];
             }
@@ -112,7 +104,7 @@ public class Communicator {
 
             @Override
             protected String doInBackground(Void... params) {
-                sendMessage(COMM_MSG_RQST_TRAIN_CLIENT);
+                sendMessage(Config.COMM_MSG_RQST_TRAIN_CLIENT);
                 String response = null;
                 try {
                     response = br.readLine();
@@ -128,9 +120,8 @@ public class Communicator {
         return new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
-                sendMessage(COMM_MSG_RQST_TEST_CLIENT);
-                String response = null;
-                response = getMessage();
+                sendMessage(Config.COMM_MSG_RQST_TEST_CLIENT);
+                String response = getMessage();
                 return response;
             }
         }.execute().get();
@@ -138,7 +129,7 @@ public class Communicator {
 
     public String answerTestDataAndGetNext(boolean suceedState) throws ExecutionException, InterruptedException {
         String clientAnswer;
-        clientAnswer = suceedState ? "ACCEPT" : "REJECT";
+        clientAnswer = suceedState ? Config.ACCEPT_STRING : Config.REJECT_STRING;
 
         return new AsyncTask<String, Void, String>() {
 
@@ -163,12 +154,12 @@ public class Communicator {
             e.printStackTrace();
         }
         if(message != null)
-            Log.d(SERVER_MESSAGE, message);
+            Log.d(Config.LOG, message);
         return message;
     }
 
     public boolean checkEndMessage(String message) {
-        return message.startsWith("GOODBYE");
+        return message.startsWith(Config.GOODBYE_STRING);
     }
 }
 
