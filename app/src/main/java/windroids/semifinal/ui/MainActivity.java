@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     private TextView inputView;
     private TextView infoView;
     private TextView counterView;
+    private EditText ipaddressView;
 
     private State currentState;
 
@@ -56,7 +58,9 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         inputView = (TextView) findViewById(R.id.input_view);
         infoView = (TextView) findViewById(R.id.description_view);
         counterView = (TextView) findViewById(R.id.counter_view);
+        ipaddressView = (EditText) findViewById(R.id.ipaddress_view);
 
+//        ipaddressView.setOnKeyListener();
         changeToStartState();
     }
 
@@ -151,6 +155,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         List<Pattern> training;
         Pattern actualPattern;
         Logic logic;
+        ArrayList<String> testResultLogList = new ArrayList<String>();
         boolean isMatching;
         try {
             communicator = new Communicator(hostName, portName, dataName);
@@ -164,11 +169,13 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
                 while (!communicator.checkEndMessage(nextTestDataRaw)) {
                     actualPattern = XmlParser.parsePattern(nextTestDataRaw);
                     isMatching = logic.isMatching(actualPattern);
-                    Log.d(Config.LOG, "Is matching: "+ String.valueOf(isMatching));
+                    logTestData(testResultLogList,nextTestDataRaw, isMatching);
+
                     nextTestDataRaw = communicator.answerTestDataAndGetNext(isMatching);
                 }
                 if (feedback) {
                     alertDialog(nextTestDataRaw);
+                    printTestData(testResultLogList, nextTestDataRaw);
                 }
                 communicator.endCommuncation();
             } else {
@@ -183,6 +190,22 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
+    }
+
+    private void logTestData(ArrayList<String> list, String nextTestDataRaw, boolean isMatching) {
+        list.add(new String(nextTestDataRaw + " Own: " + (isMatching ? "ACCEPT" : "REJECT")+ " Their: "));
+    }
+
+    private void printTestData(ArrayList<String> list, String resultData) {
+        StringBuilder builder;
+        String dataString = resultData.substring(resultData.indexOf("[")+1,resultData.length()-2);
+        String[] array = dataString.split(" ");
+        for(int i = 0; i < list.size(); ++i) {
+            builder = new StringBuilder(list.get(i));
+            builder.append(array[i]);
+            Log.d(Config.LOG,builder.toString());
+        }
+
     }
 
     public void alertDialog(String message) {
