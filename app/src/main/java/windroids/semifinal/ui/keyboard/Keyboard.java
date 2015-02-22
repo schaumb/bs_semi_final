@@ -198,10 +198,12 @@ public class Keyboard extends Fragment {
 			switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
 					type = KeyEvent.Type.DOWN;
+					turnOffOnButtons(view.getTag().toString(), false);
 					Log.d(TAG, "Type: KeyEvent.Type.DOWN");
 					break;
 				case MotionEvent.ACTION_UP:
 					type = KeyEvent.Type.UP;
+					turnOffOnButtons("", true);
 					Log.d(TAG, "Type: KeyEvent.Type.UP");
 					break;
 				case MotionEvent.ACTION_MOVE:
@@ -256,6 +258,26 @@ public class Keyboard extends Fragment {
 			return false;
 		}
 	};
+	
+	public void turnOffOnButtons(String exceptionTag, boolean onOff) {
+		for (Button button : normalButtons) {
+			if (!button.getTag().toString().equals(exceptionTag)) {
+				button.setClickable(onOff);
+			}
+		}
+		if (!shift.getTag().toString().equals(exceptionTag)) {
+			shift.setClickable(onOff);
+		}
+		if (!backspace.getTag().toString().equals(exceptionTag)) {
+			backspace.setClickable(onOff);
+		}
+		if (!enter.getTag().toString().equals(exceptionTag)) {
+			enter.setClickable(onOff);
+		}
+		if (!change.getTag().toString().equals(exceptionTag)) {
+			change.setClickable(onOff);
+		}
+	}
 
 	public void setEventListener(EventListener eventListener) {
 		this.eventListener = eventListener;
