@@ -17,11 +17,16 @@ public class AngleValueDiff extends SingleValueDiff<Double>
 
     public void add(Pair<Double, Double> from, Pair<Double, Double> to)
     {
-        this.add(vectorToAngle(from, to));
+		Double d = vectorToAngle(from, to);
+		if(!d.isNaN())
+        	this.add(d);
     }
 
     public double distance(Pair<Double, Double> from, Pair<Double, Double> to)
     {
+		Double d = vectorToAngle(from, to);
+		if(d.isNaN()) return 0;
+		
         return this.distance(vectorToAngle(from, to));
     }
 }

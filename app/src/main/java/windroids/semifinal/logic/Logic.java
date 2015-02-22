@@ -110,6 +110,7 @@ public class Logic implements Serializable
         {
             stat.calculateStatistics();
             System.out.print("[" + (stat.getAvg() - stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
+			System.out.print("[" + (stat.getAvg() ) + " " + ( stat.getAllowedDifference()) + " - " + (stat.getAvg() + stat.getAllowedDifference()) + "] ");
         }
         System.out.println();
 
@@ -127,6 +128,7 @@ public class Logic implements Serializable
 
         if(typedCode.isEmpty()) return false;
 
+		System.out.println("pw is:" + password + ", typed: " + typedCode + " are equals:" + typedCode.equals(password));
         if(typedCode.equals(password) ||
                 (typedCode.substring(0, typedCode.length() - 1).equals(password) &&
                         typedCode.charAt(typedCode.length() - 1) == '\n'))

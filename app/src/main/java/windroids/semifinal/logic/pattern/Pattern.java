@@ -53,12 +53,16 @@ public class Pattern implements Serializable
             }
             else if(e.getCode().isLetterKey() && shift)
             {
-                result += Character.toUpperCase(e.getCode().code);
+                result += Character.toUpperCase((char)e.getCode().code);
             }
-            else
+            else if(e.getCode().isLetterKey())
             {
-                result += e.getCode().code;
+                result += Character.toLowerCase((char)e.getCode().code);
             }
+			else
+			{
+				result += (char)e.getCode().code;
+			}
 
 			shift = false;
 		}
