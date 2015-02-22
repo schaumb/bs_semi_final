@@ -1,15 +1,21 @@
 package windroids.semifinal.ui;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import windroids.semifinal.R;
 import windroids.semifinal.communication.Communicator;
+import windroids.semifinal.communication.XmlParser;
+import windroids.semifinal.logic.pattern.Pattern;
 import windroids.semifinal.ui.keyboard.Keyboard;
 import windroids.semifinal.util.Config;
 
@@ -71,8 +77,6 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-//        } catch (XmlPullParserException e) {
-//            e.printStackTrace();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
