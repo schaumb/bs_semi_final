@@ -72,6 +72,9 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     public boolean onOptionsItemSelected(MenuItem item) {
         String testData;
         switch (item.getItemId()) {
+            case R.id.menu_windroids:
+                testData = "WinDroids";
+                break;
             case R.id.menu_test1:
                 testData = "TEST1";
                 break;
@@ -87,14 +90,15 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
             default:
                 return super.onOptionsItemSelected(item);
         }
-        startCommunication(Config.COMM_HOST, Config.COMM_PORT, testData, true);
+//        startCommunication(Config.COMM_HOST, Config.COMM_PORT, testData, true);
+        startCommunication(getIpFromText(), Config.COMM_PORT, testData, true);
         return super.onOptionsItemSelected(item);
     }
 
     private void changeToStartState() {
         infoView.setText(R.string.start_instructions);
         currentState = State.START;
-		counterView.setVisibility(View.GONE);
+        counterView.setVisibility(View.GONE);
         password = null;
         training = new ArrayList<>(100);
         logic = null;
@@ -112,10 +116,10 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     }
 
     public void finishTraining() {
-		if (training.size() == 0) {
-			alertDialog(getString(R.string.training_failed));
-			changeToStartState();
-		}
+        if (training.size() == 0) {
+            alertDialog(getString(R.string.training_failed));
+            changeToStartState();
+        }
         logic = new Logic(password, training);
         logic.init();
 //		if () { // TODO
@@ -130,12 +134,12 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 
             @Override
             protected Void doInBackground(Void... params) {
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						counterView.setVisibility(View.VISIBLE);
-					}
-				});
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        counterView.setVisibility(View.VISIBLE);
+                    }
+                });
                 for (int i = 0; i < 30; ++i) {
                     publishProgress(i);
                     try {
@@ -152,6 +156,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
                 super.onProgressUpdate(values);
                 counterView.setText(String.valueOf(values[0]));
             }
+
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
@@ -170,27 +175,27 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         boolean isMatching;
         try {
             communicator = new Communicator(hostName, portName, dataName);
-            if(communicator.startCommunication()) {
+            if (communicator.startCommunication()) {
                 password = communicator.doPreCommuncationAndGetPassword();
                 String patternListRaw = communicator.getXmlFromServer();
                 training = XmlParser.parseTestData(patternListRaw);
-                logic = new Logic(password,training);
+                logic = new Logic(password, training);
                 logic.init();
                 String nextTestDataRaw = communicator.getNextTestDataXmlFile();
                 while (!communicator.checkEndMessage(nextTestDataRaw)) {
                     actualPattern = XmlParser.parsePattern(nextTestDataRaw);
                     isMatching = logic.isMatching(actualPattern);
-                    logTestData(testResultLogList,nextTestDataRaw, isMatching);
+                    logTestData(testResultLogList, nextTestDataRaw, isMatching);
 
                     nextTestDataRaw = communicator.answerTestDataAndGetNext(isMatching);
                 }
                 if (feedback) {
-                    alertDialog(nextTestDataRaw);
+                    alertDialog("Server communication finished.");
                     printTestData(testResultLogList, nextTestDataRaw);
                 }
                 communicator.endCommuncation();
             } else {
-                alertDialog("Server communication failed!");
+                alertDialog("Server communication failed.");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -204,15 +209,14 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     }
 
     private void logTestData(ArrayList<String> list, String nextTestDataRaw, boolean isMatching) {
-        list.add(new String("Own: " + (isMatching ? "ACCEPT" : "REJECT")+ " Their: "));
-
+        list.add(new String("Own: " + (isMatching ? "ACCEPT" : "REJECT") + " Their: "));
     }
 
     private void printTestData(ArrayList<String> list, String resultData) {
         StringBuilder builder;
-        String dataString = resultData.substring(resultData.indexOf("[")+1,resultData.length()-2);
+        String dataString = resultData.substring(resultData.indexOf("[") + 1, resultData.length() - 2);
         String[] array = dataString.split(" ");
-        for(int i = 0; i < list.size(); ++i) {
+        for (int i = 0; i < list.size(); ++i) {
             builder = new StringBuilder(list.get(i));
             builder.append(array[i]);
             //Log.d("PatternStudied",logic.patternStudied);
@@ -224,9 +228,9 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 
     public void alertDialog(String message) {
         new AlertDialog.Builder(this)
-				.setMessage(message)
-				.create()
-				.show();
+                .setMessage(message)
+                .create()
+                .show();
     }
 
 
@@ -247,7 +251,6 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
             inputView.setText("");
             return;
         }
-
         currentText = currentText.substring(0, currentText.length() - 1);
         inputView.setText(currentText);
     }
@@ -257,9 +260,9 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         switch (currentState) {
             case START:
                 password = inputView.getText().toString();
-				if (password.isEmpty()) {
-					alertDialog(getString(R.string.bad_password));
-				}
+                if (password.isEmpty()) {
+                    alertDialog(getString(R.string.bad_password));
+                }
                 changeToTrainingState();
                 break;
             case TRAINING:
@@ -267,11 +270,15 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
                 break;
             case TEST:
                 if (logic.isMatching(pattern)) {
-					alertDialog(getString(R.string.successful_auth));
+                    alertDialog(getString(R.string.successful_auth));
                 } else {
-					alertDialog(getString(R.string.fail_auth));
+                    alertDialog(getString(R.string.fail_auth));
                 }
         }
         inputView.setText("");
+    }
+
+    public String getIpFromText() {
+        return ipaddressView.getText().toString();
     }
 }

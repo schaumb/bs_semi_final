@@ -20,9 +20,6 @@ import java.util.concurrent.ExecutionException;
 import windroids.semifinal.logic.pattern.Pattern;
 import windroids.semifinal.util.Config;
 
-/**
- * Created by Tamás on 21/02/2015.
- */
 public class Communicator {
 
     private static final String ENCODING = "ISO-8859-1";
@@ -165,7 +162,8 @@ public class Communicator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d(SERVER_MESSAGE, message);
+        if(message != null)
+            Log.d(SERVER_MESSAGE, message);
         return message;
     }
 
