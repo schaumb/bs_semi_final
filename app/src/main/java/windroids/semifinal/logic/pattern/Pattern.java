@@ -9,7 +9,16 @@ public class Pattern implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	private List<KeyEvent> events;
-	
+
+    private void decreaseTimeFrom(int from, long how_much)
+    {
+        for(ListIterator<KeyEvent> it2 = events.listIterator(from); it2.hasNext();)
+        {
+            KeyEvent next = it2.next();
+            next.setTime( next.getTime() - how_much );
+        }
+    }
+
 	public Pattern(List<KeyEvent> events) 
 	{
 		this.events = events;
@@ -38,6 +47,10 @@ public class Pattern implements Serializable
                 shift = true;
                 continue;
             }
+            else if(e.getCode().equals(KeyCode.CONTROL))
+            {
+                // nothing to do
+            }
             else if(e.getCode().isLetterKey() && shift)
             {
                 result += Character.toUpperCase(e.getCode().code);
@@ -56,44 +69,77 @@ public class Pattern implements Serializable
 	{
         // WARNING MORE MODIFIER ELIMINATE!!!!!!!!
 		int countOfBackSpace = 0;
-		for (ListIterator<KeyEvent> iterator = events.listIterator(); iterator.hasNext();) 
+
+		for (ListIterator<KeyEvent> iterator = events.listIterator(); iterator.hasNext();)
 		{
 			KeyEvent e = iterator.next();
-			if (e.getCode() == KeyCode.BACK_SPACE) 
-			{
-				if(e.getType() == KeyEvent.Type.UP)
-				{
-					++countOfBackSpace;
-					iterator.remove();
+            if (e.getCode().isModifierKey())
+            {
+                if(e.getCode().equals(KeyCode.CONTROL))
+                {
+                    long diff = -e.getTime();
+                    iterator.remove();
 
-					// change the time
-					long diff = e.getTime();
-					if(iterator.hasPrevious()) 
-					{
-						KeyEvent prev = iterator.previous();
-						diff -= prev.getTime();
-					}
-					for(ListIterator<KeyEvent> it2 = events.listIterator(iterator.nextIndex()); it2.hasNext();)
-					{
-						KeyEvent next = it2.next();
-						next.setTime( next.getTime() - diff );
-					}
-				}
-				else
-				{
-					int t = 3; // remove backspace and the previous (up-down) character
-					do
-					{
-						iterator.remove();
-						if(!iterator.hasPrevious()) break;
-						KeyEvent prev = iterator.previous();
-						if(prev.getCode() == KeyCode.SHIFT)
-							++t;
-					}
-					while(--t != 0);
-				}
-			}
+                    iterator.next();
+                    iterator.remove();
+                    e  = iterator.next();
+                    diff += e.getTime();
+
+                    iterator.previous();
+                    decreaseTimeFrom(iterator.nextIndex(), diff);
+                }
+                else if(e.getCode().equals(KeyCode.SHIFT))
+                {
+                    long diff = -e.getTime();
+                    e = iterator.next();
+                    e = iterator.next();
+                    if(!e.getCode().isLetterKey())
+                    {
+                        diff += e.getTime();
+                        iterator.previous();
+                        iterator.remove();
+                        iterator.previous();
+                        iterator.remove();
+                        decreaseTimeFrom(iterator.nextIndex(), diff);
+                    }
+                }
+            }
+            else if (e.getCode().equals(KeyCode.BACK_SPACE))
+			{
+                e = iterator.next(); // up event
+
+                long diff = e.getTime();
+
+                if(iterator.hasNext())
+                {
+                    e = iterator.next(); // next (if exist)
+                    diff = e.getTime();
+                    e = iterator.previous();
+                }
+
+                int t = 4; // remove backspace and the previous (up-down) character
+                do
+                {
+                    iterator.remove();
+                    if(!iterator.hasPrevious()) break;
+                    KeyEvent prev = iterator.previous();
+
+                    if(prev.getCode().isModifierKey())
+                        ++t;
+
+                    if(--t == 0)
+                    {
+                        diff -= prev.getTime();
+                        break;
+                    }
+                }
+                while(true);
+                decreaseTimeFrom(iterator.nextIndex(), diff);
+            }
 		}
+        // calculate to zero
+        decreaseTimeFrom(0, events.get(0).getTime());
+
 		return countOfBackSpace;
 	}
 }
