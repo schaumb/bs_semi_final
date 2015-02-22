@@ -3,6 +3,8 @@ package windroids.semifinal.ui;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -57,11 +59,36 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 		counterView = (TextView) findViewById(R.id.counter_view);
 		
 		changeToStartState();
+    }
 
-		// teszt a kliens-szerver kommunikaciora. Kerlek allitsd be a Configban az ip cimedet, es a
-		// futtatasa elott inditsd el a szervert (java -jar ECServer.jar)
-//        testCommunication();
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String testData;
+        switch (item.getItemId()) {
+            case R.id.menu_test1:
+                testData = "TEST1";
+                break;
+            case R.id.menu_test2:
+                testData = "TEST2";
+                break;
+            case R.id.menu_test3:
+                testData = "TEST3";
+                break;
+            case R.id.menu_test4:
+                testData = "TEST4";
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        startCommunication(Config.COMM_HOST, Config.COMM_PORT, testData, true);
+        return super.onOptionsItemSelected(item);
+    }
 	
 	private void changeToStartState() {
 		infoView.setText(R.string.start_instructions);
@@ -89,85 +116,84 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 	}
 	
 	private void startCounter() {
-		new AsyncTask<Void, Integer, Void>() {
+        new AsyncTask<Void, Integer, Void>() {
 
-			@Override
-			protected Void doInBackground(Void... params) {
-				counterView.setVisibility(View.VISIBLE);
-				for (int i = 0; i < 30; ++i) {
-					publishProgress(i);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				return null;
-			}
+            @Override
+            protected Void doInBackground(Void... params) {
+                counterView.setVisibility(View.VISIBLE);
+                for (int i = 0; i < 30; ++i) {
+                    publishProgress(i);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return null;
+            }
 
-			@Override
-			protected void onProgressUpdate(Integer... values) {
-				super.onProgressUpdate(values);
-				counterView.setText(String.valueOf(values[0]));
-			}
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                super.onProgressUpdate(values);
+                counterView.setText(String.valueOf(values[0]));
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                counterView.setVisibility(View.INVISIBLE);
+                finishTraining();
+            }
+        }.execute((Void[]) null);
+    }
 
-			@Override
-			protected void onPostExecute(Void aVoid) {
-				super.onPostExecute(aVoid);
-				counterView.setVisibility(View.INVISIBLE);
-				finishTraining();
-			}
-		}.execute((Void[]) null);
-	}
+    private void startCommunication(String hostName, int portName, String dataName, boolean feedback) {
+        Communicator communicator = null;
+        String password;
+        List<Pattern> patternList;
+        Pattern actualPattern;
+        try {
+            communicator = new Communicator(hostName, portName, dataName);
+            if(communicator.startCommunication()) {
+                password = communicator.doPreCommuncationAndGetPassword();
+                String patternListRaw = communicator.getXmlFromServer();
+                patternList = XmlParser.parseTestData(patternListRaw);
+                String nextTestDataRaw = communicator.getNextTestDataXmlFile();
+                while (!communicator.checkEndMessage(nextTestDataRaw)) {
+                    actualPattern = XmlParser.parsePattern(nextTestDataRaw);
+                    Log.d(Config.LOG, "Pattern events number: " + actualPattern.getEvents().size());
+                    nextTestDataRaw = communicator.answerTestDataAndGetNext(true);
+                }
+                if (feedback) {
+                    alertDialog(nextTestDataRaw);
+                }
+                communicator.endCommuncation();
+            } else {
+                alertDialog("Server communication failed!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-		return true;
-	}
+    public void alertDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        return;
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-
-	private void testCommunication() {
-		Communicator communicator = null;
-		try {
-			communicator = new Communicator(Config.COMM_HOST, Config.COMM_PORT, "TEST3");
-			communicator.startCommunication();
-			String password = communicator.doPreCommuncationAndGetPassword();
-			String patternListRaw = communicator.getXmlFromServer();
-			List<Pattern> patternList = XmlParser.parseTestData(patternListRaw);
-			String nextTestDataRaw = communicator.getNextTestDataXmlFile();
-			while (!communicator.checkEndMessage(nextTestDataRaw)) {
-				Pattern pattern = XmlParser.parsePattern(nextTestDataRaw);
-				Log.d(Config.LOG, "Pattern events number: " + pattern.getEvents().size());
-				nextTestDataRaw = communicator.answerTestDataAndGetNext(true);
-			}
-			communicator.endCommuncation();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void onTextInput(String character) {

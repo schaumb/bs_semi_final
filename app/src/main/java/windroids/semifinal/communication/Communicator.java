@@ -41,6 +41,7 @@ public class Communicator {
     private String dataId;
     private int port;
     private String address;
+    private boolean socketEnabled;
 
     public Communicator(final String address, final int port, final String dataId) throws IOException, ExecutionException, InterruptedException {
         this.dataId = dataId; //example: TEST3
@@ -54,17 +55,17 @@ public class Communicator {
             protected Boolean doInBackground(Void... params) {
                 try {
                     socket = new Socket(address, port);
-
                     InputStream inputStream = socket.getInputStream();
                     OutputStream outputStream = socket.getOutputStream();
                     br = new BufferedReader(new InputStreamReader(inputStream, ENCODING));
                     outputStream = new BufferedOutputStream(outputStream);
                     pw = new PrintWriter(new OutputStreamWriter(outputStream, ENCODING));
-                    return true;
+                    socketEnabled = true;
+                    return socketEnabled;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                return false;
+                return socketEnabled;
             }
         }.execute().get();
         Log.d("Connection succeed: ", String.valueOf(result));
@@ -77,6 +78,7 @@ public class Communicator {
             protected Boolean doInBackground(Void... params) {
                 try {
                     socket.close();
+                    socketEnabled = false;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -99,7 +101,7 @@ public class Communicator {
                 if (message.equals(COMM_MSG_ASK_ID)) {
                     sendMessage(dataId);
                 }
-                message = getMessage(); //TEST3 ID ACK - WAITING FOR REQUEST
+                getMessage(); //TESTX ID ACK - WAITING FOR REQUEST
                 sendMessage(COMM_MSG_RQST_CLIENT);
                 message = getMessage(); // PASSWORD=jelszó
                 return message.split("=")[1];
