@@ -3,6 +3,8 @@ package windroids.semifinal.communication;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +14,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import windroids.semifinal.logic.pattern.Pattern;
+import windroids.semifinal.util.Config;
 
 /**
  * Created by Tamás on 21/02/2015.

@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
 
         //teszt a kliens-szerver kommunikaciora. Kerlek allitsd be a Configban az ip cimedet, es a
         // futtatasa elott inditsd el a szervert (java -jar ECServer.jar)
-        testCommunication();
+//        testCommunication();
     }
 
     @Override
@@ -60,15 +60,14 @@ public class MainActivity extends ActionBarActivity {
         try {
             communicator = new Communicator(Config.COMM_HOST, Config.COMM_PORT, "TEST3");
             communicator.startCommunication();
-            communicator.doPreCommuncationAndGetPassword();
-            String xml = communicator.getXmlFromServer();
-//            List<Pattern> patternList = XmlParser.parseTestData(xml);
-//            Log.d(Config.LOG, "PatternList size: " + patternList.size());
-            String nextTestData = communicator.getNextTestDataXmlFile();
-            while (!communicator.checkEndMessage(nextTestData)) {
-//                Pattern pattern = XmlParser.parsePattern(nextTestData);
-//                Log.d(Config.LOG, "Pattern events number: " + pattern.getEvents().size());
-                nextTestData = communicator.answerTestDataAndGetNext(true);
+            String password = communicator.doPreCommuncationAndGetPassword();
+            String patternListRaw = communicator.getXmlFromServer();
+            List<Pattern> patternList = XmlParser.parseTestData(patternListRaw);
+            String nextTestDataRaw = communicator.getNextTestDataXmlFile();
+            while (!communicator.checkEndMessage(nextTestDataRaw)) {
+                Pattern pattern = XmlParser.parsePattern(nextTestDataRaw);
+                Log.d(Config.LOG, "Pattern events number: " + pattern.getEvents().size());
+                nextTestDataRaw = communicator.answerTestDataAndGetNext(true);
             }
             communicator.endCommuncation();
 
@@ -80,6 +79,8 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
 //        } catch (XmlPullParserException e) {
 //            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
         }
     }
 }

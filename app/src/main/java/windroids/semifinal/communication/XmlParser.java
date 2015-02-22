@@ -124,7 +124,7 @@ public class XmlParser {
         String posXRaw = parser.getAttributeValue(null, "relative-pos-x");
         double posX = Double.valueOf(posXRaw.substring(0, posXRaw.length() - 1));
         String posYRaw = parser.getAttributeValue(null, "relative-pos-y");
-        double posY = Double.valueOf(posYRaw.substring(0, posXRaw.length() - 1));
+        double posY = Double.valueOf(posYRaw.substring(0, posYRaw.length() - 1));
 
         return new KeyEvent(type, time, keyCode, posX, posY);
     }
