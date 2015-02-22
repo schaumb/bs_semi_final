@@ -1,12 +1,12 @@
 package windroids.semifinal.ui;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.List;
