@@ -12,6 +12,7 @@
 		android:layout_height="match_parent"
 		android:layout_weight="1.5"
 		android:text="#@$"
+		android:tag="F100"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
 		android:textColor="@color/text_color"/>
@@ -22,6 +23,7 @@
 		android:layout_height="match_parent"
 		android:layout_weight="1"
 		android:text=","
+		android:tag="Comma00"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
 		android:textColor="@color/text_color"/>
@@ -32,6 +34,7 @@
 		android:layout_height="match_parent"
 		android:layout_weight="5"
 		android:text=" "
+		android:tag="Space00"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
 		android:textColor="@color/text_color"/>
@@ -42,6 +45,7 @@
 		android:layout_height="match_parent"
 		android:layout_weight="1"
 		android:text="."
+		android:tag="Period00"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
 		android:textColor="@color/text_color"/>
@@ -52,6 +56,7 @@
 		android:layout_height="match_parent"
 		android:layout_weight="1.5"
 		android:layout_margin="@dimen/margin_button"
+		android:tag="Enter00"
 		android:drawableTop="@drawable/ic_keyboard_return_black_24dp"
 		android:textColor="@color/text_color"/>
 

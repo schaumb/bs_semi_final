@@ -770,6 +770,26 @@ public enum KeyCode {
     EXCLAMATION_MARK(0x0205, "Exclamation Mark"),
 
     /**
+     * Constant for the "?" key.
+     */
+    QUESTION_MARK(0x3F, "Question Mark"),
+
+    /**
+     * Constant for the "%" key.
+     */
+    PROCENTTECKEN(0x25, "Procenttecken"),
+
+    /**
+     * Constant for the "{" key.
+     */
+	OPENING_BRACE(0x7B, "Opening brace"),
+
+    /**
+     * Constant for the "}" key.
+     */
+	CLOSING_BRACE(0x7D, "Closing brace"),
+
+    /**
      * Constant for the inverted exclamation mark key.
      */
     INVERTED_EXCLAMATION_MARK(0x0206, "Inverted Exclamation Mark"),

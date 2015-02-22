@@ -49,6 +49,7 @@ public class Keyboard extends Fragment {
 	private Button enter;
 
 	private boolean isShift;
+	private boolean isChange;
 
 	private List<KeyEvent> events = new ArrayList<>(30);
 	private KeyEvent downEventCache;
@@ -58,9 +59,219 @@ public class Keyboard extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View layout = inflater.inflate(R.layout.keyboard, container, false);
 		findButtonsOnLayout(layout);
-		addTagsForSpecialCharacters();
 		addListenersToButtons();
 		return layout;
+	}
+
+	private void addListenersToButtons() {
+		//
+		//	Set View.OnClickListener
+		//
+		for (Button normalButton : normalButtons) {
+			normalButton.setOnClickListener(onNormalButtonClickListener);
+		}
+		shift.setOnClickListener(onShiftClickListener);
+		backspace.setOnClickListener(onBackspaceClickListener);
+		enter.setOnClickListener(onEnterClickListener);
+		change.setOnClickListener(onChangeClickListener);
+
+		//
+		//	Set View.OnTouchListener
+		//
+		for (Button normalButton : normalButtons) {
+			normalButton.setOnTouchListener(onTouchListener);
+		}
+		shift.setOnTouchListener(onTouchListener);
+		backspace.setOnTouchListener(onTouchListener);
+		change.setOnTouchListener(onTouchListener);
+		enter.setOnTouchListener(onTouchListener);
+	}
+
+	private View.OnClickListener onNormalButtonClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			events.add(downEventCache);
+			events.add(upEventCache);
+			checkShift();
+			checkChange();
+			Button button = (Button) view;
+			eventListener.onTextInput(button.getText().toString());
+		}
+	};
+
+	private View.OnClickListener onShiftClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			checkChange();
+			if (view != null) {
+				events.add(downEventCache);
+				events.add(upEventCache);
+				isShift = true;
+			}
+			if (isShift) {
+				for (Button normalButton : normalButtons) {
+					normalButton.setText(normalButton.getText().toString().toUpperCase());
+				}
+			} else {
+				for (Button normalButton : normalButtons) {
+					normalButton.setText(normalButton.getText().toString().toLowerCase());
+				}
+			}
+		}
+	};
+
+	private View.OnClickListener onBackspaceClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			events.add(downEventCache);
+			events.add(upEventCache);
+			checkShift();
+			checkChange();
+			eventListener.onBackspace();
+		}
+	};
+
+	private View.OnClickListener onEnterClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			events.add(downEventCache);
+			events.add(upEventCache);
+			checkShift();
+			checkChange();
+			eventListener.onSubmit(new Pattern(events));
+			events = new ArrayList<>(20);
+		}
+	};
+
+	private View.OnClickListener onChangeClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			checkShift();
+			if (view != null) {
+				events.add(downEventCache);
+				events.add(upEventCache);
+				isChange = true;
+			}
+			if (isChange) {
+				for (Button normalButton : normalButtons) {
+					CharSequence rawValue = normalButton.getText();
+					if (rawValue.equals(" ") || rawValue.equals(",") || (rawValue.equals("."))) {
+						continue;
+					}
+					Object rawTag = normalButton.getTag();
+					if (rawTag == null) {
+						continue;
+					}
+					String tag = rawTag.toString();
+					String specialKey = String.valueOf(tag.charAt(tag.length() - 1));
+					if (specialKey.equals("0")) {
+						continue;
+					}
+					normalButton.setText(specialKey);
+				}
+			} else {
+				for (Button normalButton : normalButtons) {
+					CharSequence rawValue = normalButton.getText();
+					if (rawValue.equals(" ") || rawValue.equals(",") || (rawValue.equals("."))) {
+						continue;
+					}
+					Object rawTag = normalButton.getTag();
+					if (rawTag == null){
+						continue;
+					}
+					String tag = rawTag.toString();
+					String letter = String.valueOf(tag.charAt(tag.length() - 2));
+					if (letter.equals("0")) {
+						continue;
+					}
+					normalButton.setText(letter);
+				}
+			}
+		}
+	};
+
+	private void checkShift() {
+		if (isShift) {
+			isShift = false;
+			onShiftClickListener.onClick(null);
+		}
+	}
+
+	private void checkChange() {
+		if (isChange) {
+			isChange = false;
+			onChangeClickListener.onClick(null);
+		}
+	}
+
+	private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+		@Override
+		public boolean onTouch(View view, MotionEvent event) {
+			// TYPE
+			KeyEvent.Type type;
+			switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					type = KeyEvent.Type.DOWN;
+					Log.d(TAG, "Type: KeyEvent.Type.DOWN");
+					break;
+				case MotionEvent.ACTION_UP:
+					type = KeyEvent.Type.UP;
+					Log.d(TAG, "Type: KeyEvent.Type.UP");
+					break;
+				default:
+					Log.d(TAG, "Another type: " + event.getAction());
+					return false;
+			}
+
+			// TIME
+			long time = new Date().getTime();
+			Log.d(TAG, "Time: " + time);
+
+			// CODE
+			KeyCode keyCode;
+			Object rawTag = view.getTag();
+			String tag = rawTag.toString();
+			String reference = String.valueOf(tag.charAt(tag.length() - 2));
+			if (((Button) view).getText().toString().equals(reference)) {
+				keyCode = KeyCode.getKeyCode(reference.toUpperCase());
+			} else {
+				keyCode = KeyCode.getKeyCode(tag.substring(0, tag.length() - 2));
+			}
+			Log.d(TAG, "KeyCode: " + keyCode);
+
+			// POSX
+			// TODO - is lehet
+			double posX = event.getX() / view.getWidth();
+			Log.d(TAG, "PosX: " + posX);
+
+			// POSY
+			// TODO - is lehet
+			double posY = event.getY() / view.getHeight();
+			Log.d(TAG, "PosY: " + posY);
+
+			switch (type) {
+				case DOWN:
+					downEventCache = new KeyEvent(type, time, keyCode, posX, posY);
+					break;
+				case UP:
+					upEventCache = new KeyEvent(type, time, keyCode, posX, posY);
+					break;
+			}
+
+			return false;
+		}
+	};
+
+	public void setEventListener(EventListener eventListener) {
+		this.eventListener = eventListener;
+	}
+
+	public interface EventListener {
+		void onTextInput(String character);
+
+		void onBackspace();
+
+		void onSubmit(Pattern pattern);
 	}
 
 	private void findButtonsOnLayout(View layout) {
@@ -107,170 +318,5 @@ public class Keyboard extends Fragment {
 		backspace = (Button) layout.findViewById(R.id.btn_backspace);
 		change = (Button) layout.findViewById(R.id.btn_change);
 		enter = (Button) layout.findViewById(R.id.btn_enter);
-	}
-
-	private void addListenersToButtons() {
-		//
-		//	Set View.OnClickListener
-		//
-		for (Button normalButton : normalButtons) {
-			normalButton.setOnClickListener(onNormalButtonClickListener);
-		}
-		shift.setOnClickListener(onShiftClickListener);
-		backspace.setOnClickListener(onBackspaceClickListener);
-		enter.setOnClickListener(onEnterClickListener);
-
-		//
-		//	Set View.OnTouchListener
-		//
-		for (Button normalButton : normalButtons) {
-			normalButton.setOnTouchListener(onTouchListener);
-		}
-		shift.setOnTouchListener(onTouchListener);
-		backspace.setOnTouchListener(onTouchListener);
-		change.setOnTouchListener(onTouchListener);
-		enter.setOnTouchListener(onTouchListener);
-	}
-
-	private void addTagsForSpecialCharacters() {
-		shift.setTag("Shift");
-		backspace.setTag("Backspace");
-		change.setTag("change"); // TODO
-		enter.setTag("Enter");
-	}
-
-	private View.OnClickListener onNormalButtonClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			events.add(downEventCache);
-			events.add(upEventCache);
-			updateCaseIfNecessary();
-			Button button = (Button) view;
-			eventListener.onTextInput(button.getText().toString());
-		}
-	};
-
-	private View.OnClickListener onShiftClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			if (view != null) {
-				events.add(downEventCache);
-				events.add(upEventCache);
-				isShift = !isShift;
-			}
-			if (isShift) {
-				for (Button normalButton : normalButtons) {
-					normalButton.setText(normalButton.getText().toString().toUpperCase());
-				}
-			} else {
-				for (Button normalButton : normalButtons) {
-					normalButton.setText(normalButton.getText().toString().toLowerCase());
-				}
-			}
-		}
-	};
-
-	private View.OnClickListener onBackspaceClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			events.add(downEventCache);
-			events.add(upEventCache);
-			updateCaseIfNecessary();
-			eventListener.onBackspace();
-		}
-	};
-
-	private View.OnClickListener onEnterClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			events.add(downEventCache);
-			events.add(upEventCache);
-			updateCaseIfNecessary();
-			eventListener.onSubmit(new Pattern(events));
-			events = new ArrayList<>(20);
-		}
-	};
-
-	private void updateCaseIfNecessary() {
-		if (isShift) {
-			isShift = false;
-			onShiftClickListener.onClick(null);
-		}
-	}
-
-	private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-		@Override
-		public boolean onTouch(View view, MotionEvent event) {
-			// TYPE
-			KeyEvent.Type type;
-			switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					type = KeyEvent.Type.DOWN;
-					Log.d(TAG, "Type: KeyEvent.Type.DOWN");
-					break;
-				case MotionEvent.ACTION_UP:
-					type = KeyEvent.Type.UP;
-					Log.d(TAG, "Type: KeyEvent.Type.UP");
-					break;
-				default:
-					Log.d(TAG, "Another type: " + event.getAction());
-					return false;
-			}
-
-			// TIME
-			long time = new Date().getTime();
-			Log.d(TAG, "Time: " + time);
-
-			// CODE
-			Button button = (Button) view;
-			CharSequence rawValue = button.getText();
-			if (rawValue == null || rawValue.length() == 0) {
-				rawValue = button.getTag().toString();
-			} else {
-				rawValue = rawValue.toString().toUpperCase();
-				if (rawValue.equals(" ")) {
-					rawValue = "Space";
-				}
-				if (rawValue.equals(",")) {
-					rawValue = "Comma";
-				}
-				if (rawValue.equals(".")) {
-					rawValue = "Period";
-				}
-			}
-			KeyCode keyCode = KeyCode.getKeyCode(rawValue.toString());
-			Log.d(TAG, "KeyCode: " + keyCode);
-
-			// POSX
-			double posX = event.getX() / view.getWidth();
-			Log.d(TAG, "PosX: " + posX);
-
-			// POSY
-			double posY = event.getY() / view.getHeight();
-			Log.d(TAG, "PosY: " + posY);
-
-			switch (type) {
-				case DOWN:
-					downEventCache = new KeyEvent(type, time, keyCode, posX, posY);
-					break;
-				case UP:
-					upEventCache = new KeyEvent(type, time, keyCode, posX, posY);
-					break;
-			}
-
-			return false;
-		}
-	};
-
-	public void setEventListener(EventListener eventListener) {
-		this.eventListener = eventListener;
-	}
-
-	public interface EventListener {
-		void onTextInput(String character);
-
-		void onBackspace();
-
-		void onSubmit(Pattern pattern);
 	}
 }
