@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 	private void changeToStartState() {
 		infoView.setText(R.string.start_instructions);
 		currentState = State.START;
+		counterView.setVisibility(View.GONE);
 		password = null;
 		training = new ArrayList<>(100);
 		logic = null;
@@ -93,7 +94,12 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 
 			@Override
 			protected Void doInBackground(Void... params) {
-				counterView.setVisibility(View.VISIBLE);
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						counterView.setVisibility(View.VISIBLE);
+					}
+				});
 				for (int i = 0; i < 30; ++i) {
 					publishProgress(i);
 					try {
@@ -114,7 +120,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
 			@Override
 			protected void onPostExecute(Void aVoid) {
 				super.onPostExecute(aVoid);
-				counterView.setVisibility(View.INVISIBLE);
+				counterView.setVisibility(View.GONE);
 				finishTraining();
 			}
 		}.execute((Void[]) null);
