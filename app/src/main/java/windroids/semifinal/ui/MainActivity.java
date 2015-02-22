@@ -122,10 +122,6 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         }
         logic = new Logic(password, training);
         logic.init();
-//		if () { // TODO
-//			alertDialog(getString(R.string.training_failed));
-//			changeToStartState();
-//		}
         changeToTestState();
     }
 
@@ -167,11 +163,11 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
     }
 
     private void startCommunication(String hostName, int portName, String dataName, boolean feedback) {
-        Communicator communicator = null;
+        Communicator communicator;
         String password;
         List<Pattern> training;
         Pattern actualPattern;
-        ArrayList<String> testResultLogList = new ArrayList<String>();
+        ArrayList<String> testResultLogList = new ArrayList<>();
         boolean isMatching;
         try {
             communicator = new Communicator(hostName, portName, dataName);
@@ -185,7 +181,7 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
                 while (!communicator.checkEndMessage(nextTestDataRaw)) {
                     actualPattern = XmlParser.parsePattern(nextTestDataRaw);
                     isMatching = logic.isMatching(actualPattern);
-                    logTestData(testResultLogList, nextTestDataRaw, isMatching);
+                    logTestData(testResultLogList, isMatching);
 
                     nextTestDataRaw = communicator.answerTestDataAndGetNext(isMatching);
                 }
@@ -197,19 +193,13 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
             } else {
                 alertDialog("Server communication failed.");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
+        } catch (IOException | InterruptedException | ExecutionException | XmlPullParserException e) {
             e.printStackTrace();
         }
-    }
+	}
 
-    private void logTestData(ArrayList<String> list, String nextTestDataRaw, boolean isMatching) {
-        list.add(new String("Own: " + (isMatching ? "ACCEPT" : "REJECT") + " Their: "));
+    private void logTestData(ArrayList<String> list, boolean isMatching) {
+        list.add("Own: " + (isMatching ? "ACCEPT" : "REJECT") + " Their: ");
     }
 
     private void printTestData(ArrayList<String> list, String resultData) {
