@@ -215,8 +215,8 @@ public class MainActivity extends ActionBarActivity implements Keyboard.EventLis
         for(int i = 0; i < list.size(); ++i) {
             builder = new StringBuilder(list.get(i));
             builder.append(array[i]);
-            Log.d("PatternStudied",logic.patternStudied);
-            Log.d("PatternMatch",logic.patternMatch);
+            //Log.d("PatternStudied",logic.patternStudied);
+            //Log.d("PatternMatch",logic.patternMatch);
             Log.d(Config.LOG,builder.toString());
         }
 

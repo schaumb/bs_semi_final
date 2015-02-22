@@ -66,7 +66,7 @@ public class SingleValueDiff<T> extends ArrayList<T> {
         calculateAvg();
         double stddev = calculateStandardDeviation();
         double maxdif = maximalDifference();
-        allowedDifference = maxdif + stddev / 0.01;
+        allowedDifference = maxdif + stddev / 5 * 3;// * 0.01;
     }
 
     public double distance(T elem)

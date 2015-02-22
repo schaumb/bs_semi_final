@@ -158,7 +158,7 @@ public class Logic implements Serializable
 
             double tmp = pointLimitations.get(index).distance(prevKey.getPos());
             System.out.print(patternMatch += index + " character distance : " + tmp + '\n');
-            if(tmp > 1) return false;
+            //if(tmp > 1) return false;
             pointPercents.add(tmp);
 
             while(iterator.hasNext())
@@ -167,21 +167,20 @@ public class Logic implements Serializable
 
                 tmp = timeLimitations.get(index).distance(nextKey.getTime()-prevKey.getTime());
                 System.out.print(patternMatch += index + " time distance : " + tmp + '\n');
-                if(tmp > 1) return false;
+                //if(tmp > 1) return false;
                 timePercents.add(tmp);
 
 				if(index % 2 == 0) {
 					tmp = angleLimitations.get(index).distance(prevKey.getPos(), nextKey.getPos());
 					System.out.print(patternMatch += index + " angle distance : " + tmp + '\n');
-					if (tmp > 1)
-						return false;
+					//if (tmp > 1)	return false;
 					anglePercents.add(tmp);
 				}
                 ++index;
 
                 tmp = pointLimitations.get(index).distance(prevKey.getPos());
                 System.out.print(patternMatch += index + " point distance : " + tmp + '\n');
-                if(tmp > 1) return false;
+                //if(tmp > 1) return false;
                 pointPercents.add(tmp);
 
                 prevKey = nextKey;
@@ -191,12 +190,12 @@ public class Logic implements Serializable
                     pattern.getEvents().get(pattern.getEvents().size()-1).getTime() -
                             pattern.getEvents().get(0).getTime());
             System.out.println(patternMatch += index + " sumTime distance : " + tmp + '\n');
-            if(tmp > 1) return false;
+            //if(tmp > 1) return false;
 
             timePercents.add(tmp);
             System.out.print(patternMatch += "Time AVG:" + timePercents.getAvg() + ", angle AVG: " + anglePercents.getAvg() + ", point AVG:" + pointPercents.getAvg() + '\n');
 
-            result = timePercents.getAvg() < 0.5 && anglePercents.getAvg() + pointPercents.getAvg() < 1.0;
+            result = timePercents.getAvg() < 0.3 && anglePercents.getAvg() + pointPercents.getAvg() < 0.6;
         }
 
         return result;
