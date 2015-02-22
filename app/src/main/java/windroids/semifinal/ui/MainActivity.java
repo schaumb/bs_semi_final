@@ -2,14 +2,20 @@ package windroids.semifinal.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import windroids.semifinal.R;
 import windroids.semifinal.communication.Communicator;
+import windroids.semifinal.communication.XmlParser;
+import windroids.semifinal.logic.pattern.Pattern;
 import windroids.semifinal.ui.keyboard.Keyboard;
 import windroids.semifinal.util.Config;
 
@@ -23,8 +29,8 @@ public class MainActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction().add(R.id.keyboard_container, new Keyboard(), null).commit();
 
         //teszt a kliens-szerver kommunikaciora. Kerlek allitsd be a Configban az ip cimedet, es a
-        //futtatasa elott inditsd el a szervert (java -jar ECServer.jar)
-        //testCommunication();
+        // futtatasa elott inditsd el a szervert (java -jar ECServer.jar)
+//        testCommunication();
     }
 
     @Override
@@ -54,15 +60,14 @@ public class MainActivity extends ActionBarActivity {
         try {
             communicator = new Communicator(Config.COMM_HOST, Config.COMM_PORT, "TEST3");
             communicator.startCommunication();
-            communicator.doPreCommuncationAndGetPassword();
-            String xml = communicator.getXmlFromServer();
-//            List<Pattern> patternList = XmlParser.parseTestData(xml);
-//            Log.d(Config.LOG, "PatternList size: " + patternList.size());
-            String nextTestData = communicator.getNextTestDataXmlFile();
-            while (!communicator.checkEndMessage(nextTestData)) {
-//                Pattern pattern = XmlParser.parsePattern(nextTestData);
-//                Log.d(Config.LOG, "Pattern events number: " + pattern.getEvents().size());
-                nextTestData = communicator.answerTestDataAndGetNext(true);
+            String password = communicator.doPreCommuncationAndGetPassword();
+            String patternListRaw = communicator.getXmlFromServer();
+            List<Pattern> patternList = XmlParser.parseTestData(patternListRaw);
+            String nextTestDataRaw = communicator.getNextTestDataXmlFile();
+            while (!communicator.checkEndMessage(nextTestDataRaw)) {
+                Pattern pattern = XmlParser.parsePattern(nextTestDataRaw);
+                Log.d(Config.LOG, "Pattern events number: " + pattern.getEvents().size());
+                nextTestDataRaw = communicator.answerTestDataAndGetNext(true);
             }
             communicator.endCommuncation();
 
@@ -72,8 +77,8 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-//        } catch (XmlPullParserException e) {
-//            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
         }
     }
 }
