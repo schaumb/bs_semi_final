@@ -22,25 +22,7 @@ public class Keyboard extends Fragment {
 
 	private static final String TAG = Keyboard.class.getSimpleName();
 
-	private EventListener eventListener = new EventListener() {
-		@Override
-		public void onTextInput(String character) {
-
-		}
-
-		@Override
-		public void onBackspace() {
-
-		}
-
-		@Override
-		public void onSubmit(Pattern pattern) {
-			List<KeyEvent> keyEvents = pattern.getEvents();
-			for (KeyEvent event : keyEvents) {
-				Log.d(getClass().getSimpleName(), event.toString());
-			}
-		}
-	}; // TODO delete
+	private EventListener eventListener;
 
 	private List<Button> normalButtons = new ArrayList<>(40);
 	private Button shift;
@@ -92,10 +74,10 @@ public class Keyboard extends Fragment {
 		public void onClick(View view) {
 			events.add(downEventCache);
 			events.add(upEventCache);
-			checkShift();
-			checkChange();
 			Button button = (Button) view;
 			eventListener.onTextInput(button.getText().toString());
+			checkShift();
+			checkChange();
 		}
 	};
 
@@ -125,9 +107,9 @@ public class Keyboard extends Fragment {
 		public void onClick(View view) {
 			events.add(downEventCache);
 			events.add(upEventCache);
+			eventListener.onBackspace();
 			checkShift();
 			checkChange();
-			eventListener.onBackspace();
 		}
 	};
 

@@ -12,7 +12,7 @@
 		android:layout_height="match_parent"
 		android:layout_weight="1.5"
 		android:text="#@$"
-		android:tag="F100"
+		android:tag="Ctrl00"
 		android:layout_margin="@dimen/margin_button"
 		android:padding="@dimen/padding_button"
 		android:textColor="@color/text_color"/>
