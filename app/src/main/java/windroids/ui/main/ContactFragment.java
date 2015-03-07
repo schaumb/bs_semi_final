@@ -13,13 +13,13 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import windroids.R;
 import windroids.entities.User;
@@ -28,6 +28,7 @@ import windroids.search.SearchUser;
 public class ContactFragment extends Fragment implements ContactAdapter.OnItemClickListener {
 
 	private ArrayList<User> contacts;
+	private ArrayList<User> results;
 
 	private RecyclerView contactsView;
 	private RecyclerView resultsView;
@@ -71,29 +72,29 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
 
 		contactsView.setHasFixedSize(true);
 		contactsView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-		contactsView.setAdapter(new ContactAdapter(contacts, this));
+		contactsView.setAdapter(new ContactAdapter(contacts, this, ContactAdapter.Type.Contact));
 
 		resultsView.setHasFixedSize(true);
 		resultsView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-		resultsView.setAdapter(new ContactAdapter(new ArrayList<User>(), this));
 
 		detailsView.setVisibility(View.GONE);
 		resultsView.setVisibility(View.GONE);
 
 		final EditText searchView = (EditText) layout.findViewById(R.id.search_view);
-		searchView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN) {
+		searchView.setOnKeyListener(new View.OnKeyListener() {
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 					String searchText = searchView.getText().toString();
 					try {
 						detailsView.setVisibility(View.GONE);
 						resultsView.setVisibility(View.VISIBLE);
-						ArrayList<User> results = SearchUser.searchByName(searchText);
-						resultsView.setAdapter(new ContactAdapter(results, ContactFragment.this));
+						results = SearchUser.searchByName(searchText);
+						resultsView.setAdapter(
+								new ContactAdapter(results, ContactFragment.this, ContactAdapter.Type.Result));
 					} catch (IOException | ClassNotFoundException e) {
 						e.printStackTrace();
 					}
+					return true;
 				}
 				return false;
 			}
@@ -103,9 +104,17 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
 	}
 
 	@Override
-	public void onClick(int position) {
+	public void onClick(int position, ContactAdapter.Type type) {
 		detailsView.setVisibility(View.VISIBLE);
-		User user = contacts.get(position);
+		User user = null;
+		switch (type) {
+			case Contact:
+				user = contacts.get(position);
+				break;
+			case Result:
+				user = results.get(position);
+				break;
+		}
 		byte[] decodedString = Base64.decode(user.getProfileImage(), Base64.DEFAULT);
 		Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 		imageView.setImageBitmap(decodedImage);
@@ -126,7 +135,10 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
 		} else {
 			titleView.setVisibility(View.GONE);
 		}
-		birthDateView.setText(user.getBirthDate().toString());
+		Date date = user.getBirthDate();
+		if (date != null) {
+			birthDateView.setText(date.toString());
+		}
 		addressView.setText(user.getCity());
 	}
 }

@@ -40,7 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"
-            style="@style/LoginInputStyle" />
+            style="@style/LoginInputStyle"
+			android:inputType="textPassword" />
 
         <View style="@style/LoginLineStyle" />
 
