@@ -16,7 +16,7 @@ import windroids.semifinal.logic.pattern.KeyEvent;
 import windroids.semifinal.logic.pattern.Pattern;
 
 public class XmlParser {
-
+    //test
     public static List<Pattern> parseTestData(String xmlString) throws XmlPullParserException, IOException {
         List<Pattern> patternList = parserTestData(new ByteArrayInputStream(xmlString.getBytes("UTF-8")));
         return patternList;
