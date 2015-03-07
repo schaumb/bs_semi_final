@@ -3,6 +3,8 @@ package windroids.entities;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -56,15 +58,32 @@ public class User implements Serializable {
     }
 
     public ArrayList<Message> getReceivedDatasFrom(String userName) throws IOException, ClassNotFoundException {
-        return MessageFilter.filterMessagesFrom(MessageStorage.getMessagesToMe(this.userName), userName);
+        return MessageFilter.filterMessagesToMeFrom(MessageStorage.getMessagesToMe(this.userName), userName);
     }
 
-    public void addContact(User u){
-        addContact(u.getUserName());
+    public ArrayList<Message> getSentDatasTo(String userName) throws IOException, ClassNotFoundException {
+        return MessageFilter.filterMessagesFromMeTo(MessageStorage.getMessagesFromMe(this.userName), userName);
     }
 
-    public void addContact(String s){
-        connections.add(s);
+    public ArrayList<Message> getUserMessages(String userName) throws IOException, ClassNotFoundException {
+        ArrayList<Message> result = getReceivedDatasFrom(userName);
+        result.addAll(getSentDatasTo(userName));
+
+        Comparator<Message> comparator = new Comparator<Message>() {
+            public int compare(Message c1, Message c2) {
+                return c1.getDate().compareTo(c1.getDate());
+            }
+        };
+
+        Collections.sort(result, comparator);
+        return result;
+    }
+
+    public void addContact(User u) throws IOException, ClassNotFoundException {
+        connections.add(u.getUserName());
+        UserStorage.saveThisUserChanges(this);
+        u.connections.add(this.getUserName());
+        UserStorage.saveThisUserChanges(u);
     }
 
     public HashMap<Data.Type, ArrayList<Data>> getDatas() {
