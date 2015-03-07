@@ -1,5 +1,6 @@
 package windroids.entities;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import windroids.entities.data.Data;
+import windroids.storage.UserStorage;
 
 public class User implements Serializable {
 
@@ -16,7 +18,7 @@ public class User implements Serializable {
     }
     
     public User(String userName, String password, String profileImage, String fullName, Date birthDate, String city,
-                Boolean isDoctor, String doctorType, Boolean isCoach, String coachType, HashMap<Data.Type, ArrayList<Data>> datas) {
+                Boolean isDoctor, String doctorType, Boolean isCoach, String coachType, HashMap<Data.Type, ArrayList<Data>> datas, ArrayList<String> connections) {
         this.userName = userName;
         this.password = password;
         this.profileImage = profileImage;
@@ -28,6 +30,7 @@ public class User implements Serializable {
         this.isCoach = isCoach;
         this.coachType = coachType;
         this.datas = datas;
+        this.connections = connections;
     }
 
     public User(String userName, String email, String password, String fullName) {
@@ -48,6 +51,19 @@ public class User implements Serializable {
 	private Boolean isCoach;
 	private String coachType;
     private HashMap<Data.Type, ArrayList<Data>> datas;
+    private ArrayList<String> connections;
+
+    public ArrayList<User> getContacts() throws IOException, ClassNotFoundException {
+        return UserStorage.getUsersFromName(connections);
+    }
+
+    public void addContact(User u){
+        addContact(u.getUserName());
+    }
+
+    public void addContact(String s){
+        connections.add(s);
+    }
 
     public HashMap<Data.Type, ArrayList<Data>> getDatas() {
         return datas;
@@ -149,4 +165,22 @@ public class User implements Serializable {
 	public void setCoachType(String coachType) {
 		this.coachType = coachType;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userName != null ? !userName.equals(user.userName) : user.userName != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return userName != null ? userName.hashCode() : 0;
+    }
 }

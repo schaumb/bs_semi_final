@@ -1,6 +1,5 @@
 package windroids.storage;
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -68,9 +67,9 @@ public class UserStorage {
     };
 
 
-    private static String fileName = "dont_piszka";
+    private static String fileName = "user_storage";
 
-    private static ArrayList<User> readUsers() throws IOException, ClassNotFoundException {
+    public static ArrayList<User> readUsers() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(fileName);
         ObjectInputStream ois = new ObjectInputStream(fis);
 
@@ -138,4 +137,30 @@ public class UserStorage {
         list.add(u);
         return saveUsers(list);
     }
+
+    public static ArrayList<User> getUsersFromName(ArrayList<String> connections) throws IOException, ClassNotFoundException {
+        ArrayList<User> list = readUsers();
+        ArrayList<User> result = new ArrayList<>();
+        for(User u: list)
+        {
+            if(connections.contains(u.getUserName()))
+            {
+                result.add(u);
+            }
+        }
+        return result;
+    }
+
+    public static void saveThisUserChanges(User user) throws IOException, ClassNotFoundException {
+        ArrayList<User> list = readUsers();
+        for (User m : list) {
+            if (user.equals(m)) {
+                list.remove(m);
+                list.add(user);
+                break;
+            }
+        }
+        saveUsers(list);
+    }
+
 }
