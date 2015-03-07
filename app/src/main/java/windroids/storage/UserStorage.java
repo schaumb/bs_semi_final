@@ -1,5 +1,11 @@
 package windroids.storage;
 
+import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
+
+import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -66,16 +72,30 @@ public class UserStorage {
         }
     };
 
+	private static Context context;
+
+	public static void setContext(Context contextParam) {
+		context = contextParam;
+	}
+
 
     private static String fileName = "user_storage";
 
     public static ArrayList<User> readUsers() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(fileName);
-        ObjectInputStream ois = new ObjectInputStream(fis);
+		File file = new File(Environment.getExternalStorageDirectory() + File.separator + fileName);
+		file.createNewFile();
+        FileInputStream fis = new FileInputStream(Environment.getExternalStorageDirectory() + File.separator + fileName);
 
-        ArrayList<User> result = (ArrayList<User>)ois.readObject();
+		ArrayList<User> result;
+		try {
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			result = (ArrayList<User>) ois.readObject();
+			ois.close();
+		} catch (EOFException e) {
+			Log.i(UserStorage.class.getSimpleName(), "Üres volt a file.");
+			result = new ArrayList<>();
+		}
 
-        ois.close();
         fis.close();
 
         return result;
@@ -83,7 +103,7 @@ public class UserStorage {
     }
 
     private static boolean saveUsers(ArrayList<User> users) throws IOException {
-        FileOutputStream fos = new FileOutputStream(fileName);
+        FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory() + File.separator + fileName);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
         oos.writeObject(users);
@@ -125,14 +145,14 @@ public class UserStorage {
         if(u.getPassword().length() < 8)
             throw new NotEnoughCharacterInPasswordException("minimum 8");
 
-        if(!u.getPassword().contains("[a-z]") )
-            throw new NotLowerCaseCharacterInPasswordException();
-
-        if(!u.getPassword().contains("[A-Z]") )
-            throw new NotUpperCaseCharacterInPasswordException();
-
-        if(!u.getPassword().contains("[0-9]") )
-            throw new NotNumberCharacterInPasswordException();
+//        if(!u.getPassword().contains("[a-z]") )
+//            throw new NotLowerCaseCharacterInPasswordException();
+//
+//        if(!u.getPassword().contains("[A-Z]") )
+//            throw new NotUpperCaseCharacterInPasswordException();
+//
+//        if(!u.getPassword().contains("[0-9]") )
+//            throw new NotNumberCharacterInPasswordException();
 
         list.add(u);
         return saveUsers(list);

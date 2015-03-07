@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.IOException;
-
 import windroids.R;
 import windroids.config.Constants;
 import windroids.entities.User;
@@ -34,6 +32,7 @@ public class RegistrationActivity extends Activity {
             public void onClick(View v) {
                 boolean success = false;
                 try {
+					UserStorage.setContext(RegistrationActivity.this);
                     success = UserStorage.checkRegister(getRegistrationDatas());
                 } catch (UserStorage.NotEnoughCharacterInPasswordException e) {
                     alertError("Too low character number for password, please use at least 8!");
@@ -43,6 +42,8 @@ public class RegistrationActivity extends Activity {
                     alertError("Please use upper character too in password!");
                 } catch (UserStorage.NotNumberCharacterInPasswordException e) {
                     alertError("Please use numbers too in password!");
+                } catch (UserStorage.DuplicatedUserNameException e) {
+                    alertError("User already exists!");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

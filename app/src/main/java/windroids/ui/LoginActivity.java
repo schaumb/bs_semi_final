@@ -8,11 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.IOException;
-
 import windroids.R;
 import windroids.entities.User;
 import windroids.storage.UserStorage;
+import windroids.ui.main.MainActivity;
 
 public class LoginActivity extends Activity {
 
@@ -25,7 +24,10 @@ public class LoginActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getLoginDatas();
+                User user = getLoginDatas();
+				Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+				intent.putExtra(MainActivity.EXTRA_USER, user);
+				startActivity(intent);
             }
         });
 
@@ -44,6 +46,7 @@ public class LoginActivity extends Activity {
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
         User user = new User();
         try {
+			UserStorage.setContext(this);
             user = UserStorage.checkLogin(userName, password);
         } catch (UserStorage.WrongPasswordException e) {
             alertDialog("Wrong username/password!");
