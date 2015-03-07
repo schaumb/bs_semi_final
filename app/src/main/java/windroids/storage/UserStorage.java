@@ -1,6 +1,5 @@
 package windroids.storage;
 
-import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
@@ -137,11 +136,11 @@ public class UserStorage {
         if(u.getPassword().length() < 8)
             throw new NotEnoughCharacterInPasswordException("minimum 8");
 
-        if(!u.getPassword().equals(u.getPassword().toUpperCase()))
-            throw new NotLowerCaseCharacterInPasswordException();
-
-        if(!u.getPassword().equals(u.getPassword().toLowerCase()))
-            throw new NotUpperCaseCharacterInPasswordException();
+//        if(!u.getPassword().equals(u.getPassword().toUpperCase()))
+//            throw new NotLowerCaseCharacterInPasswordException();
+//
+//        if(!u.getPassword().equals(u.getPassword().toLowerCase()))
+//            throw new NotUpperCaseCharacterInPasswordException();
 
 //        if(!u.getPassword().contains("[0-9]") )
 //            throw new NotNumberCharacterInPasswordException();

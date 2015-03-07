@@ -25,9 +25,11 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 User user = getLoginDatas();
-				Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-				intent.putExtra(MainActivity.EXTRA_USER, user);
-				startActivity(intent);
+				if (user != null) {
+					Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+					intent.putExtra(MainActivity.EXTRA_USER, user);
+					startActivity(intent);
+				}
             }
         });
 
@@ -44,11 +46,13 @@ public class LoginActivity extends Activity {
     public User getLoginDatas() {
         String userName = ((EditText) findViewById(R.id.account_name)).getText().toString();
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
-        User user = new User();
+        User user = null;
         try {
             user = UserStorage.checkLogin(userName, password);
         } catch (UserStorage.WrongPasswordException e) {
             alertDialog("Wrong username/password!");
+        } catch (UserStorage.NotExistUserException e) {
+            alertDialog("User not exists!");
         } catch (Exception e) {
             e.printStackTrace();
         }

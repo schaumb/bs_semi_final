@@ -99,7 +99,7 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
 			}
 		});
 
-		return inflater.inflate(R.layout.fragment_contact, container, false);
+		return layout;
 	}
 
 	@Override
