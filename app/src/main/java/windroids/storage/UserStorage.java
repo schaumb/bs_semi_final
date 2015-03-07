@@ -1,6 +1,5 @@
 package windroids.storage;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -69,7 +68,7 @@ public class UserStorage {
     };
 
 
-    private static String fileName = "dont_piszka";
+    private static String fileName = "user_storage";
 
     private static ArrayList<User> readUsers() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(fileName);
