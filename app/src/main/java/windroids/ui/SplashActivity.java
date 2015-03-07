@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
 
 			@Override
 			public void onFinish() {
-				//store if the user regisered or not
+				//store if the user registered or not
                 SharedPreferences sharedpreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
                 sharedpreferences.getBoolean(Constants.USER_REGISTERED_STATE, false);
 
