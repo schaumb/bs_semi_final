@@ -136,4 +136,30 @@ public class UserStorage {
         list.add(u);
         saveUsers(list);
     }
+
+    public static ArrayList<User> getUsersFromName(ArrayList<String> connections) throws IOException, ClassNotFoundException {
+        ArrayList<User> list = readUsers();
+        ArrayList<User> result = new ArrayList<>();
+        for(User u: list)
+        {
+            if(connections.contains(u.getUserName()))
+            {
+                result.add(u);
+            }
+        }
+        return result;
+    }
+
+    public static void saveThisUserChanges(User user) throws IOException, ClassNotFoundException {
+        ArrayList<User> list = readUsers();
+        for (User m : list) {
+            if (user.equals(m)) {
+                list.remove(m);
+                list.add(user);
+                break;
+            }
+        }
+        saveUsers(list);
+    }
+
 }
