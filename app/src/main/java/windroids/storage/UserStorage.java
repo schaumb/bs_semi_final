@@ -70,7 +70,7 @@ public class UserStorage {
 
     private static String fileName = "user_storage";
 
-    private static ArrayList<User> readUsers() throws IOException, ClassNotFoundException {
+    public static ArrayList<User> readUsers() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(fileName);
         ObjectInputStream ois = new ObjectInputStream(fis);
 
