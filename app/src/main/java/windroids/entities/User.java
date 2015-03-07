@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import windroids.entities.data.Data;
+import windroids.storage.MessageStorage;
 import windroids.storage.UserStorage;
 
 public class User implements Serializable {
@@ -16,12 +17,13 @@ public class User implements Serializable {
     public User() {
     }
     
-    public User(String userName, String password, String profileImage, String fullName, Date birthDate, String city,
+    public User(String userName, String password, String profileImage, String fullName, String email, Date birthDate, String city,
                 Boolean isDoctor, String doctorType, Boolean isCoach, String coachType, HashMap<Data.Type, ArrayList<Data>> datas, ArrayList<String> connections) {
         this.userName = userName;
         this.password = password;
         this.profileImage = profileImage;
         this.fullName = fullName;
+        this.email = email;
         this.birthDate = birthDate;
         this.city = city;
         this.isDoctor = isDoctor;
@@ -32,17 +34,11 @@ public class User implements Serializable {
         this.connections = connections;
     }
 
-    public User(String userName, String email, String password, String fullName) {
-        this.userName = userName;
-        this.password = password;
-        this.fullName = fullName;
-    }
-
-
     private String userName;
 	private String password;
 	private String profileImage;
 	private String fullName;
+    private String email;
 	private Date birthDate;
 	private String city;
 	private Boolean isDoctor;
@@ -57,6 +53,10 @@ public class User implements Serializable {
 			this.connections = new ArrayList<>();
 		}
         return UserStorage.getUsersFromName(connections);
+    }
+
+    public ArrayList<Message> getReceivedDatasFrom(String userName) throws IOException, ClassNotFoundException {
+        return MessageFilter.filterMessagesFrom(MessageStorage.getMessagesToMe(this.userName), userName);
     }
 
     public void addContact(User u){
@@ -167,6 +167,22 @@ public class User implements Serializable {
 	public void setCoachType(String coachType) {
 		this.coachType = coachType;
 	}
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public ArrayList<String> getConnections() {
+        return connections;
+    }
+
+    public void setConnections(ArrayList<String> connections) {
+        this.connections = connections;
+    }
 
     @Override
     public boolean equals(Object o) {

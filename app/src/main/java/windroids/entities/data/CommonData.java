@@ -10,8 +10,12 @@ public class CommonData extends Data implements Serializable {
 
     public static final ArrayList<String> recommendedCommonData =
             new ArrayList<>(Arrays.asList(
+                    "Weight",
+                    "Height",
+                    "Blood type",
+                    "Chronic disease",
+                    "Allergy",
                     "Symptoms",
-                    "Status",
                     "Medical Diagnosis",
                     "Regimen"));
 

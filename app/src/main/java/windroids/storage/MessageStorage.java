@@ -18,7 +18,7 @@ public class MessageStorage {
 
     private static String fileName = "message_storage";
 
-    private static ArrayList<Message> readMessages() throws IOException, ClassNotFoundException {
+    public static ArrayList<Message> readMessages() throws IOException, ClassNotFoundException {
         File file = new File(Environment.getExternalStorageDirectory() + File.separator + fileName);
         file.createNewFile();
         FileInputStream fis = new FileInputStream(Environment.getExternalStorageDirectory() + File.separator + fileName);
