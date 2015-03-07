@@ -9,28 +9,33 @@
         android:configChanges="orientation"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.SplashActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".ui.LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.RegistrationActivity"
-            android:label="@string/title_activity_registration" >
+            android:label="@string/title_activity_registration"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:label="@string/title_activity_main" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">
 
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
         </activity>
     </application>
 

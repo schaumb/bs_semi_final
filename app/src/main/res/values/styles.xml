@@ -6,24 +6,25 @@
 	</style>
 
     <style name="InputStyle">
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:singleLine">false</item>
         <item name="android:background">#00000000</item>
         <item name="android:layout_marginBottom">14dp</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="RegistrationInputStyle" parent="InputStyle">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
     </style>
 
     <style name="LoginInputStyle" parent="InputStyle">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColorHint">@color/gray</item>
     </style>
 
     <style name="LineStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_height">3dp</item>
         <item name="android:layout_marginBottom">17dp</item>
     </style>
 
@@ -36,7 +37,9 @@
     </style>
 
     <style name="ButtonStyle">
-        <item name="android:textSize">25dp</item>
+        <item name="android:textSize">17dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
