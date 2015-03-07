@@ -1,25 +1,31 @@
 package windroids.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import windroids.entities.data.Data;
 
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public User(String userName, String password, String profileImage, String fullName, Date birthDate,
-			String city, Boolean isDoctor, String doctorType, Boolean isCoach, String coachType) {
-		this.userName = userName;
-		this.password = password;
-		this.profileImage = profileImage;
-		this.fullName = fullName;
-		this.birthDate = birthDate;
-		this.city = city;
-		this.isDoctor = isDoctor;
-		this.doctorType = doctorType;
-		this.isCoach = isCoach;
-		this.coachType = coachType;
-	}
+    public User(String userName, String password, String profileImage, String fullName, Date birthDate, String city,
+                Boolean isDoctor, String doctorType, Boolean isCoach, String coachType, HashMap<Data.Type, ArrayList<Data>> datas) {
+        this.userName = userName;
+        this.password = password;
+        this.profileImage = profileImage;
+        this.fullName = fullName;
+        this.birthDate = birthDate;
+        this.city = city;
+        this.isDoctor = isDoctor;
+        this.doctorType = doctorType;
+        this.isCoach = isCoach;
+        this.coachType = coachType;
+        this.datas = datas;
+    }
 
 	private String userName;
 	private String password;
@@ -31,8 +37,30 @@ public class User implements Serializable {
 	private String doctorType;
 	private Boolean isCoach;
 	private String coachType;
+    private HashMap<Data.Type, ArrayList<Data>> datas;
 
-	public String getUserName() {
+    public HashMap<Data.Type, ArrayList<Data>> getDatas() {
+        return datas;
+    }
+
+    public void setDatas(HashMap<Data.Type, ArrayList<Data>> datas) {
+        this.datas = datas;
+    }
+
+    public void addData(Data d){
+        if(datas == null)
+            datas = new HashMap<>();
+
+        ArrayList<Data> vec = datas.get(d.getType());
+        if(vec == null){
+            vec = new ArrayList<>();
+        }
+        vec.add(d);
+
+        datas.put(d.getType(), vec);
+    }
+
+    public String getUserName() {
 		return userName;
 	}
 
@@ -111,5 +139,4 @@ public class User implements Serializable {
 	public void setCoachType(String coachType) {
 		this.coachType = coachType;
 	}
-
 }
