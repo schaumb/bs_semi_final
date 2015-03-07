@@ -2,7 +2,6 @@ package windroids.storage;
 
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -13,55 +12,55 @@ import windroids.entities.User;
 
 public class UserStorage {
 
-    public class UniqueException extends RuntimeException{
+    public static class UniqueException extends RuntimeException{
         public UniqueException(){}
         public UniqueException(String s) {
             super(s);
         }
     };
-    public class WrongPasswordException extends UniqueException{
+    public static class WrongPasswordException extends UniqueException{
         public WrongPasswordException(){}
         public WrongPasswordException(String s) {
             super(s);
         }
     };
-    public class NotExistUserException extends UniqueException{
+    public static class NotExistUserException extends UniqueException{
         public NotExistUserException(){}
         public NotExistUserException(String s) {
             super(s);
         }
     };
-    public class DuplicatedUserNameException extends UniqueException{
+    public static class DuplicatedUserNameException extends UniqueException{
         public DuplicatedUserNameException(){}
         public DuplicatedUserNameException(String s) {
             super(s);
         }
     };
-    public class NotEnoughCharacterInPasswordException extends WrongPasswordException{
+    public static class NotEnoughCharacterInPasswordException extends WrongPasswordException{
         public NotEnoughCharacterInPasswordException(){}
         public NotEnoughCharacterInPasswordException(String s) {
             super(s);
         }
     };
-    public class NotLowerCaseCharacterInPasswordException extends WrongPasswordException{
+    public static class NotLowerCaseCharacterInPasswordException extends WrongPasswordException{
         public NotLowerCaseCharacterInPasswordException(){}
         public NotLowerCaseCharacterInPasswordException(String s) {
             super(s);
         }
     };
-    public class NotUpperCaseCharacterInPasswordException extends WrongPasswordException{
+    public static class NotUpperCaseCharacterInPasswordException extends WrongPasswordException{
         public NotUpperCaseCharacterInPasswordException(){}
         public NotUpperCaseCharacterInPasswordException(String s) {
             super(s);
         }
     };
-    public class NotNumberCharacterInPasswordException extends WrongPasswordException{
+    public static class NotNumberCharacterInPasswordException extends WrongPasswordException{
         public NotNumberCharacterInPasswordException(){}
         public NotNumberCharacterInPasswordException(String s) {
             super(s);
         }
     };
-    public class NotSpecialCharacterInPasswordException extends WrongPasswordException{
+    public static class NotSpecialCharacterInPasswordException extends WrongPasswordException{
         public NotSpecialCharacterInPasswordException(){}
         public NotSpecialCharacterInPasswordException(String s) {
             super(s);
@@ -84,7 +83,7 @@ public class UserStorage {
 
     }
 
-    private static void saveUsers(ArrayList<User> users) throws IOException {
+    private static boolean saveUsers(ArrayList<User> users) throws IOException {
         FileOutputStream fos = new FileOutputStream(fileName);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -92,9 +91,11 @@ public class UserStorage {
 
         oos.close();
         fos.close();
+
+        return true;
     }
 
-    public User checkLogin(String userName, String password) throws IOException, ClassNotFoundException, UniqueException {
+    public static User checkLogin(String userName, String password) throws IOException, ClassNotFoundException, UniqueException {
         ArrayList<User> list = readUsers();
         for(User u: list)
         {
@@ -113,7 +114,7 @@ public class UserStorage {
         throw new NotExistUserException();
     }
 
-    public void checkRegister(User u) throws IOException, ClassNotFoundException {
+    public static boolean checkRegister(User u) throws IOException, ClassNotFoundException {
         ArrayList<User> list = readUsers();
 
         for(User v: list) {
@@ -135,6 +136,6 @@ public class UserStorage {
             throw new NotNumberCharacterInPasswordException();
 
         list.add(u);
-        saveUsers(list);
+        return saveUsers(list);
     }
 }

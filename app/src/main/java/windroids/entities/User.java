@@ -7,6 +7,9 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+    public User() {
+    }
+
 	public User(String userName, String password, String profileImage, String fullName, Date birthDate,
 			String city, Boolean isDoctor, String doctorType, Boolean isCoach, String coachType) {
 		this.userName = userName;
@@ -21,7 +24,14 @@ public class User implements Serializable {
 		this.coachType = coachType;
 	}
 
-	private String userName;
+    public User(String userName, String password, String fullName) {
+        this.userName = userName;
+        this.password = password;
+        this.fullName = fullName;
+    }
+
+
+    private String userName;
 	private String password;
 	private String profileImage;
 	private String fullName;

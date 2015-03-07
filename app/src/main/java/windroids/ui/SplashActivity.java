@@ -2,14 +2,16 @@ package windroids.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
 import windroids.R;
+import windroids.config.Constants;
 
 public class SplashActivity extends Activity {
 
-	private long waitingTime = 2000; // TODO config
+	private long waitingTime = getResources().getInteger(R.integer.splash_screen_time_ms);
 
 	private CountDownTimer timer;
 
@@ -24,7 +26,10 @@ public class SplashActivity extends Activity {
 
 			@Override
 			public void onFinish() {
-				// TODO shared pref alapján
+				//store if the user regisered or not
+                SharedPreferences sharedpreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
+                sharedpreferences.getBoolean(Constants.USER_REGISTERED_STATE, false);
+
 				startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 			}
 		};
