@@ -62,7 +62,7 @@ public class RegistrationActivity extends Activity {
         String fullName = ((EditText) findViewById(R.id.full_name)).getText().toString();
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
         String email = ((EditText) findViewById(R.id.email)).getText().toString();
-        return new User(userName, email, password, fullName);
+        return new User(userName, email, password, fullName, null, null, null, null, null, null, null, null, null);
     }
 
     private void alertError(String message) {
