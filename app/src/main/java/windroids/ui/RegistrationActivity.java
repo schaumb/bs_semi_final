@@ -2,6 +2,7 @@ package windroids.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +50,8 @@ public class RegistrationActivity extends Activity {
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putBoolean(Constants.USER_REGISTERED_STATE, true);
                     editor.commit();
+                    startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                    finish();
                 }
             }
         });
@@ -58,7 +61,8 @@ public class RegistrationActivity extends Activity {
         String userName = ((EditText) findViewById(R.id.account_name)).getText().toString();
         String fullName = ((EditText) findViewById(R.id.full_name)).getText().toString();
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
-        return new User(userName, password, fullName);
+        String email = ((EditText) findViewById(R.id.email)).getText().toString();
+        return new User(userName, email, password, fullName);
     }
 
     private void alertError(String message) {

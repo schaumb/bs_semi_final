@@ -5,37 +5,72 @@
     android:orientation="vertical"
     tools:context="windroids.ui.LoginActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="322dp"></LinearLayout>
+        android:layout_height="214dp"
+        android:background="@color/green">
+
+        <ImageView
+            android:layout_width="61dp"
+            android:layout_height="72dp"
+            android:src="@drawable/logo_small"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="180dp"
-        android:orientation="vertical">
+        android:paddingTop="120dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:orientation="vertical"
+        android:background="@android:color/white">
 
         <EditText
             android:id="@+id/account_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="36dp" />
+            android:text="user"
+            style="@style/LoginInputStyle" />
+
+        <View style="@style/LoginLineStyle" />
 
         <EditText
             android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="password"
+            style="@style/LoginInputStyle" />
+
+        <View style="@style/LoginLineStyle" />
+
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36dp" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ButtonStyle"
+                android:text="LOG IN"
+                android:textColor="@color/gray"
+                android:layout_gravity="left"
+                android:background="@android:color/transparent"
+                android:layout_alignParentStart="true" />
 
-        <Button
-            android:id="@+id/signin_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/signin_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ButtonStyle"
+                android:text="SIGN IN"
+                android:textColor="@color/gray"
+                android:background="@android:color/transparent"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

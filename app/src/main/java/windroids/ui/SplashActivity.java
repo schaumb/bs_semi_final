@@ -11,14 +11,14 @@ import windroids.config.Constants;
 
 public class SplashActivity extends Activity {
 
-	private long waitingTime = getResources().getInteger(R.integer.splash_screen_time_ms);
-
 	private CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+//        long waitingTime = getResources().getInteger(R.integer.splash_screen_time_ms);
+        long waitingTime = 2000;
 		timer = new CountDownTimer(waitingTime, waitingTime) {
 			@Override
 			public void onTick(long millisUntilFinished) {
