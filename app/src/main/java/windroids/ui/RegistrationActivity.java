@@ -32,8 +32,7 @@ public class RegistrationActivity extends Activity {
             public void onClick(View v) {
                 boolean success = false;
                 try {
-					UserStorage.setContext(RegistrationActivity.this);
-                    success = UserStorage.checkRegister(getRegistrationDatas());
+				    success = UserStorage.checkRegister(getRegistrationDatas());
                 } catch (UserStorage.NotEnoughCharacterInPasswordException e) {
                     alertError("Too low character number for password, please use at least 8!");
                 } catch (UserStorage.NotLowerCaseCharacterInPasswordException e) {

@@ -46,7 +46,6 @@ public class LoginActivity extends Activity {
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
         User user = new User();
         try {
-			UserStorage.setContext(this);
             user = UserStorage.checkLogin(userName, password);
         } catch (UserStorage.WrongPasswordException e) {
             alertDialog("Wrong username/password!");

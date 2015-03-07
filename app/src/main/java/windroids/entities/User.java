@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import windroids.entities.data.Data;
 import windroids.storage.UserStorage;
@@ -54,6 +53,9 @@ public class User implements Serializable {
     private ArrayList<String> connections;
 
     public ArrayList<User> getContacts() throws IOException, ClassNotFoundException {
+		if (connections == null) {
+			this.connections = new ArrayList<>();
+		}
         return UserStorage.getUsersFromName(connections);
     }
 
