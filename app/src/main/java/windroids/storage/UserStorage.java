@@ -72,13 +72,6 @@ public class UserStorage {
         }
     };
 
-	private static Context context;
-
-	public static void setContext(Context contextParam) {
-		context = contextParam;
-	}
-
-
     private static String fileName = "user_storage";
 
     public static ArrayList<User> readUsers() throws IOException, ClassNotFoundException {
@@ -99,7 +92,6 @@ public class UserStorage {
         fis.close();
 
         return result;
-
     }
 
     private static boolean saveUsers(ArrayList<User> users) throws IOException {
@@ -145,12 +137,12 @@ public class UserStorage {
         if(u.getPassword().length() < 8)
             throw new NotEnoughCharacterInPasswordException("minimum 8");
 
-//        if(!u.getPassword().contains("[a-z]") )
-//            throw new NotLowerCaseCharacterInPasswordException();
-//
-//        if(!u.getPassword().contains("[A-Z]") )
-//            throw new NotUpperCaseCharacterInPasswordException();
-//
+        if(!u.getPassword().equals(u.getPassword().toUpperCase()))
+            throw new NotLowerCaseCharacterInPasswordException();
+
+        if(!u.getPassword().equals(u.getPassword().toLowerCase()))
+            throw new NotUpperCaseCharacterInPasswordException();
+
 //        if(!u.getPassword().contains("[0-9]") )
 //            throw new NotNumberCharacterInPasswordException();
 

@@ -1,12 +1,15 @@
 package windroids.storage;
 
+import android.os.Environment;
+import android.util.Log;
+
+import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import windroids.entities.Message;
@@ -16,20 +19,27 @@ public class MessageStorage {
     private static String fileName = "message_storage";
 
     private static ArrayList<Message> readMessages() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(fileName);
-        ObjectInputStream ois = new ObjectInputStream(fis);
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + fileName);
+        file.createNewFile();
+        FileInputStream fis = new FileInputStream(Environment.getExternalStorageDirectory() + File.separator + fileName);
 
-        ArrayList<Message> result = (ArrayList<Message>)ois.readObject();
+        ArrayList<Message> result;
+        try {
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            result = (ArrayList<Message>) ois.readObject();
+            ois.close();
+        } catch (EOFException e) {
+            Log.i(UserStorage.class.getSimpleName(), "Üres volt a file.");
+            result = new ArrayList<>();
+        }
 
-        ois.close();
         fis.close();
 
         return result;
-
     }
 
     private static void saveMessages(ArrayList<Message> users) throws IOException {
-        FileOutputStream fos = new FileOutputStream(fileName);
+        FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory() + File.separator + fileName);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
         oos.writeObject(users);
