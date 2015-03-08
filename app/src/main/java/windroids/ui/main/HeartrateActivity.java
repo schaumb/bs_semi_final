@@ -32,7 +32,7 @@ public class HeartrateActivity extends Activity implements HeartrateReceiver {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_heartrate);
 
         arguments = getIntent().getBundleExtra(BUNDLE_HEARTRATE);
 
