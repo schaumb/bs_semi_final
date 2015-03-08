@@ -16,12 +16,19 @@ import windroids.entities.User;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
 
+	public enum Type {
+		Contact,
+		Result
+	}
+
 	private List<User> contacts;
 	private OnItemClickListener clickListener;
+	private Type type;
 
-	public ContactAdapter(List<User> contacts, OnItemClickListener clickListener) {
+	public ContactAdapter(List<User> contacts, OnItemClickListener clickListener, Type type) {
 		this.contacts = contacts;
 		this.clickListener = clickListener;
+		this.type = type;
 	}
 
 	@Override
@@ -36,7 +43,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 		holder.profileImage.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				clickListener.onClick(position);
+				clickListener.onClick(position, type);
 			}
 		});
 		User user = contacts.get(position);
@@ -59,11 +66,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
 		public ViewHolder(ImageView profileImage) {
 			super(profileImage);
+			this.profileImage = profileImage;
 		}
 
 	}
 
 	public interface OnItemClickListener {
-		void onClick(int position);
+		void onClick(int position, Type type);
 	}
 }

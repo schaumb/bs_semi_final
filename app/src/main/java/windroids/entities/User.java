@@ -3,10 +3,13 @@ package windroids.entities;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
 import windroids.entities.data.Data;
+import windroids.storage.MessageStorage;
 import windroids.storage.UserStorage;
 
 public class User implements Serializable {
@@ -16,33 +19,28 @@ public class User implements Serializable {
     public User() {
     }
     
-    public User(String userName, String password, String profileImage, String fullName, Date birthDate, String city,
+    public User(String userName, String password, String profileImage, String fullName, String email, Date birthDate, String city,
                 Boolean isDoctor, String doctorType, Boolean isCoach, String coachType, HashMap<Data.Type, ArrayList<Data>> datas, ArrayList<String> connections) {
         this.userName = userName;
         this.password = password;
         this.profileImage = profileImage;
         this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.city = city;
-        this.isDoctor = isDoctor;
-        this.doctorType = doctorType;
-        this.isCoach = isCoach;
-        this.coachType = coachType;
-        this.datas = datas;
-        this.connections = connections;
+        this.email = email;
+        this.birthDate = birthDate == null ? new Date() : birthDate;
+        this.city = city == null ? new String() : city;
+        this.isDoctor = isDoctor == null ? new Boolean(false) : isDoctor;
+        this.doctorType = doctorType == null ? new String() : doctorType;
+        this.isCoach = isCoach == null ? new Boolean(false) : isCoach;
+        this.coachType = coachType == null ? new String() : coachType;
+        this.datas = datas == null ? new HashMap<Data.Type, ArrayList<Data>>() : datas;
+        this.connections = connections == null ? new ArrayList<String>() : connections;
     }
-
-    public User(String userName, String email, String password, String fullName) {
-        this.userName = userName;
-        this.password = password;
-        this.fullName = fullName;
-    }
-
 
     private String userName;
 	private String password;
 	private String profileImage;
 	private String fullName;
+    private String email;
 	private Date birthDate;
 	private String city;
 	private Boolean isDoctor;
@@ -53,18 +51,36 @@ public class User implements Serializable {
     private ArrayList<String> connections;
 
     public ArrayList<User> getContacts() throws IOException, ClassNotFoundException {
-		if (connections == null) {
-			this.connections = new ArrayList<>();
-		}
         return UserStorage.getUsersFromName(connections);
     }
 
-    public void addContact(User u){
-        addContact(u.getUserName());
+    public ArrayList<Message> getReceivedDatasFrom(String userName) throws IOException, ClassNotFoundException {
+        return MessageFilter.filterMessagesToMeFrom(MessageStorage.getMessagesToMe(this.userName), userName);
     }
 
-    public void addContact(String s){
-        connections.add(s);
+    public ArrayList<Message> getSentDatasTo(String userName) throws IOException, ClassNotFoundException {
+        return MessageFilter.filterMessagesFromMeTo(MessageStorage.getMessagesFromMe(this.userName), userName);
+    }
+
+    public ArrayList<Message> getUserMessages(String userName) throws IOException, ClassNotFoundException {
+        ArrayList<Message> result = getReceivedDatasFrom(userName);
+        result.addAll(getSentDatasTo(userName));
+
+        Comparator<Message> comparator = new Comparator<Message>() {
+            public int compare(Message c1, Message c2) {
+                return c1.getDate().compareTo(c1.getDate());
+            }
+        };
+
+        Collections.sort(result, comparator);
+        return result;
+    }
+
+    public void addContact(User u) throws IOException, ClassNotFoundException {
+        connections.add(u.getUserName());
+        UserStorage.saveThisUserChanges(this);
+        u.connections.add(this.getUserName());
+        UserStorage.saveThisUserChanges(u);
     }
 
     public HashMap<Data.Type, ArrayList<Data>> getDatas() {
@@ -76,9 +92,6 @@ public class User implements Serializable {
     }
 
     public void addData(Data d){
-        if(datas == null)
-            datas = new HashMap<>();
-
         ArrayList<Data> vec = datas.get(d.getType());
         if(vec == null){
             vec = new ArrayList<>();
@@ -167,6 +180,22 @@ public class User implements Serializable {
 	public void setCoachType(String coachType) {
 		this.coachType = coachType;
 	}
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public ArrayList<String> getConnections() {
+        return connections;
+    }
+
+    public void setConnections(ArrayList<String> connections) {
+        this.connections = connections;
+    }
 
     @Override
     public boolean equals(Object o) {
