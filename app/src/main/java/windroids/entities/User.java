@@ -26,14 +26,14 @@ public class User implements Serializable {
         this.profileImage = profileImage;
         this.fullName = fullName;
         this.email = email;
-        this.birthDate = birthDate;
-        this.city = city;
-        this.isDoctor = isDoctor;
-        this.doctorType = doctorType;
-        this.isCoach = isCoach;
-        this.coachType = coachType;
-        this.datas = datas;
-        this.connections = connections;
+        this.birthDate = birthDate == null ? new Date() : birthDate;
+        this.city = city == null ? new String() : city;
+        this.isDoctor = isDoctor == null ? new Boolean(false) : isDoctor;
+        this.doctorType = doctorType == null ? new String() : doctorType;
+        this.isCoach = isCoach == null ? new Boolean(false) : isCoach;
+        this.coachType = coachType == null ? new String() : coachType;
+        this.datas = datas == null ? new HashMap<Data.Type, ArrayList<Data>>() : datas;
+        this.connections = connections == null ? new ArrayList<String>() : connections;
     }
 
     private String userName;
@@ -51,9 +51,6 @@ public class User implements Serializable {
     private ArrayList<String> connections;
 
     public ArrayList<User> getContacts() throws IOException, ClassNotFoundException {
-		if (connections == null) {
-			this.connections = new ArrayList<>();
-		}
         return UserStorage.getUsersFromName(connections);
     }
 
@@ -95,9 +92,6 @@ public class User implements Serializable {
     }
 
     public void addData(Data d){
-        if(datas == null)
-            datas = new HashMap<>();
-
         ArrayList<Data> vec = datas.get(d.getType());
         if(vec == null){
             vec = new ArrayList<>();
