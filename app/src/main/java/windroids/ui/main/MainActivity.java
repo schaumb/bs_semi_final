@@ -12,56 +12,53 @@ import windroids.entities.User;
 
 public class MainActivity extends FragmentActivity {
 
-	public static String EXTRA_USER = "EXTRA_USER";
+    public static String EXTRA_USER = "EXTRA_USER";
 
-    private android.app.Fragment activeFragment;
+    private User user;
 
-	private User user;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+        user = (User) getIntent().getSerializableExtra(EXTRA_USER);
 
-		user = (User) getIntent().getSerializableExtra(EXTRA_USER);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+    }
 
-		ViewPager pager = (ViewPager) findViewById(R.id.pager);
-		pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-	}
+    private class MyPagerAdapter extends FragmentPagerAdapter {
 
-	private class MyPagerAdapter extends FragmentPagerAdapter {
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-		public MyPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
+        @Override
+        public Fragment getItem(int pos) {
+            switch (pos) {
+                case 0:
+                    return new MessagesFragment();
+                case 1:
+                    return new DataFragment();
+                case 2:
+                    return new SensorFragment();
+                case 3:
+                    return new ProfileFragment();
+                case 4:
+                    Fragment contactFragment = new ContactFragment();
+                    Bundle args = new Bundle();
+                    args.putSerializable(EXTRA_USER, user);
+                    contactFragment.setArguments(args);
+                    return contactFragment;
+                default:
+                    return null;
+            }
+        }
 
-		@Override
-		public Fragment getItem(int pos) {
-			switch (pos) {
-				case 0:
-//					return new NewsFragment();
-					return new SearchFragment();
-				case 1:
-					return new DataFragment();
-				case 2:
-					return new SensorFragment();
-				case 3:
-					return new ProfileFragment();
-				case 4:
-					Fragment contactFragment = new ContactFragment();
-					Bundle args = new Bundle();
-					args.putSerializable(EXTRA_USER, user);
-					contactFragment.setArguments(args);
-					return contactFragment;
-				default:
-					return null;
-			}
-		}
-
-		@Override
-		public int getCount() {
-			return 5;
-		}
-	}
+        @Override
+        public int getCount() {
+            return 5;
+        }
+    }
 }
 
