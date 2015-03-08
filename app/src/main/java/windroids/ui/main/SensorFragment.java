@@ -19,13 +19,16 @@ import windroids.sensors.search.BluetoothDeviceAdapterListAdapter;
 import windroids.sensors.search.BluetoothSearchBroadcaster;
 import windroids.sensors.search.BluetoothSearchReceiver;
 import windroids.sensors.util.IntentAndBundleUtil;
+import windroids.ui.sensor.BloodpressureActivity;
+import windroids.ui.sensor.HeartrateActivity;
+import windroids.ui.sensor.RunningSpeedActivity;
 
 import static windroids.sensors.constants.BluetoothUUID.RunningSpeedAndCadenceService;
 import static windroids.sensors.constants.BluetoothUUID.BloodPressureService;
 import static windroids.sensors.constants.BluetoothUUID.HeartRateService;
 
 
-public class SearchFragment extends Fragment implements OnItemClickListener {
+public class SensorFragment extends Fragment implements OnItemClickListener {
 
     private ListView listView;
     private BluetoothSearchReceiver receiver;

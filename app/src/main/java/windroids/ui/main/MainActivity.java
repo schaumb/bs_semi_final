@@ -16,39 +16,38 @@ import windroids.entities.User;
 
 public class MainActivity extends FragmentActivity {
 
-    public static String EXTRA_USER = "EXTRA_USER";
+	public static String EXTRA_USER = "EXTRA_USER";
 
-    private User user;
+	private User user;
 	private Fragment fragment;
 
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+		user = (User) getIntent().getSerializableExtra(EXTRA_USER);
 
-        user = (User) getIntent().getSerializableExtra(EXTRA_USER);
+		ViewPager pager = (ViewPager) findViewById(R.id.pager);
+		pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
 
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+	}
 
-    }
+	private class MyPagerAdapter extends FragmentPagerAdapter {
 
-    private class MyPagerAdapter extends FragmentPagerAdapter {
+		public MyPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
 
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int pos) {
+		@Override
+		public Fragment getItem(int pos) {
 			Bundle args = new Bundle();
 			args.putSerializable(EXTRA_USER, user);
-            switch (pos) {
-                case 0:
+			switch (pos) {
+				case 0:
 					fragment = new MessagesFragment();
 					fragment.setArguments(args);
-                    return fragment;
+					return fragment;
 				case 1:
 					fragment = new ContactFragment();
 					fragment.setArguments(args);
@@ -58,20 +57,19 @@ public class MainActivity extends FragmentActivity {
 					fragment.setArguments(args);
 					return fragment;
 				case 3:
-					return new SearchFragment();
-                case 4:
-                    return new DataFragment();
-                default:
-                    return null;
-            }
-        }
+					return new SensorFragment();
+				case 4:
+					return new DataFragment();
+				default:
+					return null;
+			}
+		}
 
-        @Override
-        public int getCount() {
-            return 5;
-        }
-    }
-
+		@Override
+		public int getCount() {
+			return 5;
+		}
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

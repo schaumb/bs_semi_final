@@ -34,7 +34,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 	@Override
 	public ContactAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		ImageView profileImage =
-				(ImageView) LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_profile_image, parent, false);
+				(ImageView) LayoutInflater.from(parent.getContext())
+						.inflate(R.layout.grid_profile_image, parent, false);
 		return new ViewHolder(profileImage);
 	}
 

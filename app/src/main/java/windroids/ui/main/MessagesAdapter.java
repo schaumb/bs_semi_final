@@ -1,5 +1,6 @@
 package windroids.ui.main;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -76,18 +77,11 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 			holder.title.setVisibility(View.GONE);
 		}
 
-		holder.content.setText(message.getMessage());
-		if (!message.hasData()) {
-			holder.button.setVisibility(View.GONE);
-		} else {
-			holder.button.setVisibility(View.VISIBLE);
-		}
+		ArrayAdapter<Message> adapter =
+				new MessagePieceAdapter(holder.image.getContext(), R.layout.line_message_content);
+		holder.messagesContent.setAdapter(adapter);
 
-		ArrayAdapter<Message> adapter = new ArrayAdapter<>(holder.title.getContext(), R.layout.line_message_content);
-		adapter.addAll(messages);
-		holder.messages.setAdapter(adapter);
-
-		holder.messages.setVisibility(View.GONE);
+		holder.messagesContent.setVisibility(View.GONE);
 	}
 
 	@Override
@@ -100,20 +94,49 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 		private ImageView image;
 		private TextView name;
 		private TextView title;
-		private ListView messages;
-		private TextView content;
-		private Button button;
-		private View divider;
+		private ListView messagesContent;
 
 		public ViewHolder(View layout) {
 			super(layout);
 			this.image = (ImageView) layout.findViewById(R.id.image);
 			this.name = (TextView) layout.findViewById(R.id.name);
 			this.title = (TextView) layout.findViewById(R.id.title);
-			this.messages = (ListView) layout.findViewById(R.id.message);
-			this.content = (TextView) layout.findViewById(R.id.content);
-			this.button = (Button) layout.findViewById(R.id.button);
-			this.divider = layout.findViewById(R.id.divider);
+			this.messagesContent = (ListView) layout.findViewById(R.id.message);
+		}
+	}
+
+	private class MessagePieceAdapter extends ArrayAdapter<Message> {
+
+		public MessagePieceAdapter(Context context, int resource) {
+			super(context, resource);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View layout = convertView;
+			if (layout == null) {
+				LayoutInflater inflater = (LayoutInflater) parent.getContext()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				layout = inflater.inflate(R.layout.line_message_content, parent, false);
+			}
+
+			TextView content = (TextView) layout.findViewById(R.id.content);
+			Button button = (Button) layout.findViewById(R.id.button);
+
+			Message message = messages.get(position);
+			content.setText(message.getMessage());
+			if (!message.hasData()) {
+				button.setVisibility(View.GONE);
+			} else {
+				button.setVisibility(View.VISIBLE);
+			}
+
+			return layout;
+		}
+
+		@Override
+		public int getCount() {
+			return 1;
 		}
 	}
 }

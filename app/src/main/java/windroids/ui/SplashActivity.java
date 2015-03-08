@@ -13,12 +13,11 @@ public class SplashActivity extends Activity {
 
 	private CountDownTimer timer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
-//        long waitingTime = getResources().getInteger(R.integer.splash_screen_time_ms);
-        long waitingTime = 2000;
+		long waitingTime = 2000;
 		timer = new CountDownTimer(waitingTime, waitingTime) {
 			@Override
 			public void onTick(long millisUntilFinished) {
@@ -27,14 +26,14 @@ public class SplashActivity extends Activity {
 			@Override
 			public void onFinish() {
 				//store if the user registered or not
-                SharedPreferences sharedpreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
-                sharedpreferences.getBoolean(Constants.USER_REGISTERED_STATE, false);
+				SharedPreferences sharedpreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
+				sharedpreferences.getBoolean(Constants.USER_REGISTERED_STATE, false);
 
 				startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                finish();
+				finish();
 			}
 		};
-    }
+	}
 
 	@Override
 	protected void onResume() {

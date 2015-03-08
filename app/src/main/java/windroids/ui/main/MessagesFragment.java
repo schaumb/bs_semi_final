@@ -22,19 +22,14 @@ import windroids.storage.MessageStorage;
 
 public class MessagesFragment extends Fragment {
 
-	private RecyclerView messages;
-	private ImageView image;
-	private TextView name;
-	private TextView title;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		View layout = inflater.inflate(R.layout.fragment_messages, container, false);
-		messages = (RecyclerView) layout.findViewById(R.id.messages);
-		image = (ImageView) layout.findViewById(R.id.image);
-		name = (TextView) layout.findViewById(R.id.name);
-		title = (TextView) layout.findViewById(R.id.title);
+		RecyclerView messages = (RecyclerView) layout.findViewById(R.id.messages);
+		ImageView image = (ImageView) layout.findViewById(R.id.image);
+		TextView name = (TextView) layout.findViewById(R.id.name);
+		TextView title = (TextView) layout.findViewById(R.id.title);
 
 		User user = (User) getArguments().getSerializable(MainActivity.EXTRA_USER);
 

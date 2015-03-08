@@ -1,4 +1,4 @@
-package windroids.ui.main;
+package windroids.ui.sensor;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.widget.TextView;
 
 import windroids.R;
 import windroids.entities.data.RunningSpeed;
-import windroids.sensors.cycling.CyclingBroadcastReceiver;
-import windroids.sensors.cycling.CyclingCommunicationContext;
-import windroids.sensors.cycling.CyclingReceiver;
+import windroids.sensors.runningspeed.RunningSpeedBroadcastReceiver;
+import windroids.sensors.runningspeed.RunningSpeedCommunicationContext;
+import windroids.sensors.runningspeed.RunningSpeedReceiver;
 import windroids.sensors.search.BluetoothDeviceAdapter;
 import windroids.sensors.util.IntentAndBundleUtil;
 
@@ -17,13 +17,13 @@ import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
 import static android.bluetooth.BluetoothProfile.STATE_DISCONNECTED;
 import static android.bluetooth.BluetoothProfile.STATE_DISCONNECTING;
 
-public class CyclingActivity extends Activity implements CyclingReceiver {
+public class RunningSpeedActivity extends Activity implements RunningSpeedReceiver {
 
-	public final static String BUNDLE_CYCLING = "BUNDLE_CYCLING";
+	public final static String BUNDLE_RUNNINGSPEED = "BUNDLE_RUNNINGSPEED";
 
-	private TextView cyclingView;
-	private CyclingCommunicationContext cyclingContext;
-	private CyclingBroadcastReceiver receiver;
+	private TextView runningspeedView;
+	private RunningSpeedCommunicationContext runningspeedContext;
+	private RunningSpeedBroadcastReceiver receiver;
 	private Bundle arguments;
 	private RunningSpeed dataCollect = new RunningSpeed(null);
 
@@ -32,9 +32,9 @@ public class CyclingActivity extends Activity implements CyclingReceiver {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_heartrate);
 
-		arguments = getIntent().getBundleExtra(BUNDLE_CYCLING);
+		arguments = getIntent().getBundleExtra(BUNDLE_RUNNINGSPEED);
 
-		cyclingView = (TextView) findViewById(R.id.heartrateFragment_heartrateValue);
+		runningspeedView = (TextView) findViewById(R.id.heartrateFragment_heartrateValue);
 	}
 
 	@Override
@@ -44,12 +44,12 @@ public class CyclingActivity extends Activity implements CyclingReceiver {
 	}
 
 	private void startRunningSpeed() {
-		receiver = new CyclingBroadcastReceiver();
+		receiver = new RunningSpeedBroadcastReceiver();
 		receiver.register(this);
-		receiver.setCyclingReceiver(this);
+		receiver.setRunningSpeedReceiver(this);
 		BluetoothDeviceAdapter deviceAdapter = IntentAndBundleUtil.loadBluetoothDeviceAdapter(arguments);
-		cyclingContext = new CyclingCommunicationContext(this, deviceAdapter.getDevice());
-		cyclingContext.start();
+		runningspeedContext = new RunningSpeedCommunicationContext(this, deviceAdapter.getDevice());
+		runningspeedContext.start();
 	}
 
 	@Override
@@ -60,12 +60,11 @@ public class CyclingActivity extends Activity implements CyclingReceiver {
 	}
 
 	private void stopRunningSpeed() {
-		cyclingContext.stop(false);
+		runningspeedContext.stop(false);
 	}
 
 	@Override
-	public void onCyclingReceived(int connectionState, int wheelRevolution, int wheelEventTime, int crankRevolution,
-			int crankEventTime) {
+	public void onRunningSpeedReceived(int connectionState, int speed, int cadence, int stride, int total) {
 		switch (connectionState) {
 			case STATE_CONNECTING:
 			case STATE_DISCONNECTING:
@@ -78,9 +77,10 @@ public class CyclingActivity extends Activity implements CyclingReceiver {
 				setProgressBarIndeterminateVisibility(false);
 				break;
 		}
-		dataCollect.set(wheelRevolution, wheelEventTime, crankRevolution, crankEventTime);
-		cyclingView.setText(Integer.toString(wheelRevolution) + " - " + Integer.toString(wheelEventTime) + " - "
-				+ Integer.toString(crankRevolution) + "  - " + Integer.toString(crankEventTime));
+		dataCollect.set(speed, cadence, stride, total);
+		runningspeedView.setText(
+				Integer.toString(speed) + " - " + Integer.toString(cadence) + "  - " + Integer.toString(stride) +
+						"  - " + Integer.toString(total));
 	}
 
 	public RunningSpeed getData() {

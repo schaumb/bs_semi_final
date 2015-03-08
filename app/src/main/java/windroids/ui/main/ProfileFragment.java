@@ -49,42 +49,42 @@ public class ProfileFragment extends Fragment {
 		final User user = (User) getArguments().getSerializable(MainActivity.EXTRA_USER);
 
 		List<Data> datas = user.getDatas().get(Data.Type.Common);
-        if(datas != null) {
-            for (Data data : datas) {
-                CommonData commonData = (CommonData) data;
-                String key = commonData.getName();
-                String value = commonData.getDescription();
-                switch (key) {
-                    case "weight":
-                        weightView.setText(value);
-                        break;
-                    case "height":
-                        heightView.setText(value);
-                        break;
-                    case "blood_type":
-                        blood_typeView.setText(value);
-                        break;
-                    case "chronic_disease":
-                        chronic_diseaseView.setText(value);
-                        break;
-                    case "allergy":
-                        allergyView.setText(value);
-                        break;
-                    case "sports":
-                        sportsView.setText(value);
-                        break;
-                    case "eating_habits":
-                        eating_habitsView.setText(value);
-                        break;
-                }
-            }
-        }
+		if (datas != null) {
+			for (Data data : datas) {
+				CommonData commonData = (CommonData) data;
+				String key = commonData.getName();
+				String value = commonData.getDescription();
+				switch (key) {
+					case "weight":
+						weightView.setText(value);
+						break;
+					case "height":
+						heightView.setText(value);
+						break;
+					case "blood_type":
+						blood_typeView.setText(value);
+						break;
+					case "chronic_disease":
+						chronic_diseaseView.setText(value);
+						break;
+					case "allergy":
+						allergyView.setText(value);
+						break;
+					case "sports":
+						sportsView.setText(value);
+						break;
+					case "eating_habits":
+						eating_habitsView.setText(value);
+						break;
+				}
+			}
+		}
 
 		full_nameView.setText(user.getFullName());
 		passwordView.setText(user.getPassword());
 		emailView.setText(user.getEmail());
 		addressView.setText(user.getCity());
-		byte [] encodeByte=Base64.decode(user.getProfileImage(), Base64.DEFAULT);
+		byte[] encodeByte = Base64.decode(user.getProfileImage(), Base64.DEFAULT);
 		imageBitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
 		boolean isDoctor = user.getIsDoctor();
 		boolean isCoach = user.getIsCoach();
@@ -107,7 +107,6 @@ public class ProfileFragment extends Fragment {
 		} else {
 			coach.setTag(false);
 		}
-
 
 		layout.findViewById(R.id.submit_button).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -191,8 +190,6 @@ public class ProfileFragment extends Fragment {
 				startActivityForResult(intent, 0);
 			}
 		});
-
-
 
 		return layout;
 	}
