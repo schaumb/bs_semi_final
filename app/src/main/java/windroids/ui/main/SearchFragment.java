@@ -20,6 +20,8 @@ import windroids.sensors.search.BluetoothSearchBroadcaster;
 import windroids.sensors.search.BluetoothSearchReceiver;
 import windroids.sensors.util.IntentAndBundleUtil;
 
+import static windroids.sensors.constants.BluetoothUUID.RunningSpeedAndCadenceService;
+import static windroids.sensors.constants.BluetoothUUID.BloodPressureService;
 import static windroids.sensors.constants.BluetoothUUID.HeartRateService;
 
 
@@ -83,6 +85,16 @@ public class SearchFragment extends Fragment implements OnItemClickListener {
             if (uuid == HeartRateService.get16BitUUID()) {
                 Intent intent = new Intent(getActivity(), HeartrateActivity.class);
                 intent.putExtra(HeartrateActivity.BUNDLE_HEARTRATE,params);
+                startActivity(intent);
+            }
+            if(uuid == BloodPressureService.get16BitUUID()){
+                Intent intent = new Intent(getActivity(), BloodpressureActivity.class);
+                intent.putExtra(BloodpressureActivity.BUNDLE_BLOODPRESSURE,params);
+                startActivity(intent);
+            }
+            if(uuid == RunningSpeedAndCadenceService.get16BitUUID()){
+                Intent intent = new Intent(getActivity(), RunningSpeedActivity.class);
+                intent.putExtra(RunningSpeedActivity.BUNDLE_RUNNINGSPEED,params);
                 startActivity(intent);
             }
         }

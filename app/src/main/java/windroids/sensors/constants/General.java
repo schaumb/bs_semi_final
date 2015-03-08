@@ -23,6 +23,19 @@ public class General {
 
     public static final String BLUETOOTH_ACTION_HEARTRATE = "com.btlerefapp.bluetooth.action.heartrate";
     public static final String BLUETOOTH_EXTRA_HEARTRATE = "com.btlerefapp.bluetooth.extra.heartrate";
+    public static final String BLUETOOTH_EXTRA_HEARTRATE2 = "com.btlerefapp.bluetooth.extra.heartrate2";
+    public static final String BLUETOOTH_EXTRA_HEARTRATE3 = "com.btlerefapp.bluetooth.extra.heartrate3";
+
+    public static final String BLUETOOTH_ACTION_BLOODPRESSURE = "com.btlerefapp.bluetooth.action.bloodpressure";
+    public static final String BLUETOOTH_EXTRA_BLOODPRESSURE = "com.btlerefapp.bluetooth.extra.bloodpressure";
+    public static final String BLUETOOTH_EXTRA_BLOODPRESSURE2 = "com.btlerefapp.bluetooth.extra.bloodpressure2";
+    public static final String BLUETOOTH_EXTRA_BLOODPRESSURE3 = "com.btlerefapp.bluetooth.extra.bloodpressure3";
+
+    public static final String BLUETOOTH_ACTION_RUNNINGSPEED = "com.btlerefapp.bluetooth.action.runningspeed";
+    public static final String BLUETOOTH_EXTRA_RUNNINGSPEED = "com.btlerefapp.bluetooth.extra.runningspeed";
+    public static final String BLUETOOTH_EXTRA_RUNNINGSPEED2 = "com.btlerefapp.bluetooth.extra.runningspeed2";
+    public static final String BLUETOOTH_EXTRA_RUNNINGSPEED3 = "com.btlerefapp.bluetooth.extra.runningspeed3";
+    public static final String BLUETOOTH_EXTRA_RUNNINGSPEED4 = "com.btlerefapp.bluetooth.extra.runningspeed4";
 
     public static final String BLUETOOTH_ACTION_CYCLING = "com.btlerefapp.bluetooth.action.cycling";
     public static final String BLUETOOTH_EXTRA_WHEEL_REVOLUTION = "com.btlerefapp.bluetooth.extra.cycling.wheelRevolutionSum";

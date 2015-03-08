@@ -11,63 +11,63 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import windroids.R;
-import windroids.entities.data.HeartRate;
-import windroids.sensors.heartrate.HeartrateBroadcastReceiver;
-import windroids.sensors.heartrate.HeartrateCommunicationContext;
-import windroids.sensors.heartrate.HeartrateReceiver;
+import windroids.entities.data.RunningSpeed;
+import windroids.sensors.runningspeed.RunningSpeedBroadcastReceiver;
+import windroids.sensors.runningspeed.RunningSpeedCommunicationContext;
+import windroids.sensors.runningspeed.RunningSpeedReceiver;
 import windroids.sensors.search.BluetoothDeviceAdapter;
 import windroids.sensors.util.IntentAndBundleUtil;
 
-public class HeartrateActivity extends Activity implements HeartrateReceiver {
+public class RunningSpeedActivity extends Activity implements RunningSpeedReceiver {
 
-    public final static String BUNDLE_HEARTRATE = "BUNDLE_HEARTRATE";
+    public final static String BUNDLE_RUNNINGSPEED = "BUNDLE_RUNNINGSPEED";
 
     private ImageView heartImage;
-    private TextView heartrateView;
-    private HeartrateCommunicationContext heartrateContext;
-    private HeartrateBroadcastReceiver receiver;
+    private TextView runningspeedView;
+    private RunningSpeedCommunicationContext runningspeedContext;
+    private RunningSpeedBroadcastReceiver receiver;
     private Bundle arguments;
-    private HeartRate dataCollect = new HeartRate(null);
+    private RunningSpeed dataCollect = new RunningSpeed(null);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heartrate);
 
-        arguments = getIntent().getBundleExtra(BUNDLE_HEARTRATE);
+        arguments = getIntent().getBundleExtra(BUNDLE_RUNNINGSPEED);
 
-        heartrateView = (TextView) findViewById(R.id.heartrateFragment_heartrateValue);
+        runningspeedView = (TextView) findViewById(R.id.heartrateFragment_heartrateValue);
         heartImage = (ImageView) findViewById(R.id.heartrateFragment_heartImage);
     }
 
     @Override
     public void onResume() {
-        startHeartrate();
+        startRunningSpeed();
         super.onResume();
     }
 
-    private void startHeartrate() {
-        receiver = new HeartrateBroadcastReceiver();
+    private void startRunningSpeed() {
+        receiver = new RunningSpeedBroadcastReceiver();
         receiver.register(this);
-        receiver.setHeartrateReceiver(this);
+        receiver.setRunningSpeedReceiver(this);
         BluetoothDeviceAdapter deviceAdapter = IntentAndBundleUtil.loadBluetoothDeviceAdapter(arguments);
-        heartrateContext = new HeartrateCommunicationContext(this, deviceAdapter.getDevice());
-        heartrateContext.start();
+        runningspeedContext = new RunningSpeedCommunicationContext(this, deviceAdapter.getDevice());
+        runningspeedContext.start();
     }
 
     @Override
     public void onPause() {
-        stopHeartrate();
+        stopRunningSpeed();
         receiver.unregister();
         super.onPause();
     }
 
-    private void stopHeartrate() {
-        heartrateContext.stop(false);
+    private void stopRunningSpeed() {
+        runningspeedContext.stop(false);
     }
 
     @Override
-    public void onHeartrateReceived(int connectionState, int heartrate, int energy, int rri) {
+    public void onRunningSpeedReceived(int connectionState, int speed, int cadence, int stride, int total){
         switch (connectionState) {
             case STATE_CONNECTING:
             case STATE_DISCONNECTING:
@@ -80,11 +80,11 @@ public class HeartrateActivity extends Activity implements HeartrateReceiver {
                 setProgressBarIndeterminateVisibility(false);
                 break;
         }
-        dataCollect.addMeasure(heartrate, energy, rri);
-        heartrateView.setText(Integer.toString(heartrate) + " - " + Integer.toString(energy) + "  - " + Integer.toString(rri));
+        dataCollect.set(speed, cadence, stride, total);
+        runningspeedView.setText(Integer.toString(speed) + " - " + Integer.toString(cadence) + "  - " + Integer.toString(stride)+ "  - " + Integer.toString(total));
     }
 
-    public HeartRate getData(){
+    public RunningSpeed getData(){
         return dataCollect;
     }
 }

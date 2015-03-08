@@ -150,9 +150,103 @@ public class IntentAndBundleUtil {
         return intent.putExtra(BLUETOOTH_EXTRA_HEARTRATE, heartRate);
     }
 
+    public static final Intent saveHeartRate2(Intent intent, int heartRate) {
+        return intent.putExtra(BLUETOOTH_EXTRA_HEARTRATE2, heartRate);
+    }
+
+    public static final Intent saveHeartRate3(Intent intent, int heartRate) {
+        return intent.putExtra(BLUETOOTH_EXTRA_HEARTRATE3, heartRate);
+    }
+
     public static final int loadHeartRate(Intent intent) {
         return intent.getIntExtra(BLUETOOTH_EXTRA_HEARTRATE, 0);
     }
+
+    public static final int loadHeartRate2(Intent intent) {
+        return intent.getIntExtra(BLUETOOTH_EXTRA_HEARTRATE2, 0);
+    }
+
+    public static final int loadHeartRate3(Intent intent) {
+        return intent.getIntExtra(BLUETOOTH_EXTRA_HEARTRATE3, 0);
+    }
+
+
+    // bloodpressure
+    public static final Intent createBloodpressureIntent() {
+        return new Intent(BLUETOOTH_ACTION_BLOODPRESSURE);
+    }
+
+    public static boolean isBloodpressureIntent(Intent intent) {
+        return intent.getAction().equals(BLUETOOTH_ACTION_BLOODPRESSURE);
+    }
+
+    public static final Intent saveBloodpressure(Intent intent, float bp) {
+        return intent.putExtra(BLUETOOTH_EXTRA_BLOODPRESSURE, bp);
+    }
+
+    public static final Intent saveBloodpressure2(Intent intent, float bp) {
+        return intent.putExtra(BLUETOOTH_EXTRA_BLOODPRESSURE2, bp);
+    }
+
+    public static final Intent saveBloodpressure3(Intent intent, float bp) {
+        return intent.putExtra(BLUETOOTH_EXTRA_BLOODPRESSURE3, bp);
+    }
+
+    public static final float loadBloodpressure(Intent intent) {
+        return intent.getFloatExtra(BLUETOOTH_EXTRA_BLOODPRESSURE, 0);
+    }
+
+    public static final float loadBloodpressure2(Intent intent) {
+        return intent.getFloatExtra(BLUETOOTH_EXTRA_BLOODPRESSURE2, 0);
+    }
+
+    public static final float loadBloodpressure3(Intent intent) {
+        return intent.getFloatExtra(BLUETOOTH_EXTRA_BLOODPRESSURE3, 0);
+    }
+    // eddig
+
+
+    // running
+    public static final Intent createRunningSpeedIntent() {
+        return new Intent(BLUETOOTH_ACTION_RUNNINGSPEED);
+    }
+
+    public static boolean isRunningSpeedIntent(Intent intent) {
+        return intent.getAction().equals(BLUETOOTH_ACTION_RUNNINGSPEED);
+    }
+
+    public static final Intent saveRunningSpeed(Intent intent, int runningSpeed) {
+        return intent.putExtra(BLUETOOTH_EXTRA_RUNNINGSPEED, runningSpeed);
+    }
+
+    public static final Intent saveRunningSpeed2(Intent intent, int runningSpeed) {
+        return intent.putExtra(BLUETOOTH_EXTRA_RUNNINGSPEED2, runningSpeed);
+    }
+
+    public static final Intent saveRunningSpeed3(Intent intent, int runningSpeed) {
+        return intent.putExtra(BLUETOOTH_EXTRA_RUNNINGSPEED3, runningSpeed);
+    }
+
+    public static final Intent saveRunningSpeed4(Intent intent, int runningSpeed) {
+        return intent.putExtra(BLUETOOTH_EXTRA_RUNNINGSPEED4, runningSpeed);
+    }
+
+    public static final int loadRunningSpeed(Intent intent) {
+        return intent.getIntExtra(BLUETOOTH_EXTRA_RUNNINGSPEED, 0);
+    }
+
+    public static final int loadRunningSpeed2(Intent intent) {
+        return intent.getIntExtra(BLUETOOTH_EXTRA_RUNNINGSPEED2, 0);
+    }
+
+    public static final int loadRunningSpeed3(Intent intent) {
+        return intent.getIntExtra(BLUETOOTH_EXTRA_RUNNINGSPEED3, 0);
+    }
+
+    public static final int loadRunningSpeed4(Intent intent) {
+        return intent.getIntExtra(BLUETOOTH_EXTRA_RUNNINGSPEED4, 0);
+    }
+    // eddig
 
     public static final Intent createCyclingIntent() {
     	return new Intent(BLUETOOTH_ACTION_CYCLING);

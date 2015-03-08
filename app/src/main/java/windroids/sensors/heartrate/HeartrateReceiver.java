@@ -11,5 +11,5 @@ public interface HeartrateReceiver {
      * @param connectionState Sensor connection state
      * @param heartrate Heart rate (BPM)
      */
-    void onHeartrateReceived(int connectionState, int heartrate);
+    void onHeartrateReceived(int connectionState, int heartrate, int energy, int rri);
 }

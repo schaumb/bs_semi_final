@@ -13,6 +13,8 @@ import static windroids.sensors.constants.BluetoothUUID.HeartRateService;
 import static windroids.sensors.util.IntentAndBundleUtil.createHeartRateIntent;
 import static windroids.sensors.util.IntentAndBundleUtil.saveConnectionState;
 import static windroids.sensors.util.IntentAndBundleUtil.saveHeartRate;
+import static windroids.sensors.util.IntentAndBundleUtil.saveHeartRate2;
+import static windroids.sensors.util.IntentAndBundleUtil.saveHeartRate3;
 
 import java.util.UUID;
 
@@ -75,6 +77,8 @@ public class HeartrateNotificationState implements BluetoothCommunicationState {
         Intent heartrateIntent = createHeartRateIntent();
         saveConnectionState(heartrateIntent, STATE_DISCONNECTED);
         saveHeartRate(heartrateIntent, 0);
+        saveHeartRate2(heartrateIntent, 0);
+        saveHeartRate3(heartrateIntent, 0);
         communicationContext.getAndroidContext().sendBroadcast(heartrateIntent);
     }
 
@@ -104,17 +108,37 @@ public class HeartrateNotificationState implements BluetoothCommunicationState {
             BluetoothGattService heartrateService = communicationContext.getGattClient().getService(HeartRateService.getUUID());
             BluetoothGattCharacteristic heartrateMeasurementCharacteristic = heartrateService.getCharacteristic(HeartRateMeasurementCharacteristic.getUUID());
             int heartrate = 0;
-            int offset = 1;
-            if ((data[0] & 1) != 0) {
-                heartrate = heartrateMeasurementCharacteristic.getIntValue(FORMAT_UINT16, offset);
-                offset += 2;
-            } else {
-                heartrate = heartrateMeasurementCharacteristic.getIntValue(FORMAT_UINT8, offset);
-                offset += 1;
+            int energy = 0;
+            int rri = 0;
+            try {
+
+                int offset = 1;
+                if ((data[0] & 1) != 0) {
+                    heartrate = heartrateMeasurementCharacteristic.getIntValue(FORMAT_UINT16, offset);
+                    offset += 2;
+                } else {
+                    heartrate = heartrateMeasurementCharacteristic.getIntValue(FORMAT_UINT8, offset);
+                    offset += 1;
+                }
+                if ((data[0] & (1 << 3)) != 0) {
+                    energy = heartrateMeasurementCharacteristic.getIntValue(FORMAT_UINT16, offset);
+                    offset += 2;
+                }
+                if ((data[0] & (1 << 4)) != 0) {
+                    energy = heartrateMeasurementCharacteristic.getIntValue(FORMAT_UINT16, offset);
+                    offset += 2;
+                }
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
             }
             Intent heartrateIntent = createHeartRateIntent();
             saveConnectionState(heartrateIntent, STATE_CONNECTED);
             saveHeartRate(heartrateIntent, heartrate);
+            saveHeartRate2(heartrateIntent, energy);
+            saveHeartRate3(heartrateIntent, rri);
+
             communicationContext.getAndroidContext().sendBroadcast(heartrateIntent);
         }
     }

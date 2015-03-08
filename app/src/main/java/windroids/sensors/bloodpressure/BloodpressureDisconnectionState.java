@@ -1,16 +1,16 @@
-package windroids.sensors.heartrate;
+package windroids.sensors.bloodpressure;
 
 import static android.bluetooth.BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE;
 import static android.bluetooth.BluetoothProfile.STATE_DISCONNECTED;
 import static android.bluetooth.BluetoothProfile.STATE_DISCONNECTING;
 import static windroids.sensors.constants.BluetoothUUID.ClientCharacteristicConfigurationDescriptor;
-import static windroids.sensors.constants.BluetoothUUID.HeartRateMeasurementCharacteristic;
-import static windroids.sensors.constants.BluetoothUUID.HeartRateService;
-import static windroids.sensors.util.IntentAndBundleUtil.createHeartRateIntent;
+import static windroids.sensors.constants.BluetoothUUID.BloodPressureMeasurementCharacteristic;
+import static windroids.sensors.constants.BluetoothUUID.BloodPressureService;
+import static windroids.sensors.util.IntentAndBundleUtil.createBloodpressureIntent;
 import static windroids.sensors.util.IntentAndBundleUtil.saveConnectionState;
-import static windroids.sensors.util.IntentAndBundleUtil.saveHeartRate;
-import static windroids.sensors.util.IntentAndBundleUtil.saveHeartRate2;
-import static windroids.sensors.util.IntentAndBundleUtil.saveHeartRate3;
+import static windroids.sensors.util.IntentAndBundleUtil.saveBloodpressure;
+import static windroids.sensors.util.IntentAndBundleUtil.saveBloodpressure2;
+import static windroids.sensors.util.IntentAndBundleUtil.saveBloodpressure3;
 
 import java.util.UUID;
 
@@ -23,11 +23,7 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.content.Intent;
 
-/**
- * Bluetooth communication state for heart rate service disconnection.
- * @author Balazs_Csernai
- */
-public class HeartrateDisconnectionState implements BluetoothCommunicationState {
+public class BloodpressureDisconnectionState implements BluetoothCommunicationState {
 
     private BluetoothCommunicationContext communicationContext;
 
@@ -38,16 +34,16 @@ public class HeartrateDisconnectionState implements BluetoothCommunicationState 
 
     @Override
     public void startCommunication() {
-        Intent heartrateIntent = createHeartRateIntent();
-        saveConnectionState(heartrateIntent, STATE_DISCONNECTING);
-        saveHeartRate(heartrateIntent, 0);
-        saveHeartRate2(heartrateIntent, 0);
-        saveHeartRate3(heartrateIntent, 0);
-        communicationContext.getAndroidContext().sendBroadcast(heartrateIntent);
-        BluetoothGattService heartrateService = communicationContext.getGattClient().getService(HeartRateService.getUUID());
-        BluetoothGattCharacteristic heartrateMeasurementCharacteristic = heartrateService.getCharacteristic(HeartRateMeasurementCharacteristic.getUUID());
-        communicationContext.getGattClient().setCharacteristicNotification(heartrateMeasurementCharacteristic, false);
-        BluetoothGattDescriptor clientCharacteristicConfigurationDescriptor = heartrateMeasurementCharacteristic.getDescriptor(ClientCharacteristicConfigurationDescriptor.getUUID());
+        Intent bloodpressureIntent = createBloodpressureIntent();
+        saveConnectionState(bloodpressureIntent, STATE_DISCONNECTING);
+        saveBloodpressure(bloodpressureIntent, 0);
+        saveBloodpressure2(bloodpressureIntent, 0);
+        saveBloodpressure3(bloodpressureIntent, 0);
+        communicationContext.getAndroidContext().sendBroadcast(bloodpressureIntent);
+        BluetoothGattService bloodpressureService = communicationContext.getGattClient().getService(BloodPressureService.getUUID());
+        BluetoothGattCharacteristic bloodpressureMeasurementCharacteristic = bloodpressureService.getCharacteristic(BloodPressureMeasurementCharacteristic.getUUID());
+        communicationContext.getGattClient().setCharacteristicNotification(bloodpressureMeasurementCharacteristic, false);
+        BluetoothGattDescriptor clientCharacteristicConfigurationDescriptor = bloodpressureMeasurementCharacteristic.getDescriptor(ClientCharacteristicConfigurationDescriptor.getUUID());
         clientCharacteristicConfigurationDescriptor.setValue(DISABLE_NOTIFICATION_VALUE);
         communicationContext.getGattClient().writeDescriptor(clientCharacteristicConfigurationDescriptor);
     }
@@ -70,12 +66,12 @@ public class HeartrateDisconnectionState implements BluetoothCommunicationState 
 
     @Override
     public void onDisconnected(BluetoothDevice device) {
-        Intent heartrateIntent = createHeartRateIntent();
-        saveConnectionState(heartrateIntent, STATE_DISCONNECTED);
-        saveHeartRate(heartrateIntent, 0);
-        saveHeartRate2(heartrateIntent, 0);
-        saveHeartRate3(heartrateIntent, 0);
-        communicationContext.getAndroidContext().sendBroadcast(heartrateIntent);
+        Intent bloodpressureIntent = createBloodpressureIntent();
+        saveConnectionState(bloodpressureIntent, STATE_DISCONNECTED);
+        saveBloodpressure(bloodpressureIntent, 0);
+        saveBloodpressure2(bloodpressureIntent, 0);
+        saveBloodpressure3(bloodpressureIntent, 0);
+        communicationContext.getAndroidContext().sendBroadcast(bloodpressureIntent);
         communicationContext.getGattClient().close();
         communicationContext.getCommunicationReceiver().unregister();
     }
@@ -94,7 +90,7 @@ public class HeartrateDisconnectionState implements BluetoothCommunicationState 
 
     @Override
     public void onDescriptorWrite(BluetoothDevice device, UUID characteristic, UUID descriptor) {
-        if (communicationContext.isDevice(device) && HeartRateMeasurementCharacteristic.getUUID().equals(characteristic)) {
+        if (communicationContext.isDevice(device) && BloodPressureMeasurementCharacteristic.getUUID().equals(characteristic)) {
             communicationContext.getGattClient().disconnect();
         }
     }

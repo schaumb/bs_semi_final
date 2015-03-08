@@ -4,38 +4,38 @@ import java.io.Serializable;
 
 public class BloodPressure extends Data implements Serializable {
 
-    public BloodPressure(Integer systolic, Integer diastolic, Integer pulse) {
+    public BloodPressure(Float systolic, Float diastolic, Float pulse) {
         super(Type.BloodPressure);
         this.systolic = systolic;
         this.diastolic = diastolic;
         this.pulse = pulse;
     }
 
-    private Integer systolic;
-    private Integer diastolic;
-    private Integer pulse;
+    private Float systolic;
+    private Float diastolic;
+    private Float pulse;
 
-    public Integer getSystolic() {
+    public Float getSystolic() {
         return systolic;
     }
 
-    public void setSystolic(Integer systolic) {
+    public void setSystolic(Float systolic) {
         this.systolic = systolic;
     }
 
-    public Integer getDiastolic() {
+    public Float getDiastolic() {
         return diastolic;
     }
 
-    public void setDiastolic(Integer diastolic) {
+    public void setDiastolic(Float diastolic) {
         this.diastolic = diastolic;
     }
 
-    public Integer getPulse() {
+    public Float getPulse() {
         return pulse;
     }
 
-    public void setPulse(Integer pulse) {
+    public void setPulse(Float pulse) {
         this.pulse = pulse;
     }
 }

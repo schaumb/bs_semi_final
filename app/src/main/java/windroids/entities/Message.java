@@ -37,7 +37,7 @@ public class Message implements Serializable {
     public boolean hasData(){
         return datas.isEmpty();
     }
-    
+
     public Integer getMessageId() {
         return messageId;
     }

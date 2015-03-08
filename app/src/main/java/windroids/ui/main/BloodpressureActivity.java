@@ -1,40 +1,40 @@
 package windroids.ui.main;
 
-import static android.bluetooth.BluetoothProfile.STATE_CONNECTED;
-import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
-import static android.bluetooth.BluetoothProfile.STATE_DISCONNECTED;
-import static android.bluetooth.BluetoothProfile.STATE_DISCONNECTING;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import windroids.R;
-import windroids.entities.data.HeartRate;
-import windroids.sensors.heartrate.HeartrateBroadcastReceiver;
-import windroids.sensors.heartrate.HeartrateCommunicationContext;
-import windroids.sensors.heartrate.HeartrateReceiver;
+import windroids.entities.data.BloodPressure;
+import windroids.sensors.bloodpressure.BloodpressureBroadcastReceiver;
+import windroids.sensors.bloodpressure.BloodpressureCommunicationContext;
+import windroids.sensors.bloodpressure.BloodpressureReceiver;
 import windroids.sensors.search.BluetoothDeviceAdapter;
 import windroids.sensors.util.IntentAndBundleUtil;
 
-public class HeartrateActivity extends Activity implements HeartrateReceiver {
+import static android.bluetooth.BluetoothProfile.STATE_CONNECTED;
+import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
+import static android.bluetooth.BluetoothProfile.STATE_DISCONNECTED;
+import static android.bluetooth.BluetoothProfile.STATE_DISCONNECTING;
 
-    public final static String BUNDLE_HEARTRATE = "BUNDLE_HEARTRATE";
+public class BloodpressureActivity extends Activity implements BloodpressureReceiver {
+
+    public final static String BUNDLE_BLOODPRESSURE = "BUNDLE_BLOODPRESSURE";
 
     private ImageView heartImage;
     private TextView heartrateView;
-    private HeartrateCommunicationContext heartrateContext;
-    private HeartrateBroadcastReceiver receiver;
+    private BloodpressureCommunicationContext heartrateContext;
+    private BloodpressureBroadcastReceiver receiver;
     private Bundle arguments;
-    private HeartRate dataCollect = new HeartRate(null);
+    private BloodPressure dataCollect = new BloodPressure(null, null, null);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heartrate);
 
-        arguments = getIntent().getBundleExtra(BUNDLE_HEARTRATE);
+        arguments = getIntent().getBundleExtra(BUNDLE_BLOODPRESSURE);
 
         heartrateView = (TextView) findViewById(R.id.heartrateFragment_heartrateValue);
         heartImage = (ImageView) findViewById(R.id.heartrateFragment_heartImage);
@@ -42,16 +42,16 @@ public class HeartrateActivity extends Activity implements HeartrateReceiver {
 
     @Override
     public void onResume() {
-        startHeartrate();
+        startBloodPressure();
         super.onResume();
     }
 
-    private void startHeartrate() {
-        receiver = new HeartrateBroadcastReceiver();
+    private void startBloodPressure() {
+        receiver = new BloodpressureBroadcastReceiver();
         receiver.register(this);
-        receiver.setHeartrateReceiver(this);
+        receiver.setBloodpressureReceiver(this);
         BluetoothDeviceAdapter deviceAdapter = IntentAndBundleUtil.loadBluetoothDeviceAdapter(arguments);
-        heartrateContext = new HeartrateCommunicationContext(this, deviceAdapter.getDevice());
+        heartrateContext = new BloodpressureCommunicationContext(this, deviceAdapter.getDevice());
         heartrateContext.start();
     }
 
@@ -67,7 +67,7 @@ public class HeartrateActivity extends Activity implements HeartrateReceiver {
     }
 
     @Override
-    public void onHeartrateReceived(int connectionState, int heartrate, int energy, int rri) {
+    public void onBloodpressureReceived(int connectionState, float sys, float dia, float map) {
         switch (connectionState) {
             case STATE_CONNECTING:
             case STATE_DISCONNECTING:
@@ -80,11 +80,14 @@ public class HeartrateActivity extends Activity implements HeartrateReceiver {
                 setProgressBarIndeterminateVisibility(false);
                 break;
         }
-        dataCollect.addMeasure(heartrate, energy, rri);
-        heartrateView.setText(Integer.toString(heartrate) + " - " + Integer.toString(energy) + "  - " + Integer.toString(rri));
+        dataCollect.setSystolic(sys);
+        dataCollect.setDiastolic(dia);
+        dataCollect.setPulse(map);
+        heartrateView.setText(Float.toString(sys) + " - " + Float.toString(dia) + "  - " + Float.toString(map));
     }
 
-    public HeartRate getData(){
+    public BloodPressure getData(){
         return dataCollect;
     }
+
 }

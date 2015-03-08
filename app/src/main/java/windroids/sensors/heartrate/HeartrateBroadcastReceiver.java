@@ -4,6 +4,8 @@ import static windroids.sensors.constants.General.BLUETOOTH_ACTION_HEARTRATE;
 import static windroids.sensors.util.IntentAndBundleUtil.isHeartRateIntent;
 import static windroids.sensors.util.IntentAndBundleUtil.loadConnectionState;
 import static windroids.sensors.util.IntentAndBundleUtil.loadHeartRate;
+import static windroids.sensors.util.IntentAndBundleUtil.loadHeartRate2;
+import static windroids.sensors.util.IntentAndBundleUtil.loadHeartRate3;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -58,7 +60,7 @@ public class HeartrateBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (isHeartRateIntent(intent) && heartrateReceiver != null) {
-            heartrateReceiver.onHeartrateReceived(loadConnectionState(intent), loadHeartRate(intent));
+            heartrateReceiver.onHeartrateReceived(loadConnectionState(intent), loadHeartRate(intent), loadHeartRate2(intent), loadHeartRate3(intent));
         }
     }
 }

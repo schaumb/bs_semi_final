@@ -50,6 +50,18 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".ui.main.BloodpressureActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".ui.main.RunningSpeedActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
