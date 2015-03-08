@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import windroids.R;
+import windroids.entities.data.HeartRate;
 import windroids.sensors.heartrate.HeartrateBroadcastReceiver;
 import windroids.sensors.heartrate.HeartrateCommunicationContext;
 import windroids.sensors.heartrate.HeartrateReceiver;
@@ -26,6 +27,7 @@ public class HeartrateActivity extends Activity implements HeartrateReceiver {
     private HeartrateCommunicationContext heartrateContext;
     private HeartrateBroadcastReceiver receiver;
     private Bundle arguments;
+    private HeartRate dataCollect = new HeartRate(null);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,11 @@ public class HeartrateActivity extends Activity implements HeartrateReceiver {
                 setProgressBarIndeterminateVisibility(false);
                 break;
         }
+        dataCollect.addMeasure(heartrate);
         heartrateView.setText(Integer.toString(heartrate) + " bpm");
+    }
+
+    public HeartRate getData(){
+        return dataCollect;
     }
 }

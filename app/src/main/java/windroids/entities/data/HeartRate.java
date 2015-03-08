@@ -10,7 +10,7 @@ public class HeartRate extends Data implements Serializable {
 
     public HeartRate(HashMap<Date, Integer> measures) {
         super(Type.Pulse);
-        this.measures = measures;
+        this.measures = measures == null ? new HashMap<Date, Integer>() : measures;
     }
 
     private HashMap<Date, Integer> measures;
@@ -24,10 +24,6 @@ public class HeartRate extends Data implements Serializable {
     }
 
     public void addMeasure(Integer i){
-
-        if(measures == null)
-            measures = new HashMap<>();
-
         measures.put(new Date(), i);
     }
 
