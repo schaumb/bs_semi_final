@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="wrap_content"
-	android:layout_width="match_parent"
-	android:fillViewport="true"
-	android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
 
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-		<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="214dp"
+            android:orientation="vertical"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:background="@color/blue">
 
-			<ImageView
-				android:id="@+id/image"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="9dp"
+                android:src="@drawable/screen1"
+                android:layout_marginBottom="28dp" />
 
-			<TextView
-				android:id="@+id/name"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
+            <include layout="@layout/account_item" />
+        </LinearLayout>
 
-			<TextView
-				android:id="@+id/title"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
-		</LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/messages"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-		<android.support.v7.widget.RecyclerView
-			android:id="@+id/messages"
-			android:orientation="vertical"
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1" />
-
-	</LinearLayout>
-
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>
