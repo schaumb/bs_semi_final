@@ -20,7 +20,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="9dp"
-                android:src="@drawable/screen1"
+                android:src="@drawable/a1"
                 android:layout_marginBottom="28dp" />
 
             <include layout="@layout/account_item" />

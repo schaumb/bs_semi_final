@@ -6,11 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import windroids.sensors.util.StringUtil;
-import windroids.sensors.BluetoothDeviceAdapterView;
-
 import java.util.LinkedList;
 import java.util.List;
+
+import windroids.sensors.BluetoothDeviceAdapterView;
 
 /**
  * View adapter for Bluetooth devices.
@@ -65,6 +64,5 @@ public class BluetoothDeviceAdapterListAdapter extends BaseAdapter implements Bl
     private void populateView(BluetoothDeviceAdapterView adapterView, BluetoothDeviceAdapter deviceAdapter) {
         adapterView.setName(deviceAdapter.getName());
         adapterView.setAddress(deviceAdapter.getDevice().getAddress());
-        adapterView.setAdditional(StringUtil.getServiceNames(deviceAdapter.get16BitUUIDs()));
     }
 }

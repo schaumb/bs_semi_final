@@ -49,18 +49,18 @@ public class MainActivity extends FragmentActivity {
 					fragment = new MessagesFragment();
 					fragment.setArguments(args);
                     return fragment;
-                case 1:
-                    return new DataFragment();
-                case 2:
-                    return new SensorFragment();
-                case 3:
-					fragment = new ProfileFragment();
-					fragment.setArguments(args);
-					return fragment;
-                case 4:
+				case 1:
 					fragment = new ContactFragment();
 					fragment.setArguments(args);
 					return fragment;
+				case 2:
+					fragment = new ProfileFragment();
+					fragment.setArguments(args);
+					return fragment;
+				case 3:
+					return new SearchFragment();
+                case 4:
+                    return new DataFragment();
                 default:
                     return null;
             }

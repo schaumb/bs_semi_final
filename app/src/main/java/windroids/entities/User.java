@@ -87,6 +87,9 @@ public class User implements Serializable {
     }
 
     public HashMap<Data.Type, ArrayList<Data>> getDatas() {
+		if (datas == null) {
+			datas = new HashMap<>();
+		}
         return datas;
     }
 

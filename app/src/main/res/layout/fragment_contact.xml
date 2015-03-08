@@ -19,7 +19,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="9dp"
-                android:src="@drawable/screen2" />
+                android:src="@drawable/a2" />
 
             <EditText
                 android:id="@+id/search_view"
