@@ -26,7 +26,6 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
-            android:singleLine="true"
             android:layout_alignParentTop="true"
             android:text="Name" />
 
