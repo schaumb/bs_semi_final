@@ -88,7 +88,7 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
                 alertDialogBuilder
                         .setView(dialoglayout)
                         .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Message message = null;
                                 try {
@@ -100,7 +100,7 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
                                     e1.printStackTrace();
                                 }
                             }})
-                            .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            .setNegativeButton("CANCEL",new DialogInterface.OnClickListener() {
                                 public void onClick (DialogInterface dialog,int id){
                                     dialog.cancel();
                                 }
@@ -197,7 +197,12 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
             if (date != null) {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy. MM. dd.");
                 birthDateView.setText(simpleDateFormat.format(date));
+                birthDateView.setVisibility(View.VISIBLE);
+                birthDateView.setVisibility(View.VISIBLE);
             }
-            addressView.setText(user.getCity());
+            if(!user.getCity().equals("")) {
+                addressView.setText(user.getCity());
+                addressView.setVisibility(View.VISIBLE);
+            }
         }
     }

@@ -21,6 +21,7 @@ public class MainActivity extends FragmentActivity {
     private User user;
 	private Fragment fragment;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,7 @@ public class MainActivity extends FragmentActivity {
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

@@ -50,15 +50,15 @@
                     android:layout_height="wrap_content"
                     style="AccountDataStyle"
                     android:layout_marginBottom="20dp"
-                    android:text="1993. 08. 29." />
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="AccountDataStyle"
-                    android:layout_marginBottom="40dp"
-                    android:text="1121, Budapest" />
+                    android:layout_marginBottom="20dp"
+                    android:visibility="gone"/>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -68,16 +68,18 @@
                         android:id="@+id/msg_write"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:scaleType="fitXY"
-                        android:layout_alignParentStart="false"
+                        android:layout_alignParentStart="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/ikon_message" />
 
                     <ImageButton
                         android:id="@+id/cancel"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:scaleType="fitStart"
                         android:layout_alignParentEnd="true"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"
                         android:src="@drawable/ikon_cancel" />
                 </RelativeLayout>
 

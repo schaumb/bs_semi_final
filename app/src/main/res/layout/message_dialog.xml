@@ -2,23 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="30dp" >
 
     <EditText
         android:id="@+id/toMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="to:"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         style="@style/LoginInputStyle" />
 
-    <View style="@style/LoginLineStyle" />
+    <View style="@style/LoginLineStyle"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
 
     <EditText
         android:id="@+id/message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="message"
+        android:hint="Message"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         style="@style/LoginInputStyle" />
 
-    <View style="@style/LoginLineStyle" />
+    <View style="@style/LoginLineStyle"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
 </LinearLayout>

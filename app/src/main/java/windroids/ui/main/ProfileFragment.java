@@ -49,34 +49,36 @@ public class ProfileFragment extends Fragment {
 		final User user = (User) getArguments().getSerializable(MainActivity.EXTRA_USER);
 
 		List<Data> datas = user.getDatas().get(Data.Type.Common);
-		for (Data data : datas) {
-			CommonData commonData = (CommonData) data;
-			String key = commonData.getName();
-			String value = commonData.getDescription();
-			switch (key) {
-				case "weight":
-					weightView.setText(value);
-					break;
-				case "height":
-					heightView.setText(value);
-					break;
-				case "blood_type":
-					blood_typeView.setText(value);
-					break;
-				case "chronic_disease":
-					chronic_diseaseView.setText(value);
-					break;
-				case "allergy":
-					allergyView.setText(value);
-					break;
-				case "sports":
-					sportsView.setText(value);
-					break;
-				case "eating_habits":
-					eating_habitsView.setText(value);
-					break;
-			}
-		}
+        if(datas != null) {
+            for (Data data : datas) {
+                CommonData commonData = (CommonData) data;
+                String key = commonData.getName();
+                String value = commonData.getDescription();
+                switch (key) {
+                    case "weight":
+                        weightView.setText(value);
+                        break;
+                    case "height":
+                        heightView.setText(value);
+                        break;
+                    case "blood_type":
+                        blood_typeView.setText(value);
+                        break;
+                    case "chronic_disease":
+                        chronic_diseaseView.setText(value);
+                        break;
+                    case "allergy":
+                        allergyView.setText(value);
+                        break;
+                    case "sports":
+                        sportsView.setText(value);
+                        break;
+                    case "eating_habits":
+                        eating_habitsView.setText(value);
+                        break;
+                }
+            }
+        }
 
 		full_nameView.setText(user.getFullName());
 		passwordView.setText(user.getPassword());
