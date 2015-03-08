@@ -12,7 +12,7 @@ import windroids.storage.MessageStorage;
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    enum Type{ Request, Send, Response }
+    public enum Type{ Request, Send, Response }
 
     public Message(Type type, String from, String to, String message, HashMap<Data.Type, ArrayList<Data>> datas) throws IOException, ClassNotFoundException {
         this.messageId = MessageStorage.getNewMessageId();
