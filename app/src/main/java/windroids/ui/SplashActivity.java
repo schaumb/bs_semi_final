@@ -31,6 +31,7 @@ public class SplashActivity extends Activity {
                 sharedpreferences.getBoolean(Constants.USER_REGISTERED_STATE, false);
 
 				startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                finish();
 			}
 		};
     }

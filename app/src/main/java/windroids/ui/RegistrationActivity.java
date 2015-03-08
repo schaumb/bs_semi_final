@@ -50,7 +50,6 @@ public class RegistrationActivity extends Activity {
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putBoolean(Constants.USER_REGISTERED_STATE, true);
                     editor.commit();
-                    startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
                     finish();
                 }
             }

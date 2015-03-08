@@ -14,6 +14,8 @@ public class MainActivity extends FragmentActivity {
 
 	public static String EXTRA_USER = "EXTRA_USER";
 
+    private android.app.Fragment activeFragment;
+
 	private User user;
 
 	@Override
@@ -37,7 +39,8 @@ public class MainActivity extends FragmentActivity {
 		public Fragment getItem(int pos) {
 			switch (pos) {
 				case 0:
-					return new NewsFragment();
+//					return new NewsFragment();
+					return new SearchFragment();
 				case 1:
 					return new DataFragment();
 				case 2:
