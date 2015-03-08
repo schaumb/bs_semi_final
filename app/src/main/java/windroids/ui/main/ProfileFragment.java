@@ -46,6 +46,11 @@ public class ProfileFragment extends Fragment {
 
 		final User user = (User) getArguments().getSerializable(MainActivity.EXTRA_USER);
 
+//		List<Data> datas = user.getDatas().get(Data.Type.Common);
+//		for (Data data : datas) {
+//
+//		}
+
 		full_nameView.setText(user.getFullName());
 		passwordView.setText(user.getPassword());
 		emailView.setText(user.getEmail());
