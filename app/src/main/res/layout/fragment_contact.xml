@@ -57,27 +57,27 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content" />
 
-				<ImageButton
-					android:id="@+id/msg_write"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" />
+				<!--<ImageButton-->
+					<!--android:id="@+id/msg_write"-->
+					<!--android:layout_width="wrap_content"-->
+					<!--android:layout_height="wrap_content" />-->
 
-				<ImageButton
-					android:id="@+id/msg_in"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" />
+				<!--<ImageButton-->
+					<!--android:id="@+id/msg_in"-->
+					<!--android:layout_width="wrap_content"-->
+					<!--android:layout_height="wrap_content" />-->
 
-				<ImageButton
-					android:id="@+id/msg_out"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" />
+				<!--<ImageButton-->
+					<!--android:id="@+id/msg_out"-->
+					<!--android:layout_width="wrap_content"-->
+					<!--android:layout_height="wrap_content" />-->
 
 			</LinearLayout>
 
-			<ImageButton
-				android:id="@+id/cancel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
+			<!--<ImageButton-->
+				<!--android:id="@+id/cancel"-->
+				<!--android:layout_width="wrap_content"-->
+				<!--android:layout_height="wrap_content" />-->
 
 		</LinearLayout>
 

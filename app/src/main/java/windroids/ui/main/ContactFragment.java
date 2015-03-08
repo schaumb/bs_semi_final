@@ -38,7 +38,7 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
 	private TextView titleView;
 	private TextView birthDateView;
 	private TextView addressView;
-	private View cancelView;
+	//private View cancelView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -52,15 +52,15 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
 		titleView = (TextView) layout.findViewById(R.id.title);
 		birthDateView = (TextView) layout.findViewById(R.id.birth_date);
 		addressView = (TextView) layout.findViewById(R.id.address);
-		cancelView = layout.findViewById(R.id.cancel);
+		//cancelView = layout.findViewById(R.id.cancel);
 
-		cancelView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				detailsView.setVisibility(View.GONE);
-				resultsView.setVisibility(View.GONE);
-			}
-		});
+//		cancelView.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				detailsView.setVisibility(View.GONE);
+//				resultsView.setVisibility(View.GONE);
+//			}
+//		});
 
 		User user = (User) getArguments().getSerializable(MainActivity.EXTRA_USER);
 		try {
@@ -105,6 +105,7 @@ public class ContactFragment extends Fragment implements ContactAdapter.OnItemCl
 
 	@Override
 	public void onClick(int position, ContactAdapter.Type type) {
+		resultsView.setVisibility(View.GONE);
 		detailsView.setVisibility(View.VISIBLE);
 		User user = null;
 		switch (type) {
