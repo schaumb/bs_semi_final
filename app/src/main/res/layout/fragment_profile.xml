@@ -1,5 +1,222 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
-	android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fillViewport="true" >
 
-</LinearLayout>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:paddingTop="120dp"
+		android:paddingLeft="60dp"
+		android:paddingRight="60dp"
+		android:background="@color/green" >
+
+		<TextView
+			android:text="Password"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/password"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Password"
+			style="@style/RegistrationInputStyle"
+			android:inputType="textPassword" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Email"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/email"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Email"
+			style="@style/RegistrationInputStyle"
+			android:inputType="textEmailAddress" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Full name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/full_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Full name"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Address"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/address"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Address"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Weight"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/weight"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Weight"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Height"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/height"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Height"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Blood Type"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/blood_type"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Blood Type"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Chronic Disease"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/chronic_disease"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Chronic Disease"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Allergy"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/allergy"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Allergy"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Sports"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/sports"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Sports"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:text="Eating Habits"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/eating_habits"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Eating Habits"
+			style="@style/RegistrationInputStyle" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:id="@+id/doctor"
+			android:drawableLeft="@drawable/checkbox_empty"
+			android:text="Doctor"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<TextView
+			android:id="@+id/coach"
+			android:drawableLeft="@drawable/checkbox_empty"
+			android:text="Coach"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<View style="@style/RegistrationLineStyle" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<Button
+				android:id="@+id/image_button"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:background="@android:color/transparent"
+				android:gravity="left"
+				style="@style/ButtonStyle"
+				android:textColor="@android:color/white"
+				android:text="+ IMAGE"
+				/>
+
+			<Button
+				android:id="@+id/submit_button"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:background="@android:color/transparent"
+				android:gravity="right"
+				style="@style/ButtonStyle"
+				android:textColor="@android:color/white"
+				android:text="OK"
+				/>
+		</LinearLayout>
+	</LinearLayout>
+
+</ScrollView>
+
+

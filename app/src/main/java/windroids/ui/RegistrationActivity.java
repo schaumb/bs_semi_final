@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
@@ -79,6 +80,7 @@ public class RegistrationActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		try {
 			imageBitmap = (Bitmap) data.getExtras().get("data");
+			Toast.makeText(this, "Image successfully saved", Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
 			Log.i(RegistrationActivity.class.getSimpleName(), "Nem sikerült betölteni a képet.");
 		}

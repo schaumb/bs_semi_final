@@ -95,6 +95,9 @@ public class User implements Serializable {
     }
 
     public void addData(Data d){
+		if (datas == null) {
+			datas = new HashMap<>();
+		}
         ArrayList<Data> vec = datas.get(d.getType());
         if(vec == null){
             vec = new ArrayList<>();

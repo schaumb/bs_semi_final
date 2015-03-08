@@ -1,11 +1,15 @@
 package windroids.ui.main;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.widget.Toast;
 
 import windroids.R;
 import windroids.entities.User;
@@ -15,6 +19,7 @@ public class MainActivity extends FragmentActivity {
     public static String EXTRA_USER = "EXTRA_USER";
 
     private User user;
+	private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,26 +40,25 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int pos) {
-			Bundle args;
+			Bundle args = new Bundle();
+			args.putSerializable(EXTRA_USER, user);
             switch (pos) {
                 case 0:
-					Fragment messagesFragment = new MessagesFragment();
-					args = new Bundle();
-					args.putSerializable(EXTRA_USER, user);
-					messagesFragment.setArguments(args);
-                    return messagesFragment;
+					fragment = new MessagesFragment();
+					fragment.setArguments(args);
+                    return fragment;
                 case 1:
                     return new DataFragment();
                 case 2:
                     return new SensorFragment();
                 case 3:
-                    return new ProfileFragment();
+					fragment = new ProfileFragment();
+					fragment.setArguments(args);
+					return fragment;
                 case 4:
-                    Fragment contactFragment = new ContactFragment();
-                    args = new Bundle();
-                    args.putSerializable(EXTRA_USER, user);
-                    contactFragment.setArguments(args);
-                    return contactFragment;
+					fragment = new ContactFragment();
+					fragment.setArguments(args);
+					return fragment;
                 default:
                     return null;
             }
@@ -65,5 +69,18 @@ public class MainActivity extends FragmentActivity {
             return 5;
         }
     }
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		try {
+			Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+			Toast.makeText(this, "Image successfully saved", Toast.LENGTH_SHORT).show();
+			((ProfileFragment) fragment).setImageBitmap(imageBitmap);
+		} catch (Exception e) {
+			Log.i(ProfileFragment.class.getSimpleName(), "Nem sikerült betölteni a képet.");
+		}
+	}
 }
 
