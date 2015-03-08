@@ -10,12 +10,14 @@
 		android:paddingTop="120dp"
 		android:paddingLeft="60dp"
 		android:paddingRight="60dp"
+		android:paddingBottom="120dp"
 		android:background="@color/green" >
 
 		<TextView
 			android:text="Password"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle" />
 
 		<EditText
 			android:id="@+id/password"
@@ -30,7 +32,8 @@
 		<TextView
 			android:text="Email"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/email"
@@ -45,7 +48,8 @@
 		<TextView
 			android:text="Full name"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/full_name"
@@ -59,7 +63,8 @@
 		<TextView
 			android:text="Address"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/address"
@@ -73,7 +78,8 @@
 		<TextView
 			android:text="Weight"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/weight"
@@ -87,7 +93,8 @@
 		<TextView
 			android:text="Height"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/height"
@@ -101,7 +108,8 @@
 		<TextView
 			android:text="Blood Type"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/blood_type"
@@ -115,7 +123,8 @@
 		<TextView
 			android:text="Chronic Disease"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/chronic_disease"
@@ -129,7 +138,8 @@
 		<TextView
 			android:text="Allergy"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/allergy"
@@ -143,7 +153,8 @@
 		<TextView
 			android:text="Sports"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/sports"
@@ -157,7 +168,8 @@
 		<TextView
 			android:text="Eating Habits"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"  />
 
 		<EditText
 			android:id="@+id/eating_habits"
@@ -172,8 +184,11 @@
 			android:id="@+id/doctor"
 			android:drawableLeft="@drawable/checkbox_empty"
 			android:text="Doctor"
+			android:gravity="center_vertical"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"
+			android:textSize="30sp"/>
 
 		<View style="@style/RegistrationLineStyle" />
 
@@ -181,8 +196,11 @@
 			android:id="@+id/coach"
 			android:drawableLeft="@drawable/checkbox_empty"
 			android:text="Coach"
+			android:gravity="center_vertical"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			style="@style/AccountDataStyle"
+			android:textSize="30sp"  />
 
 		<View style="@style/RegistrationLineStyle" />
 
