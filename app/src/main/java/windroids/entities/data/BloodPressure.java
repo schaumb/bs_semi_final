@@ -3,6 +3,7 @@ package windroids.entities.data;
 import java.io.Serializable;
 
 public class BloodPressure extends Data implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public BloodPressure(Float systolic, Float diastolic, Float pulse) {
         super(Type.BloodPressure);

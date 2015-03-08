@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 public class HeartRate extends Data implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     public class Rate implements  Serializable{
         private static final long serialVersionUID = 1L;
 
@@ -19,8 +21,6 @@ public class HeartRate extends Data implements Serializable {
         public Integer energy;
         public Integer rri;
     }
-
-    private static final long serialVersionUID = 1L;
 
     public HeartRate(HashMap<Date, Rate> measures) {
         super(Type.Pulse);
