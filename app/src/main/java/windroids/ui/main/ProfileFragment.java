@@ -17,10 +17,12 @@ import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import windroids.R;
 import windroids.entities.User;
 import windroids.entities.data.CommonData;
+import windroids.entities.data.Data;
 import windroids.storage.UserStorage;
 
 public class ProfileFragment extends Fragment {
@@ -46,10 +48,35 @@ public class ProfileFragment extends Fragment {
 
 		final User user = (User) getArguments().getSerializable(MainActivity.EXTRA_USER);
 
-//		List<Data> datas = user.getDatas().get(Data.Type.Common);
-//		for (Data data : datas) {
-//
-//		}
+		List<Data> datas = user.getDatas().get(Data.Type.Common);
+		for (Data data : datas) {
+			CommonData commonData = (CommonData) data;
+			String key = commonData.getName();
+			String value = commonData.getDescription();
+			switch (key) {
+				case "weight":
+					weightView.setText(value);
+					break;
+				case "height":
+					heightView.setText(value);
+					break;
+				case "blood_type":
+					blood_typeView.setText(value);
+					break;
+				case "chronic_disease":
+					chronic_diseaseView.setText(value);
+					break;
+				case "allergy":
+					allergyView.setText(value);
+					break;
+				case "sports":
+					sportsView.setText(value);
+					break;
+				case "eating_habits":
+					eating_habitsView.setText(value);
+					break;
+			}
+		}
 
 		full_nameView.setText(user.getFullName());
 		passwordView.setText(user.getPassword());
@@ -64,6 +91,20 @@ public class ProfileFragment extends Fragment {
 		doctor.setTag(isDoctor);
 		final TextView coach = (TextView) layout.findViewById(R.id.coach);
 		coach.setTag(isCoach);
+
+		if (isDoctor) {
+			doctor.setCompoundDrawablesWithIntrinsicBounds(R.drawable.checkbox_filled, 0, 0, 0);
+			doctor.setTag(true);
+		} else {
+			doctor.setTag(false);
+		}
+
+		if (isCoach) {
+			coach.setCompoundDrawablesWithIntrinsicBounds(R.drawable.checkbox_filled, 0, 0, 0);
+			coach.setTag(true);
+		} else {
+			coach.setTag(false);
+		}
 
 
 		layout.findViewById(R.id.submit_button).setOnClickListener(new View.OnClickListener() {
