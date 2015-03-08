@@ -89,4 +89,10 @@ public class MessageStorage {
         }
         saveMessages(list);
     }
+
+    public static void saveNewMessage(Message message) throws IOException, ClassNotFoundException {
+        ArrayList<Message> list = readMessages();
+        list.add(message);
+        saveMessages(list);
+    }
 }

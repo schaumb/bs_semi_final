@@ -23,6 +23,8 @@ public class Message implements Serializable {
         this.datas = datas;
         this.date = new Date();
         this.read = false;
+
+        MessageStorage.saveNewMessage(this);
     }
 
     private Integer messageId;
