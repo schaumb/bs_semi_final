@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -13,8 +14,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import windroids.R;
 import windroids.entities.User;
+import windroids.storage.MessageStorage;
 
 public class MessagesFragment extends Fragment {
 
@@ -32,7 +36,7 @@ public class MessagesFragment extends Fragment {
 		name = (TextView) layout.findViewById(R.id.name);
 		title = (TextView) layout.findViewById(R.id.title);
 
-		User user = ((MainActivity) getActivity()).getUser();
+		User user = (User) getArguments().getSerializable(MainActivity.EXTRA_USER);
 
 		String profileImageEncoded = user.getProfileImage();
 		if (profileImageEncoded != null) {
@@ -58,7 +62,12 @@ public class MessagesFragment extends Fragment {
 			title.setVisibility(View.GONE);
 		}
 
-
+		messages.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+		try {
+			messages.setAdapter(new MessagesAdapter(MessageStorage.getMessagesToMe(user.getUserName())));
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		return layout;
 	}

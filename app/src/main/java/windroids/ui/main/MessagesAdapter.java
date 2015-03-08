@@ -13,18 +13,20 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import windroids.R;
 import windroids.entities.Message;
 import windroids.entities.User;
+import windroids.storage.UserStorage;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHolder> {
 
 	private List<Message> messages;
 
-	public MessagesAdapter(List<Message> contacts, User user) {
-		this.messages = contacts;
+	public MessagesAdapter(List<Message> messages) {
+		this.messages = messages;
 	}
 
 	@Override
@@ -47,8 +49,12 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 	@Override
 	public void onBindViewHolder(MessagesAdapter.ViewHolder holder, final int position) {
 		Message message = messages.get(position);
-		// TODO
 		User from = null;
+		try {
+			from = UserStorage.findUser(message.getFrom());
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		byte[] decodedString = Base64.decode(from.getProfileImage(), Base64.DEFAULT);
 		Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 		holder.image.setImageBitmap(decodedImage);
@@ -71,7 +77,11 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 		}
 
 		holder.content.setText(message.getMessage());
-		// TODO button
+		if (!message.hasData()) {
+			holder.button.setVisibility(View.GONE);
+		} else {
+			holder.button.setVisibility(View.VISIBLE);
+		}
 
 		ArrayAdapter<Message> adapter = new ArrayAdapter<>(holder.title.getContext(), R.layout.line_message_content);
 		adapter.addAll(messages);

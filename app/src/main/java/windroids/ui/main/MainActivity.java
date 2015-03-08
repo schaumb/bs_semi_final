@@ -35,9 +35,14 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int pos) {
+			Bundle args;
             switch (pos) {
                 case 0:
-                    return new MessagesFragment();
+					Fragment messagesFragment = new MessagesFragment();
+					args = new Bundle();
+					args.putSerializable(EXTRA_USER, user);
+					messagesFragment.setArguments(args);
+                    return messagesFragment;
                 case 1:
                     return new DataFragment();
                 case 2:
@@ -46,7 +51,7 @@ public class MainActivity extends FragmentActivity {
                     return new ProfileFragment();
                 case 4:
                     Fragment contactFragment = new ContactFragment();
-                    Bundle args = new Bundle();
+                    args = new Bundle();
                     args.putSerializable(EXTRA_USER, user);
                     contactFragment.setArguments(args);
                     return contactFragment;

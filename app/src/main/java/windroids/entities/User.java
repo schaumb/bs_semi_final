@@ -51,6 +51,9 @@ public class User implements Serializable {
     private ArrayList<String> connections;
 
     public ArrayList<User> getContacts() throws IOException, ClassNotFoundException {
+		if (connections == null) {
+			return new ArrayList<>();
+		}
         return UserStorage.getUsersFromName(connections);
     }
 
@@ -150,7 +153,7 @@ public class User implements Serializable {
 	}
 
 	public Boolean getIsDoctor() {
-		return isDoctor;
+		return isDoctor == null ? false : isDoctor;
 	}
 
 	public void setIsDoctor(Boolean isDoctor) {
@@ -166,7 +169,7 @@ public class User implements Serializable {
 	}
 
 	public Boolean getIsCoach() {
-		return isCoach;
+		return isCoach == null ? false : isCoach;
 	}
 
 	public void setIsCoach(Boolean isCoach) {
