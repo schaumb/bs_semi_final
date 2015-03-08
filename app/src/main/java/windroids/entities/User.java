@@ -150,7 +150,7 @@ public class User implements Serializable {
 	}
 
 	public Boolean getIsDoctor() {
-		return isDoctor;
+		return isDoctor == null ? false : isDoctor;
 	}
 
 	public void setIsDoctor(Boolean isDoctor) {
@@ -166,7 +166,7 @@ public class User implements Serializable {
 	}
 
 	public Boolean getIsCoach() {
-		return isCoach;
+		return isCoach == null ? false : isCoach;
 	}
 
 	public void setIsCoach(Boolean isCoach) {

@@ -37,7 +37,7 @@ public class MainActivity extends FragmentActivity {
 		public Fragment getItem(int pos) {
 			switch (pos) {
 				case 0:
-					return new NewsFragment();
+					return new MessagesFragment();
 				case 1:
 					return new DataFragment();
 				case 2:
