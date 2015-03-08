@@ -62,6 +62,12 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".ui.main.CyclingActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
