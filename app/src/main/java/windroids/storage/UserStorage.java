@@ -162,6 +162,18 @@ public class UserStorage {
         return result;
     }
 
+    public static User findUser(String userName) throws IOException, ClassNotFoundException {
+        ArrayList<User> list = readUsers();
+        for(User u: list)
+        {
+            if(userName.equals(u.getUserName()))
+            {
+                return u;
+            }
+        }
+        return null;
+    }
+
     public static void saveThisUserChanges(User user) throws IOException, ClassNotFoundException {
         ArrayList<User> list = readUsers();
         for (User m : list) {
