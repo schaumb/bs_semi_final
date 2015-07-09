@@ -1,0 +1,25 @@
+beehealthy
+Az alkalmazás egy folyamatos kommunikációt valósít meg a user és az orvosa/edzője közt. A user
+tud magának orvost/edzőt választani, akár többet is. Ezután meg tudja adni, milyen adatokat oszt meg
+vele. A legfontosabb, amit megoszthat vele: a telefonhoz csatlakoztatott szenzorokon keresztül
+beérkezett adat. Ilyen például a pulzus, a vérnyomás, a testhőmérségklet, a séta/futás hossza stb.
+Mit tud a user:
+	- Regisztrálhat és kötelező is neki. Itt adhatja meg, azt is, hogy ő orvos-e vagy edző-e 
+	  vagy mindkettő vagy semelyik (átlag user).
+	- Bejelölhet egy orvos/edző típusú usert és az megkapja a jelölést. 
+	  Ezután dönthet, hogy elfogadja-e vagy sem. Ha elfogadja, a user 
+	  küldhet neki adatokat, amit a következő pontban részletezünk.
+	- Egy user küldhet egy requestet az általa bejelölt (és visszajelölt, mostantól "élő kapcsolat") 
+	  orvosnak/edzőnek, hogy milyen adatot szeretne vele megosztani. 
+	  A következő adatokat tudja vele megosztani:
+		-- A senzorok adatait: ilyen lesz például a pulzus vagy a vérnyomás, stb.
+		-- kórkép
+		-- általános állapot (fizikai stb.)
+		-- tűnetek (inkább orvosoknak)
+		-- elérni kívánt cél (inkább edzőknek)
+	- Üzenetet küldeni a vele kapcsolatban lévő usereknek. Jellemzően itt az orvos edző fogja leírni
+	  A véleményét a beérkezett adatok alapján
+	- Adatokat felvenni, szenzorok segítségével vagy általánosat.
+	- Ha a user orvos vagy edző és van "páciense", akkor annak az adatait.
+	- Meg tudja nézni kinek mit oszt meg / kitől mit kap.
+
